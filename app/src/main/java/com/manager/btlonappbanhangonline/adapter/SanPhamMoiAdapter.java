@@ -2,6 +2,7 @@ package com.manager.btlonappbanhangonline.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,11 @@ import com.manager.btlonappbanhangonline.Interface.ItemClickListener;
 import com.manager.btlonappbanhangonline.R;
 
 import com.manager.btlonappbanhangonline.activity.ChiTietActivity;
+import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;
 import com.manager.btlonappbanhangonline.model.SanPhamMoi;
 import com.manager.btlonappbanhangonline.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -59,6 +63,8 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
                     intent.putExtra("chitiet",sanPhamMoi);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
+                }else{
+                    EventBus.getDefault().postSticky(new SuaXoaEvent(sanPhamMoi));
                 }
             }
         });
@@ -70,7 +76,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         return array.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, View.OnLongClickListener {
         TextView txtgia,txtten;
         ImageView imghinhanh;
         private ItemClickListener itemClickListener;
@@ -80,6 +86,8 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
             txtten = itemView.findViewById(R.id.itemsp_ten);
             imghinhanh = itemView.findViewById(R.id.itemsp_image);
             itemView.setOnClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -89,6 +97,20 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         @Override
         public void onClick(View view) {
             itemClickListener.onClick(view, getAdapterPosition(), false);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.add(0,0,getAdapterPosition(),"Sửa");
+            contextMenu.add(0,1,getAdapterPosition(),"Xóa");
+
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), true);
+
+            return false;
         }
     }
 }

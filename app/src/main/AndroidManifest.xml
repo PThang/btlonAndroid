@@ -15,6 +15,12 @@
         android:theme="@style/Theme.BTLonAppBanHangOnline"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="com.manager.btlonappbanhangonline.activity.ThongTinActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.manager.btlonappbanhangonline.activity.LienHeActivity"
+            android:exported="false" />
+        <activity
             android:name="com.manager.btlonappbanhangonline.activity.ThemSPActivity"
             android:exported="true" />
         <activity
