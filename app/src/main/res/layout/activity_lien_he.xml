@@ -50,4 +50,15 @@
         app:layout_constraintStart_toStartOf="@+id/txtsdt"
         app:layout_constraintTop_toBottomOf="@+id/txtsdt" />
 
+    <Button
+        android:id="@+id/btnFb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Facebook"
+        app:layout_constraintEnd_toEndOf="@+id/txtemail"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/txtemail"
+        app:layout_constraintTop_toBottomOf="@+id/txtemail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
