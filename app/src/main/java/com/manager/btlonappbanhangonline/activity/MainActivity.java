@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(dienthoai);
                         break;
                     case 2:
-                        Intent laptop= new Intent(getApplicationContext(), DienThoaiActivity.class);
+                        Intent laptop= new Intent(getApplicationContext(), LaptopActivity.class);
                         laptop.putExtra("loai",2);
                         startActivity(laptop);
                         break;

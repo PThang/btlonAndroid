@@ -20,7 +20,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DangKiActivity extends AppCompatActivity {
-    EditText email, pass, repass,mobile,username;
+    EditText pass,email, repass,mobile,username;
     AppCompatButton button;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable= new CompositeDisposable();
@@ -41,14 +41,15 @@ public class DangKiActivity extends AppCompatActivity {
         });
     }
     private void dangKi() {
-        String str_email = email.getText().toString().trim();
+        String str_email=email.getText().toString().trim();
         String str_pass = pass.getText().toString().trim();
         String str_repass = repass.getText().toString().trim();
         String str_user = username.getText().toString().trim();
         String str_mobile = mobile.getText().toString().trim();
         if (TextUtils.isEmpty(str_email)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập Email!", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(str_pass)) {
+        }
+       if (TextUtils.isEmpty(str_pass)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập Pass!", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(str_repass)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập Repass!", Toast.LENGTH_SHORT).show();
