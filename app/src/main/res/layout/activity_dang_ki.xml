@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.manager.btlonappbanhangonline.activity.DangKiActivity">
+    tools:context="com.manager.btlonappbanhangonline.activity.RegisterActivity">
     <TextView
         android:id="@+id/txtdangnhap"
         app:layout_constraintTop_toTopOf="parent"

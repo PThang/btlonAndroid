@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.adapter.SanPhamMoiAdapter;
 import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;
-import com.manager.btlonappbanhangonline.model.SanPhamMoi;
+import com.manager.btlonappbanhangonline.model.NewProduct;
 import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
 import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
 import com.manager.btlonappbanhangonline.utils.Utils;
@@ -31,19 +31,20 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class QuanLiActivity extends AppCompatActivity {
+public class ManagerActivity extends AppCompatActivity {
     ImageView img_them;
     RecyclerView recyclerView;
     CompositeDisposable compositeDisposable= new CompositeDisposable();
     ApiBanHang apiBanHang;
-    List<SanPhamMoi> list;
+    List<NewProduct> list;
     SanPhamMoiAdapter adapter;
-    SanPhamMoi sanPhamSuaXoa;
+    NewProduct sanPhamSuaXoa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_li);
         apiBanHang= RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        Log.i("activity: ", "Main");
         initView();
         initControl();
         getSpMoi();
@@ -53,7 +54,7 @@ public class QuanLiActivity extends AppCompatActivity {
         img_them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(getApplicationContext(), ThemSPActivity.class);
+                Intent intent= new Intent(getApplicationContext(), AddProductActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,7 +96,7 @@ public class QuanLiActivity extends AppCompatActivity {
     }
 
     private void xoaSanPham() {
-        compositeDisposable.add(apiBanHang.xoaSanPham(sanPhamSuaXoa.getId())
+        compositeDisposable.add(apiBanHang.xoaSanPham(Integer.parseInt(sanPhamSuaXoa.getId()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -114,7 +115,7 @@ public class QuanLiActivity extends AppCompatActivity {
     }
 
     private void suaSanPham() {
-        Intent intent= new Intent(getApplicationContext(), ThemSPActivity.class);
+        Intent intent= new Intent(getApplicationContext(), AddProductActivity.class);
         intent.putExtra("sua", sanPhamSuaXoa);
         startActivity(intent);
     }

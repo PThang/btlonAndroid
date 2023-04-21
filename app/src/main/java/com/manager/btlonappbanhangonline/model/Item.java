@@ -1,7 +1,7 @@
 package com.manager.btlonappbanhangonline.model;
 
 public class Item {
-    int idsp;
+    String idsp;
     String tensp;
     int soluong;
     String hinhanh;
@@ -22,11 +22,11 @@ public class Item {
         this.hinhanh = hinhanh;
     }
 
-    public int getIdsp() {
+    public String getIdsp() {
         return idsp;
     }
 
-    public void setIdsp(int idsp) {
+    public void setIdsp(String idsp) {
         this.idsp = idsp;
     }
 

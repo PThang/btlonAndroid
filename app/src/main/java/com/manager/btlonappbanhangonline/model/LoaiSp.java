@@ -1,7 +1,7 @@
 package com.manager.btlonappbanhangonline.model;
 
 public class LoaiSp {
-    int id;
+    String id;
     String tensanpham;
     String hinhanh;
 
@@ -10,11 +10,11 @@ public class LoaiSp {
         this.hinhanh = hinhanh;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

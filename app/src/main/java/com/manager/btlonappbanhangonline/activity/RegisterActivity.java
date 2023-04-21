@@ -19,7 +19,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DangKiActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     EditText pass,email, repass,mobile,username;
     AppCompatButton button;
     ApiBanHang apiBanHang;
@@ -49,7 +49,7 @@ public class DangKiActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(str_email)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập Email!", Toast.LENGTH_SHORT).show();
         }
-       if (TextUtils.isEmpty(str_pass)) {
+        if (TextUtils.isEmpty(str_pass)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập Pass!", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(str_repass)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập Repass!", Toast.LENGTH_SHORT).show();
@@ -68,7 +68,7 @@ public class DangKiActivity extends AppCompatActivity {
                                     if(userModel.isSuccess()){
                                         Utils.user_current.setEmail(str_email);
                                         Utils.user_current.setPass(str_pass);
-                                        Intent intent=new Intent(getApplicationContext(), DangNhapActivity.class);
+                                        Intent intent=new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }else{

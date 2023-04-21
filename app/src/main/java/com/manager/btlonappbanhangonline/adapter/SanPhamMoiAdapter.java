@@ -16,9 +16,9 @@ import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.Interface.ItemClickListener;
 import com.manager.btlonappbanhangonline.R;
 
-import com.manager.btlonappbanhangonline.activity.ChiTietActivity;
+import com.manager.btlonappbanhangonline.activity.DetailActivity;
 import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;
-import com.manager.btlonappbanhangonline.model.SanPhamMoi;
+import com.manager.btlonappbanhangonline.model.NewProduct;
 import com.manager.btlonappbanhangonline.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,8 +28,8 @@ import java.util.List;
 
 public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.MyViewHolder> {
     Context context;
-    List<SanPhamMoi> array;
-    public SanPhamMoiAdapter(Context context, List<SanPhamMoi> array) {
+    List<NewProduct> array;
+    public SanPhamMoiAdapter(Context context, List<NewProduct> array) {
         this.context = context;
         this.array = array;
     }
@@ -43,7 +43,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        SanPhamMoi sanPhamMoi = array.get(position);
+        NewProduct sanPhamMoi = array.get(position);
         holder.txtten.setText(sanPhamMoi.getTensp());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.txtgia.setText("Giá: "+decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp()))+"Đ");
@@ -59,7 +59,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
             public void onClick(View view, int pos, boolean isLongClick) {
                 if(!isLongClick){
                     //click
-                    Intent intent=new Intent(context, ChiTietActivity.class);
+                    Intent intent=new Intent(context, DetailActivity.class);
                     intent.putExtra("chitiet",sanPhamMoi);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);

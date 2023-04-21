@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.adapter.DienThoaiAdapter;
-import com.manager.btlonappbanhangonline.model.SanPhamMoi;
+import com.manager.btlonappbanhangonline.adapter.PhoneAdapter;
+import com.manager.btlonappbanhangonline.model.NewProduct;
 import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
 import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
 import com.manager.btlonappbanhangonline.utils.Utils;
@@ -32,8 +32,8 @@ public class LaptopActivity extends AppCompatActivity {
     CompositeDisposable compositeDisposable= new CompositeDisposable();
     int page=1;
     int loai;
-    DienThoaiAdapter adapterDt;
-    List<SanPhamMoi> sanPhamMoiList;
+    PhoneAdapter adapterDt;
+    List<NewProduct> sanPhamMoiList;
     LinearLayoutManager linearLayoutManager;
     Handler handler = new Handler();
     boolean isLoading = false;
@@ -100,7 +100,7 @@ public class LaptopActivity extends AppCompatActivity {
                             if(sanPhamMoiModel.isSuccess()){
                                 if(adapterDt==null){
                                     sanPhamMoiList = sanPhamMoiModel.getResult();
-                                    adapterDt = new DienThoaiAdapter(getApplicationContext(),sanPhamMoiList);
+                                    adapterDt = new PhoneAdapter(getApplicationContext(),sanPhamMoiList);
                                     recyclerView.setAdapter(adapterDt);
                                 }else{
                                     int vitri= sanPhamMoiList.size()-1;

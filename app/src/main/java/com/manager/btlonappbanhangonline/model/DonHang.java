@@ -3,18 +3,18 @@ package com.manager.btlonappbanhangonline.model;
 import java.util.List;
 
 public class DonHang {
-    int id;
+    String id;
     int iduser;
     String diachi;
     String sodienthoai;
     String tongtien;
     List<Item> item;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

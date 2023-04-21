@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.adapter.GioHangAdapter;
+import com.manager.btlonappbanhangonline.adapter.CartAdapter;
 import com.manager.btlonappbanhangonline.model.EventBus.TinhTongEvent;
 import com.manager.btlonappbanhangonline.utils.Utils;
 
@@ -22,12 +22,12 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 
-public class GioHangActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity {
     TextView giohangtrong, tongtien;
     Toolbar toolbar;
     RecyclerView recyclerView;
     Button btnmuahang;
-    GioHangAdapter adapter;
+    CartAdapter adapter;
     long tongtiensp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class GioHangActivity extends AppCompatActivity {
         if(Utils.manggiohang.size()==0){
             giohangtrong.setVisibility(View.VISIBLE);
         }else{
-            adapter= new GioHangAdapter(getApplicationContext(),Utils.manggiohang);
+            adapter= new CartAdapter(getApplicationContext(),Utils.manggiohang);
             recyclerView.setAdapter(adapter);
         }
         btnmuahang.setOnClickListener(new View.OnClickListener() {

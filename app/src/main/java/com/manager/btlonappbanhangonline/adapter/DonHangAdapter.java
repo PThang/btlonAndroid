@@ -44,7 +44,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         );
         layoutManager.setInitialPrefetchItemCount(donHang.getItem().size());
         //adapter chitiet
-        ChitietAdapter chitietAdapter=new ChitietAdapter(context,donHang.getItem());
+        DetailAdapter chitietAdapter=new DetailAdapter(context,donHang.getItem());
         holder.reChitiet.setLayoutManager(layoutManager);
         holder.reChitiet.setAdapter(chitietAdapter);
         holder.reChitiet.setRecycledViewPool(viewPool);

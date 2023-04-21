@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.manager.btlonappbanhangonline.R;
 
-import com.manager.btlonappbanhangonline.adapter.DienThoaiAdapter;
-import com.manager.btlonappbanhangonline.model.SanPhamMoi;
+import com.manager.btlonappbanhangonline.adapter.PhoneAdapter;
+import com.manager.btlonappbanhangonline.model.NewProduct;
 import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
 import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
 import com.manager.btlonappbanhangonline.utils.Utils;
@@ -31,8 +31,8 @@ public class SearchActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     EditText edtsearch;
-    DienThoaiAdapter adapterDt;
-    List<SanPhamMoi> sanPhamMoiList;
+    PhoneAdapter adapterDt;
+    List<NewProduct> sanPhamMoiList;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable= new CompositeDisposable();
     @Override
@@ -62,7 +62,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.length()==0){
                     sanPhamMoiList.clear();
-                    adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
+                    adapterDt = new PhoneAdapter(getApplicationContext(), sanPhamMoiList);
                     recyclerView.setAdapter(adapterDt);
                 }else{
                     getDataSearch(s.toString());
@@ -85,7 +85,7 @@ public class SearchActivity extends AppCompatActivity {
                         sanPhamMoiModel -> {
                             if(sanPhamMoiModel.isSuccess()) {
                                 sanPhamMoiList= sanPhamMoiModel.getResult();
-                                adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
+                                adapterDt = new PhoneAdapter(getApplicationContext(), sanPhamMoiList);
                                 recyclerView.setAdapter(adapterDt);
                             }
                         },

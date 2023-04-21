@@ -15,19 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.Interface.ItemClickListener;
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.activity.ChiTietActivity;
-import com.manager.btlonappbanhangonline.model.SanPhamMoi;
+import com.manager.btlonappbanhangonline.activity.DetailActivity;
+import com.manager.btlonappbanhangonline.model.NewProduct;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class DienThoaiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<SanPhamMoi> array;
+    List<NewProduct> array;
     private static final int VIEW_TYPE_DATA=0;
     private static final int VIEW_TYPE_LOADING=1;
 
-    public DienThoaiAdapter(Context context, List<SanPhamMoi> array) {
+    public PhoneAdapter(Context context, List<NewProduct> array) {
         this.context = context;
         this.array = array;
     }
@@ -49,7 +49,7 @@ public class DienThoaiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof MyViewHolder){
             MyViewHolder myViewHolder = (MyViewHolder) holder;
-            SanPhamMoi sanPham = array.get(position);
+            NewProduct sanPham = array.get(position);
             myViewHolder.tensp.setText(sanPham.getTensp().trim());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
             myViewHolder.giasp.setText("Giá:"+decimalFormat.format(Double.parseDouble(sanPham.getGiasp()))+"Đ");
@@ -61,7 +61,7 @@ public class DienThoaiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onClick(View view, int pos, boolean isLongClick) {
                     if(!isLongClick){
                         //click
-                        Intent intent=new Intent(context, ChiTietActivity.class);
+                        Intent intent=new Intent(context, DetailActivity.class);
                         intent.putExtra("chitiet",sanPham);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);

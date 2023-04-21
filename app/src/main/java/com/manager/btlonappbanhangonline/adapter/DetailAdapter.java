@@ -17,11 +17,11 @@ import com.manager.btlonappbanhangonline.model.Item;
 
 import java.util.List;
 
-public class ChitietAdapter extends RecyclerView.Adapter<ChitietAdapter.MyViewHolder> {
+public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.MyViewHolder> {
     Context context;
     List<Item> itemList;
 
-    public ChitietAdapter(Context context, List<Item> itemList) {
+    public DetailAdapter(Context context, List<Item> itemList) {
         this.context = context;
         this.itemList = itemList;
     }

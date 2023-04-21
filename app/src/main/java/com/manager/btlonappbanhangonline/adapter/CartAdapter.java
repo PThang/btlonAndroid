@@ -27,11 +27,11 @@ import org.greenrobot.eventbus.EventBus;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHolder> {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     Context context;
     List<GioHang> gioHangList;
 
-    public GioHangAdapter(Context context, List<GioHang> gioHangList) {
+    public CartAdapter(Context context, List<GioHang> gioHangList) {
         this.context = context;
         this.gioHangList = gioHangList;
     }

@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 }finally {
                     if(Paper.book().read("user")==null){
-                        Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }else{

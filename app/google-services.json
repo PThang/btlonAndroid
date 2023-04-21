@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "931836430890",
+    "project_id": "appbanhang-aaa39",
+    "storage_bucket": "appbanhang-aaa39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931836430890:android:66c03ae0df7fbf0c685153",
+        "android_client_info": {
+          "package_name": "com.manager.btlonappbanhangonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931836430890-fv5659vul1dds2c1mhmlitgejdc7bgaj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAxeVCU1LbsvlS0ZBaw8K3DGuIIXOKH3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931836430890-fv5659vul1dds2c1mhmlitgejdc7bgaj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

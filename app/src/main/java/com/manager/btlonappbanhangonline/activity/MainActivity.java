@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -23,16 +25,21 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.adapter.LoaiSpAdapter;
 import com.manager.btlonappbanhangonline.adapter.SanPhamMoiAdapter;
 import com.manager.btlonappbanhangonline.model.LoaiSp;
-import com.manager.btlonappbanhangonline.model.SanPhamMoi;
+import com.manager.btlonappbanhangonline.model.NewProduct;
 import com.manager.btlonappbanhangonline.model.User;
 import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
 import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
 import com.manager.btlonappbanhangonline.utils.Utils;
-import com.google.android.material.navigation.NavigationView;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
@@ -54,17 +61,21 @@ public class MainActivity extends AppCompatActivity {
     List<LoaiSp> mangloaisp;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     ApiBanHang apiBanHang;
-    List<SanPhamMoi> mangSpMoi;
+    List<NewProduct> mangSpMoi;
     SanPhamMoiAdapter spAdapter;
     NotificationBadge badge;
     FrameLayout frameLayout;
     ImageView imgsearch;
 
+    FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i("activity: ", "Main");
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        db = FirebaseFirestore.getInstance();
         Paper.init(this);
         if(Paper.book().read("user")!=null){
             User user = Paper.book().read("user");
@@ -92,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(trangchu);
                         break;
                     case 1:
-                        Intent dienthoai= new Intent(getApplicationContext(), DienThoaiActivity.class);
+                        Intent dienthoai= new Intent(getApplicationContext(), PhoneActivity.class);
                         dienthoai.putExtra("loai", 1);
                         startActivity(dienthoai);
                         break;
@@ -102,11 +113,11 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(laptop);
                         break;
                     case 3:
-                        Intent thongtin= new Intent(getApplicationContext(), ThongTinActivity.class);
+                        Intent thongtin= new Intent(getApplicationContext(), InformationActivity.class);
                         startActivity(thongtin);
                         break;
                     case 4:
-                        Intent lienhe= new Intent(getApplicationContext(), LienHeActivity.class);
+                        Intent lienhe= new Intent(getApplicationContext(), ContactActivity.class);
                         startActivity(lienhe);
                         break;
                     case 5:
@@ -114,23 +125,23 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(donhang);
                         break;
                     case 6:
-                        Intent quanli= new Intent(getApplicationContext(), QuanLiActivity.class);
+                        Intent quanli= new Intent(getApplicationContext(), ManagerActivity.class);
                         startActivity(quanli);
                         break;
                     case 7:
-                    //xoa key user
-                    Paper.book().delete("user");
-                    Intent dangnhap= new Intent(getApplicationContext(), DangNhapActivity.class);
-                    startActivity(dangnhap);
-                    finish();
-                    break;
+                        //xoa key user
+                        Paper.book().delete("user");
+                        Intent dangnhap= new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(dangnhap);
+                        finish();
+                        break;
                 }
             }
         });
     }
 
     private void getSpMoi() {
-        compositeDisposable.add(apiBanHang.getSpMoi()
+        /*compositeDisposable.add(apiBanHang.getSpMoi()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -144,7 +155,30 @@ public class MainActivity extends AppCompatActivity {
                         throwable -> {
                             Toast.makeText(getApplicationContext(), "Không kết nối được với sever"+throwable.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                ));
+                ));*/
+        List<NewProduct> data = new ArrayList<>();
+        db.collection("items")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(error != null){
+                            Log.i("error when getting data:", error.toString());
+                            return;
+                        }
+                        try{
+                            for(DocumentChange dc : value.getDocumentChanges()){
+                                if(dc.getType() == DocumentChange.Type.ADDED){
+                                    data.add(dc.getDocument().toObject(NewProduct.class));
+                                }
+                            }
+                        } catch (Exception e){
+                            Log.i("error when getting data:", e.toString());
+                        }
+                        spAdapter = new SanPhamMoiAdapter(getApplicationContext(), data);
+                        recyclerViewManHinhChinh.setAdapter(spAdapter);
+                        spAdapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     private void getLoaiSanPham() {
@@ -224,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
         frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent giohang= new Intent(getApplicationContext(), GioHangActivity.class);
+                Intent giohang= new Intent(getApplicationContext(), CartActivity.class);
                 startActivity(giohang);
             }
         });

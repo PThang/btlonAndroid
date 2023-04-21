@@ -1,7 +1,7 @@
 package com.manager.btlonappbanhangonline.model;
 
 public class GioHang {
-    int idsp;
+    String idsp;
     String tensp;
     long giasp;
     String hinhsp;
@@ -10,11 +10,11 @@ public class GioHang {
     public GioHang() {
     }
 
-    public int getIdsp() {
+    public String getIdsp() {
         return idsp;
     }
 
-    public void setIdsp(int idsp) {
+    public void setIdsp(String idsp) {
         this.idsp = idsp;
     }
 

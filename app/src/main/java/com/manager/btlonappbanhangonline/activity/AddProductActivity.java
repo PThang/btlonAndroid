@@ -20,7 +20,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.ActivityThemspBinding;
 import com.manager.btlonappbanhangonline.model.MessageModel;
-import com.manager.btlonappbanhangonline.model.SanPhamMoi;
+import com.manager.btlonappbanhangonline.model.NewProduct;
 import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
 import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
 import com.manager.btlonappbanhangonline.utils.Utils;
@@ -39,14 +39,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ThemSPActivity extends AppCompatActivity {
+public class AddProductActivity extends AppCompatActivity {
     Spinner spinner;
     int loai=0;
     ActivityThemspBinding binding;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable= new CompositeDisposable();
     String mediaPath;
-    SanPhamMoi sanPhamSua;
+    NewProduct sanPhamSua;
     boolean flag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,8 @@ public class ThemSPActivity extends AppCompatActivity {
         initView();
         initData();
         Intent intent= getIntent();
-        sanPhamSua=(SanPhamMoi) intent.getSerializableExtra("sua");
+        Log.i("activity: ", "Add");
+        sanPhamSua=(NewProduct) intent.getSerializableExtra("sua");
         if(sanPhamSua==null){
             //them moi
             flag=false;
@@ -70,7 +71,7 @@ public class ThemSPActivity extends AppCompatActivity {
             binding.giasp.setText(sanPhamSua.getGiasp() + "");
             binding.tensp.setText(sanPhamSua.getTensp());
             binding.hinhanh.setText(sanPhamSua.getHinhanh());
-            binding.spinnerLoai.setSelection(sanPhamSua.getLoai());
+            binding.spinnerLoai.setSelection(Integer.parseInt(sanPhamSua.getLoai()));
         }
     }
 
@@ -105,7 +106,7 @@ public class ThemSPActivity extends AppCompatActivity {
         binding.imgcamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImagePicker.with(ThemSPActivity.this)
+                ImagePicker.with(AddProductActivity.this)
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
@@ -122,7 +123,7 @@ public class ThemSPActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(str_ten) || TextUtils.isEmpty(str_gia) || TextUtils.isEmpty(str_mota) || TextUtils.isEmpty(str_hinhanh) || loai==0){
             Toast.makeText(getApplicationContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_LONG).show();
         }else{
-            compositeDisposable.add(apiBanHang.updatesp(str_ten,str_gia,str_hinhanh,str_mota,loai, sanPhamSua.getId())
+            compositeDisposable.add(apiBanHang.updatesp(str_ten,str_gia,str_hinhanh,str_mota,loai, Integer.parseInt(sanPhamSua.getId()))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(

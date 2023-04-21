@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DangNhapActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     TextView txtdangki,txtresetpass;
     EditText email, pass;
     AppCompatButton btndangnhap;
@@ -33,6 +34,7 @@ public class DangNhapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_nhap);
+        Log.i("activity: ", "Login");
         initView();
         initControll();
     }
@@ -41,7 +43,7 @@ public class DangNhapActivity extends AppCompatActivity {
         txtdangki.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(), DangKiActivity.class);
+                Intent intent=new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -85,17 +87,17 @@ public class DangNhapActivity extends AppCompatActivity {
             pass.setText(Paper.book().read("pass"));
             if(Paper.book().read("islogin")!=null){
                 boolean flag= Paper.book().read("islogin");
-                    if(flag){
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //dangNhap(Paper.book().read("email"),Paper.book().read("pass"));
-                            }
-                        },1000);
-                    }
+                if(flag){
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //dangNhap(Paper.book().read("email"),Paper.book().read("pass"));
+                        }
+                    },1000);
                 }
             }
         }
+    }
 
     private void dangNhap(String email, String pass) {
         compositeDisposable.add(apiBanHang.dangNhap(email, pass)

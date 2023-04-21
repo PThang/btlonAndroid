@@ -2,19 +2,31 @@ package com.manager.btlonappbanhangonline.model;
 
 import java.io.Serializable;
 
-public class SanPhamMoi implements Serializable {
-    int id;
+public class NewProduct implements Serializable {
+    String id;
     String tensp;
     String hinhanh;
     String giasp;
     String mota;
-    int loai;
+    String loai;
 
-    public int getId() {
+    public NewProduct(String id, String tensp, String hinhanh, String giasp, String mota, String loai) {
+        this.id = id;
+        this.tensp = tensp;
+        this.hinhanh = hinhanh;
+        this.giasp = giasp;
+        this.mota = mota;
+        this.loai = loai;
+    }
+
+    public NewProduct() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -50,11 +62,11 @@ public class SanPhamMoi implements Serializable {
         this.mota = mota;
     }
 
-    public int getLoai() {
+    public String getLoai() {
         return loai;
     }
 
-    public void setLoai(int loai) {
+    public void setLoai(String loai) {
         this.loai = loai;
     }
 

@@ -1,19 +1,19 @@
 package com.manager.btlonappbanhangonline.model.EventBus;
 
-import com.manager.btlonappbanhangonline.model.SanPhamMoi;
+import com.manager.btlonappbanhangonline.model.NewProduct;
 
 public class SuaXoaEvent {
-    SanPhamMoi sanPhamMoi;
+    NewProduct sanPhamMoi;
 
-    public SuaXoaEvent(SanPhamMoi sanPhamMoi) {
+    public SuaXoaEvent(NewProduct sanPhamMoi) {
         this.sanPhamMoi = sanPhamMoi;
     }
 
-    public SanPhamMoi getSanPhamMoi() {
+    public NewProduct getSanPhamMoi() {
         return sanPhamMoi;
     }
 
-    public void setSanPhamMoi(SanPhamMoi sanPhamMoi) {
+    public void setSanPhamMoi(NewProduct sanPhamMoi) {
         this.sanPhamMoi = sanPhamMoi;
     }
 }
