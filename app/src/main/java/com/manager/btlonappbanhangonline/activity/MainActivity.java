@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     ImageView imgsearch;
 
-    FirebaseFirestore db;
+    FirebaseFirestore db=FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

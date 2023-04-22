@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.Interface.ItemClickListener;
 import com.manager.btlonappbanhangonline.R;
-
 import com.manager.btlonappbanhangonline.activity.DetailActivity;
 import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;
 import com.manager.btlonappbanhangonline.model.NewProduct;
@@ -23,7 +22,6 @@ import com.manager.btlonappbanhangonline.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.MyViewHolder> {
@@ -45,8 +43,8 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NewProduct sanPhamMoi = array.get(position);
         holder.txtten.setText(sanPhamMoi.getTensp());
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.txtgia.setText("Giá: "+decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp()))+"Đ");
+        //DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.txtgia.setText("Giá: "+sanPhamMoi.getGiasp()+"Đ");
         if(sanPhamMoi.getHinhanh().contains("http")){
             Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
         }else{

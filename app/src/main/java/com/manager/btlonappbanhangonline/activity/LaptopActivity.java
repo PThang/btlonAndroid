@@ -2,6 +2,7 @@ package com.manager.btlonappbanhangonline.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class LaptopActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laptop);
+        Log.i("activity: ", "Laptop");
         apiBanHang= RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         loai= getIntent().getIntExtra("loai",2);
         Anhxa();
