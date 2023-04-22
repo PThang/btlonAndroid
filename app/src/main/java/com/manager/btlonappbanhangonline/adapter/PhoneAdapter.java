@@ -50,12 +50,12 @@ public class PhoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if(holder instanceof MyViewHolder){
             MyViewHolder myViewHolder = (MyViewHolder) holder;
             NewProduct sanPham = array.get(position);
-            myViewHolder.tensp.setText(sanPham.getTensp().trim());
+            myViewHolder.tensp.setText(sanPham.getName().trim());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            myViewHolder.giasp.setText("Giá:"+decimalFormat.format(Double.parseDouble(sanPham.getGiasp()))+"Đ");
-            myViewHolder.mota.setText(sanPham.getMota());
+            myViewHolder.giasp.setText("Giá:"+decimalFormat.format(Double.parseDouble(sanPham.getPrice()))+"Đ");
+            myViewHolder.mota.setText(sanPham.getDetail());
 
-            Glide.with(context).load(sanPham.getHinhanh()).into(myViewHolder.hinhanh);
+            Glide.with(context).load(sanPham.getImg()).into(myViewHolder.hinhanh);
             myViewHolder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int pos, boolean isLongClick) {

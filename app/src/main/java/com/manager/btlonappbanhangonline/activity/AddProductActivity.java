@@ -67,11 +67,11 @@ public class AddProductActivity extends AppCompatActivity {
             flag=true;
             binding.btnthem.setText("Sửa sản phẩm");
             //show data
-            binding.mota.setText(sanPhamSua.getMota());
-            binding.giasp.setText(sanPhamSua.getGiasp() + "");
-            binding.tensp.setText(sanPhamSua.getTensp());
-            binding.hinhanh.setText(sanPhamSua.getHinhanh());
-            binding.spinnerLoai.setSelection(Integer.parseInt(sanPhamSua.getLoai()));
+            binding.mota.setText(sanPhamSua.getDetail());
+            binding.giasp.setText(sanPhamSua.getPrice() + "");
+            binding.tensp.setText(sanPhamSua.getName());
+            binding.hinhanh.setText(sanPhamSua.getImg());
+            binding.spinnerLoai.setSelection(Integer.parseInt(sanPhamSua.getType()));
         }
     }
 

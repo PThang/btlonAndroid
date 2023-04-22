@@ -4,22 +4,19 @@ import java.io.Serializable;
 
 public class NewProduct implements Serializable {
     String id;
-    String tensp;
-    String hinhanh;
-    String giasp;
-    String mota;
-    String loai;
-
-    public NewProduct(String id, String tensp, String hinhanh, String giasp, String mota, String loai) {
+    String name;
+    String img;
+    String price;
+    String detail;
+    String type;
+    public NewProduct(){}
+    public NewProduct(String id, String name, String img, String price, String detail, String type) {
         this.id = id;
-        this.tensp = tensp;
-        this.hinhanh = hinhanh;
-        this.giasp = giasp;
-        this.mota = mota;
-        this.loai = loai;
-    }
-
-    public NewProduct() {
+        this.name = name;
+        this.img = img;
+        this.price = price;
+        this.detail = detail;
+        this.type = type;
     }
 
     public String getId() {
@@ -30,44 +27,43 @@ public class NewProduct implements Serializable {
         this.id = id;
     }
 
-    public String getTensp() {
-        return tensp;
+    public String getName() {
+        return name;
     }
 
-    public void setTensp(String tensp) {
-        this.tensp = tensp;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getHinhanh() {
-        return hinhanh;
+    public String getImg() {
+        return img;
     }
 
-    public void setHinhanh(String hinhanh) {
-        this.hinhanh = hinhanh;
+    public void setImg(String img) {
+        this.img = img;
     }
 
-    public String getGiasp() {
-        return giasp;
+    public String getPrice() {
+        return price;
     }
 
-    public void setGiasp(String giasp) {
-        this.giasp = giasp;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public String getMota() {
-        return mota;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setMota(String mota) {
-        this.mota = mota;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
-    public String getLoai() {
-        return loai;
+    public String getType() {
+        return type;
     }
 
-    public void setLoai(String loai) {
-        this.loai = loai;
+    public void setType(String type) {
+        this.type = type;
     }
-
 }

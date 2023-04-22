@@ -57,30 +57,30 @@ public class DetailActivity extends AppCompatActivity {
             for(int i=0;i<Utils.manggiohang.size();i++){
                 if(Utils.manggiohang.get(i).getIdsp()==sanPhamMoi.getId()) {
                     Utils.manggiohang.get(i).setSoluong(soluong + Utils.manggiohang.get(i).getSoluong());
-                    long gia = Long.parseLong(sanPhamMoi.getGiasp())*Utils.manggiohang.get(i).getSoluong();
+                    long gia = Long.parseLong(sanPhamMoi.getPrice())*Utils.manggiohang.get(i).getSoluong();
                     Utils.manggiohang.get(i).setGiasp(gia);
                     flag=true;
                 }
             }
             if(flag==false){
-                long gia = Long.parseLong(sanPhamMoi.getGiasp())*soluong;
+                long gia = Long.parseLong(sanPhamMoi.getPrice())*soluong;
                 GioHang gioHang= new GioHang();
                 gioHang.setGiasp(gia);
                 gioHang.setSoluong(soluong);
                 gioHang.setIdsp(sanPhamMoi.getId());
-                gioHang.setTensp(sanPhamMoi.getTensp());
-                gioHang.setHinhsp(sanPhamMoi.getHinhanh());
+                gioHang.setTensp(sanPhamMoi.getName());
+                gioHang.setHinhsp(sanPhamMoi.getImg());
                 Utils.manggiohang.add(gioHang);
             }
         }else{
             int soluong= Integer.parseInt(spinner.getSelectedItem().toString());
-            long gia = Long.parseLong(sanPhamMoi.getGiasp())*soluong;
+            long gia = Long.parseLong(sanPhamMoi.getPrice())*soluong;
             GioHang gioHang= new GioHang();
             gioHang.setGiasp(gia);
             gioHang.setSoluong(soluong);
             gioHang.setIdsp(sanPhamMoi.getId());
-            gioHang.setTensp(sanPhamMoi.getTensp());
-            gioHang.setHinhsp(sanPhamMoi.getHinhanh());
+            gioHang.setTensp(sanPhamMoi.getName());
+            gioHang.setHinhsp(sanPhamMoi.getImg());
             Utils.manggiohang.add(gioHang);
         }
         int totalItem=0;
@@ -92,11 +92,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initData() {
         sanPhamMoi= sanPhamMoi=(NewProduct) getIntent().getSerializableExtra("chitiet");
-        tensp.setText(sanPhamMoi.getTensp());
-        mota.setText(sanPhamMoi.getMota());
-        Glide.with(getApplicationContext()).load(sanPhamMoi.getHinhanh()).into(imghinhanh);
+        tensp.setText(sanPhamMoi.getName());
+        mota.setText(sanPhamMoi.getDetail());
+        Glide.with(getApplicationContext()).load(sanPhamMoi.getImg()).into(imghinhanh);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        giasp.setText("Giá:"+sanPhamMoi.getGiasp()+"Đ");
+        giasp.setText("Giá:"+sanPhamMoi.getPrice()+"Đ");
         Integer[] so =new Integer[]{1,2,3,4,5,6,7,8,9,10};
         ArrayAdapter<Integer> adapterspin= new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,so);
         spinner.setAdapter(adapterspin);

@@ -42,13 +42,13 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NewProduct sanPhamMoi = array.get(position);
-        holder.txtten.setText(sanPhamMoi.getTensp());
+        holder.txtten.setText(sanPhamMoi.getName());
         //DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.txtgia.setText("Giá: "+sanPhamMoi.getGiasp()+"Đ");
-        if(sanPhamMoi.getHinhanh().contains("http")){
-            Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
+        holder.txtgia.setText("Giá: "+sanPhamMoi.getPrice()+"Đ");
+        if(sanPhamMoi.getImg().contains("http")){
+            Glide.with(context).load(sanPhamMoi.getImg()).into(holder.imghinhanh);
         }else{
-            String hinh = Utils.BASE_URL+"images/"+sanPhamMoi.getHinhanh();
+            String hinh = Utils.BASE_URL+"images/"+sanPhamMoi.getImg();
             Glide.with(context).load(hinh).into(holder.imghinhanh);
         }
 
