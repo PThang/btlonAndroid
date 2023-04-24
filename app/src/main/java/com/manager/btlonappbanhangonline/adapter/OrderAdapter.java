@@ -16,12 +16,12 @@ import com.manager.btlonappbanhangonline.model.Order;
 
 import java.util.List;
 
-public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHolder> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder> {
     private RecyclerView.RecycledViewPool viewPool=new RecyclerView.RecycledViewPool();
     Context context;
     List<Order> listdonhang;
 
-    public DonHangAdapter(Context context, List<Order> listdonhang) {
+    public OrderAdapter(Context context, List<Order> listdonhang) {
         this.context = context;
         this.listdonhang = listdonhang;
     }

@@ -1,31 +1,10 @@
 package com.manager.btlonappbanhangonline.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.adapter.SanPhamMoiAdapter;
-import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;
-import com.manager.btlonappbanhangonline.model.NewProduct;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.List;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ManagerActivity extends AppCompatActivity {
 /*    ImageView img_them;

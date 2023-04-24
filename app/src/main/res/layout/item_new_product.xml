@@ -8,7 +8,48 @@
     app:cardCornerRadius="4dp"
     android:layout_width="160dp"
     android:layout_height="wrap_content">
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/productItemImage"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:src="@drawable/laptop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/nameItemProduct"
+            android:text="product"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productItemImage" />
+
+        <TextView
+            android:id="@+id/costItemProduct"
+            android:text="20.000.000 vnd"
+            android:textColor="@color/red"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:gravity="left"
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameItemProduct" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--<FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
@@ -48,5 +89,5 @@
             android:layout_gravity="top|right"
             android:layout_width="30dp"
             android:layout_height="30dp"/>
-    </FrameLayout>
+    </FrameLayout>-->
 </androidx.cardview.widget.CardView>

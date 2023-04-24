@@ -14,5 +14,6 @@
     <color name="highlight">#ffffff</color>
     <color name="shadow_color">#d9dbde</color>
     <color name="red">#FF6263</color>
+    <color name="pink">#fab1a0</color>
 
 </resources>

@@ -1,11 +1,12 @@
-package com.manager.btlonappbanhangonline.database.repository;
+package com.manager.btlonappbanhangonline.database.cartdatabase.repository;
 
 import android.app.Application;
 
 import androidx.room.Room;
 
-import com.manager.btlonappbanhangonline.database.CartDatabase;
-import com.manager.btlonappbanhangonline.database.dao.CartDao;
+
+import com.manager.btlonappbanhangonline.database.cartdatabase.CartDatabase;
+import com.manager.btlonappbanhangonline.database.cartdatabase.dao.CartDao;
 import com.manager.btlonappbanhangonline.model.Cart;
 
 import java.util.List;

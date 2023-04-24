@@ -1,20 +1,10 @@
 package com.manager.btlonappbanhangonline.activity;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.manager.btlonappbanhangonline.R;
-
-import com.manager.btlonappbanhangonline.adapter.DonHangAdapter;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class XemDonActivity extends AppCompatActivity {
 /*    CompositeDisposable compositeDisposable = new CompositeDisposable();

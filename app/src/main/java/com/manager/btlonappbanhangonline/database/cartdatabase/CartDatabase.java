@@ -1,8 +1,7 @@
-package com.manager.btlonappbanhangonline.database;
-
+package com.manager.btlonappbanhangonline.database.cartdatabase;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-import com.manager.btlonappbanhangonline.database.dao.CartDao;
+import com.manager.btlonappbanhangonline.database.cartdatabase.dao.CartDao;
 import com.manager.btlonappbanhangonline.model.Cart;
 
 @Database(entities = {Cart.class}, version = 1)

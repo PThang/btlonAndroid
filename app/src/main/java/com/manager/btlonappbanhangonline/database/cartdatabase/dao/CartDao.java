@@ -1,4 +1,4 @@
-package com.manager.btlonappbanhangonline.database.dao;
+package com.manager.btlonappbanhangonline.database.cartdatabase.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

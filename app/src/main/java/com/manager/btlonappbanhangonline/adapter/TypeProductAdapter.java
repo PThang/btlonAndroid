@@ -15,10 +15,10 @@ import com.manager.btlonappbanhangonline.model.TypeProduct;
 
 import java.util.List;
 
-public class LoaiSpAdapter extends BaseAdapter {
+public class TypeProductAdapter extends BaseAdapter {
     List<TypeProduct> array;
 
-    public LoaiSpAdapter(Context context, List<TypeProduct> array) {
+    public TypeProductAdapter(Context context, List<TypeProduct> array) {
         this.array = array;
         this.context = context;
     }

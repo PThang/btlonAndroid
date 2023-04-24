@@ -31,20 +31,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.adapter.LoaiSpAdapter;
-import com.manager.btlonappbanhangonline.adapter.SanPhamMoiAdapter;
+import com.manager.btlonappbanhangonline.adapter.TypeProductAdapter;
+import com.manager.btlonappbanhangonline.adapter.NewProductAdapter;
 import com.manager.btlonappbanhangonline.model.TypeProduct;
 import com.manager.btlonappbanhangonline.model.NewProduct;
-import com.manager.btlonappbanhangonline.model.User;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.paperdb.Paper;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -53,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ListView listViewManHinhChinh;
     DrawerLayout drawerLayout;
-    LoaiSpAdapter loaiSpAdapter;
+    TypeProductAdapter loaiSpAdapter;
     List<TypeProduct> mangloaisp;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     List<NewProduct> mangSpMoi;
-    SanPhamMoiAdapter spAdapter;
+    NewProductAdapter spAdapter;
     NotificationBadge badge;
     FrameLayout frameLayout;
     ImageView imgsearch;
@@ -165,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e){
                             Log.i("error when getting data:", e.toString());
                         }
-                        spAdapter = new SanPhamMoiAdapter(getApplicationContext(), data);
+                        spAdapter = new NewProductAdapter(getApplicationContext(), data);
                         recyclerViewManHinhChinh.setAdapter(spAdapter);
                         spAdapter.notifyDataSetChanged();
                     }
@@ -237,22 +234,7 @@ public class MainActivity extends AppCompatActivity {
         //khoi tao list
         mangloaisp = new ArrayList<>();
         mangSpMoi = new ArrayList<>();
-        /*if(Utils.manggiohang==null){
-            Utils.manggiohang=new ArrayList<>();
-        }else{
-            int totalItem=0;
-            for(int i=0;i<Utils.manggiohang.size();i++){
-                totalItem= totalItem+Utils.manggiohang.get(i).getSoluong();
-            }
-            badge.setText(String.valueOf(totalItem));
-        }
-        frameLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent giohang= new Intent(getApplicationContext(), CartActivity.class);
-                startActivity(giohang);
-            }
-        });*/
+
         imgsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
