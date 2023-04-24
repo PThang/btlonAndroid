@@ -14,9 +14,6 @@ public class Cart {
     String imageProduct;
     int quantity;
 
-    public Cart() {
-    }
-
     public Cart(String idProduct, String nameProduct, String costProduct, String imageProduct, int quantity) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;

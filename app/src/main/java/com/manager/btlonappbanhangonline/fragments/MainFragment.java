@@ -42,23 +42,18 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewFlipper = view.findViewById(R.id.viewFlipper);
+        productRecycler = view.findViewById(R.id.productRecycler);
+        searchView = view.findViewById(R.id.searchView);
+        db = FirebaseFirestore.getInstance();
 
-        try{
-            viewFlipper = view.findViewById(R.id.viewFlipper);
-            productRecycler = view.findViewById(R.id.productRecycler);
-            searchView = view.findViewById(R.id.searchView);
-            db = FirebaseFirestore.getInstance();
-
-            ActionViewFlipper();
-            //adapter = new NewProductAdapter(requireActivity().getApplicationContext(), data);
-            RecyclerView.LayoutManager layoutManager= new GridLayoutManager(requireActivity().getApplicationContext(),2);
-            productRecycler.setLayoutManager(layoutManager);
-            productRecycler.setHasFixedSize(true);
-            getProductData();
-            //productRecycler.setAdapter(adapter);
-        } catch (Exception e){
-            Log.i("Error when creating view :", e.toString());
-        }
+        ActionViewFlipper();
+        //adapter = new NewProductAdapter(requireActivity().getApplicationContext(), data);
+        RecyclerView.LayoutManager layoutManager= new GridLayoutManager(requireActivity().getApplicationContext(),2);
+        productRecycler.setLayoutManager(layoutManager);
+        productRecycler.setHasFixedSize(true);
+        getProductData();
+        //productRecycler.setAdapter(adapter);
     }
 
     @Override

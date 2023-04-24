@@ -2,89 +2,145 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="8dp"
-    app:cardCornerRadius="4dp"
-    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="3dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/item_giohang_image"
-            android:scaleType="centerCrop"
-            android:src="@drawable/iconnew_w512"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_cart">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/productCartImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/delivery" />
+        </androidx.cardview.widget.CardView>
+
         <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+            app:layout_constraintStart_toEndOf="@+id/cardView4"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center">
             <TextView
-                android:layout_marginLeft="10dp"
-                android:textSize="18sp"
+                android:id="@+id/nameProductCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:text="Test"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                />
+            <TextView
+                android:id="@+id/noName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Test"
+                android:textSize="17dp"
+                />
+            <TextView
+                android:id="@+id/costProductCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Test"
+                android:textSize="17dp"
+                android:textColor="@color/red"
                 android:textStyle="bold"
-                android:id="@+id/item_giohang_tensp"
-                android:text="Tên sản phẩm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:weightSum="18"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/item_giohang_gia"
-                    android:text="15000"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="7"
-                    android:textColor="@android:color/holo_red_light"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:src="@drawable/ic_baseline_remove_24"
-                    android:id="@+id/item_giohang_tru"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/item_giohang_soluong"
-                    android:text="1"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:src="@drawable/ic_baseline_add_24"
-                    android:id="@+id/item_giohang_cong"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_baseline_drag_handle_24"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/item_giohang_giasp2"
-                    android:text="25000 đ"
-                    android:gravity="center|center_vertical"
-                    android:layout_weight="7"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/holo_red_light"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <CheckBox
-                android:padding="5dp"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/item_giohang_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                />
         </LinearLayout>
-    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="85dp"
+            android:layout_height="25dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="5dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:cardCornerRadius="3dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/subImage"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:padding="7dp"
+                        android:src="@drawable/minus"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/red" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/quantityText"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:cardCornerRadius="3dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/red"
+                    >
+
+                    <ImageView
+                        android:id="@+id/addImage"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:padding="7dp"
+                        android:src="@drawable/add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </androidx.cardview.widget.CardView>
