@@ -2,10 +2,10 @@ package com.manager.btlonappbanhangonline.model;
 
 import java.util.List;
 
-public class LoaiSpModel {
+public class OrderModel {
     boolean success;
     String message;
-    List<LoaiSp> result;
+    List<Order> result;
 
     public boolean isSuccess() {
         return success;
@@ -23,11 +23,11 @@ public class LoaiSpModel {
         this.message = message;
     }
 
-    public List<LoaiSp> getResult() {
+    public List<Order> getResult() {
         return result;
     }
 
-    public void setResult(List<LoaiSp> result) {
+    public void setResult(List<Order> result) {
         this.result = result;
     }
 }

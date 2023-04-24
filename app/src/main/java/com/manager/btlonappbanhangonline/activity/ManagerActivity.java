@@ -17,10 +17,6 @@ import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.adapter.SanPhamMoiAdapter;
 import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;
 import com.manager.btlonappbanhangonline.model.NewProduct;
-import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
-import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
-import com.manager.btlonappbanhangonline.utils.Utils;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -32,25 +28,25 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ManagerActivity extends AppCompatActivity {
-    ImageView img_them;
+/*    ImageView img_them;
     RecyclerView recyclerView;
     CompositeDisposable compositeDisposable= new CompositeDisposable();
     ApiBanHang apiBanHang;
     List<NewProduct> list;
     SanPhamMoiAdapter adapter;
-    NewProduct sanPhamSuaXoa;
+    NewProduct sanPhamSuaXoa;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quan_li);
-        apiBanHang= RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        setContentView(R.layout.activity_manager);
+        /*apiBanHang= RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         Log.i("activity: ", "Main");
         initView();
         initControl();
-        getSpMoi();
+        getSpMoi();*/
     }
 
-    private void initControl() {
+    /*private void initControl() {
         img_them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,5 +138,5 @@ public class ManagerActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
+    }*/
 }

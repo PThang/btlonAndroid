@@ -14,10 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
-import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
-import com.manager.btlonappbanhangonline.utils.Utils;
-
 import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -27,13 +23,12 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtdangki,txtresetpass;
     EditText email, pass;
     AppCompatButton btndangnhap;
-    ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable=new CompositeDisposable();
     boolean isLogin = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dang_nhap);
+        setContentView(R.layout.activity_login);
         Log.i("activity: ", "Login");
         initView();
         initControll();
@@ -74,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        Paper.init(this);
+        /*Paper.init(this);
         apiBanHang= RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         txtdangki= findViewById(R.id.txtdangki);
         txtresetpass=findViewById(R.id.txtresetpass);
@@ -96,11 +91,11 @@ public class LoginActivity extends AppCompatActivity {
                     },1000);
                 }
             }
-        }
+        }*/
     }
 
     private void dangNhap(String email, String pass) {
-        compositeDisposable.add(apiBanHang.dangNhap(email, pass)
+        /*compositeDisposable.add(apiBanHang.dangNhap(email, pass)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -120,15 +115,15 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
-                ));
+                ));*/
     }
     @Override
     protected void onResume() {
         super.onResume();
-        if(Utils.user_current.getEmail()!= null && Utils.user_current.getPass()!=null){
+        /*if(Utils.user_current.getEmail()!= null && Utils.user_current.getPass()!=null){
             email.setText(Utils.user_current.getEmail());
             pass.setText(Utils.user_current.getPass());
-        }
+        }*/
     }
 
     @Override

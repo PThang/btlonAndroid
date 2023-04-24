@@ -15,9 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.manager.btlonappbanhangonline.R;
 
-import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
-import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
-import com.manager.btlonappbanhangonline.utils.Utils;
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
@@ -27,24 +24,24 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ThanhToanActivity extends AppCompatActivity {
-    Toolbar toolbar;
+    /*Toolbar toolbar;
     TextView txttongtien, txtsodt, txtemail;
     EditText edtdiachi;
     AppCompatButton btndathang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     ApiBanHang apiBanHang;
     long tongtien;
-    int totalItem;
+    int totalItem;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thanh_toan);
-        initView();
+        setContentView(R.layout.activity_pay);
+        /*initView();
         countItem();
-        initControl();
+        initControl();*/
     }
 
-    private void countItem() {
+    /*private void countItem() {
         int totalItem=0;
         for(int i=0;i<Utils.mangmuahang.size();i++){
             totalItem= totalItem+Utils.mangmuahang.get(i).getSoluong();
@@ -110,5 +107,5 @@ public class ThanhToanActivity extends AppCompatActivity {
     protected void onDestroy() {
         compositeDisposable.clear();
         super.onDestroy();
-    }
+    }*/
 }

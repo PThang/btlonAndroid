@@ -15,19 +15,22 @@
         android:theme="@style/Theme.BTLonAppBanHangOnline"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.InformationActivity"
+            android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.ContactActivity"
+            android:name=".InformationActivity"
             android:exported="false" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.AddProductAcivity"
+            android:name=".ContactActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddProductAcivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.ManagerActivity"
+            android:name=".ManagerActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.SplashActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,43 +39,44 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.SearchActivity"
+            android:name=".SearchActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.XemDonActivity"
+            android:name=".XemDonActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.ThanhToanActivity"
+            android:name=".ThanhToanActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.ResetPassActivity"
+            android:name=".ResetPassActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.RegisterActivity"
+            android:name=".RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.CartActivity"
+            android:name=".CartActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.DetailActivity"
+            android:name=".DetailActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.LaptopActivity"
+            android:name=".LaptopActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.PhoneActivity"
+            android:name=".PhoneActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.MainActivity"
+            android:name=".MainActivity"
             android:exported="true" />
-        <service android:name="com.manager.btlonappbanhangonline.Service.FirebaseMessagerReceiver"
-            android:exported="true"
-            >
+
+        <service
+            android:name="com.manager.btlonappbanhangonline.Service.FirebaseMessagerReceiver"
+            android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

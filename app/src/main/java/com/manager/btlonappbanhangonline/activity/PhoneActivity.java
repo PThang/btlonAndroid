@@ -14,9 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.adapter.PhoneAdapter;
 import com.manager.btlonappbanhangonline.model.NewProduct;
-import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
-import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
-import com.manager.btlonappbanhangonline.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +23,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class PhoneActivity extends AppCompatActivity {
-    Toolbar toolbar;
+    /*Toolbar toolbar;
     RecyclerView recyclerView;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable= new CompositeDisposable();
@@ -36,20 +33,20 @@ public class PhoneActivity extends AppCompatActivity {
     List<NewProduct> sanPhamMoiList;
     LinearLayoutManager linearLayoutManager;
     Handler handler = new Handler();
-    boolean isLoading = false;
+    boolean isLoading = false;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dien_thoai);
-        apiBanHang= RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        setContentView(R.layout.activity_phone);
+        /*apiBanHang= RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         loai= getIntent().getIntExtra("loai",1);
         Anhxa();
         ActionToolBar();
         getData(page);
-        addEventLoad();
+        addEventLoad();*/
     }
 
-    private void addEventLoad() {
+    /*private void addEventLoad() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -144,5 +141,5 @@ public class PhoneActivity extends AppCompatActivity {
     protected void onDestroy(){
         compositeDisposable.clear();
         super.onDestroy();
-    }
+    }*/
 }

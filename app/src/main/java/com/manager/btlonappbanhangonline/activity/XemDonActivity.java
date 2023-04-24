@@ -11,29 +11,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.manager.btlonappbanhangonline.R;
 
 import com.manager.btlonappbanhangonline.adapter.DonHangAdapter;
-import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
-import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
-import com.manager.btlonappbanhangonline.utils.Utils;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class XemDonActivity extends AppCompatActivity {
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
+/*    CompositeDisposable compositeDisposable = new CompositeDisposable();
     ApiBanHang apiBanHang;
     RecyclerView redonhang;
-    Toolbar toolbar;
+    Toolbar toolbar;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xem_don);
-        initView();
+/*        initView();
         initToolbar();
-        getOrder();
+        getOrder();*/
     }
 
-    private void getOrder() {
+    /*private void getOrder() {
         compositeDisposable.add(apiBanHang.xemDonHang(Utils.user_current.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -71,5 +68,5 @@ public class XemDonActivity extends AppCompatActivity {
     protected void onDestroy() {
         compositeDisposable.clear();
         super.onDestroy();
-    }
+    }*/
 }

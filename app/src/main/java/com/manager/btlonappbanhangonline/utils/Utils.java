@@ -1,3 +1,4 @@
+/*
 package com.manager.btlonappbanhangonline.utils;
 
 import com.manager.btlonappbanhangonline.model.GioHang;
@@ -12,3 +13,4 @@ public class Utils {
     public static List<GioHang> mangmuahang = new ArrayList<>();
     public static User user_current = new User();
 }
+*/

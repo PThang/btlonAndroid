@@ -1,11 +1,11 @@
 package com.manager.btlonappbanhangonline.model;
 
-public class LoaiSp {
+public class TypeProduct {
     String id;
     String tensanpham;
     String hinhanh;
 
-    public LoaiSp(String tensanpham, String hinhanh) {
+    public TypeProduct(String tensanpham, String hinhanh) {
         this.tensanpham = tensanpham;
         this.hinhanh = hinhanh;
     }

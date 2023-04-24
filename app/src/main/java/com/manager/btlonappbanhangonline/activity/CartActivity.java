@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.adapter.CartAdapter;
 import com.manager.btlonappbanhangonline.model.EventBus.TinhTongEvent;
-import com.manager.btlonappbanhangonline.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -24,23 +23,23 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.text.DecimalFormat;
 
 public class CartActivity extends AppCompatActivity {
-    TextView giohangtrong, tongtien;
+    /*TextView giohangtrong, tongtien;
     Toolbar toolbar;
     RecyclerView recyclerView;
     Button btnmuahang;
     CartAdapter adapter;
-    long tongtiensp;
+    long tongtiensp;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gio_hang);
+        setContentView(R.layout.activity_cart);
         Log.i("activity: ", "Cart");
-        initView();
+        /*initView();
         initControl();
-        tinhTongTien();
+        tinhTongTien();*/
     }
 
-    private void tinhTongTien() {
+    /*private void tinhTongTien() {
         tongtiensp=0;
         for(int i=0;i<Utils.mangmuahang.size();i++){
             tongtiensp = tongtiensp + (Utils.mangmuahang.get(i).getGiasp()* Utils.mangmuahang.get(i).getSoluong());
@@ -103,5 +102,5 @@ public class CartActivity extends AppCompatActivity {
         if(event!=null){
             tinhTongTien();
         }
-    }
+    }*/
 }

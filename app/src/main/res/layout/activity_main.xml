@@ -51,6 +51,7 @@
             </androidx.appcompat.widget.Toolbar>
 
             <ViewFlipper
+                android:layout_margin="15dp"
                 android:id="@+id/viewlipper"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">

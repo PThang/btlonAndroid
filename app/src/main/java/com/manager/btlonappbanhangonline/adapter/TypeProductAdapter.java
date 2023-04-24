@@ -11,14 +11,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.R;
 
-import com.manager.btlonappbanhangonline.model.LoaiSp;
+import com.manager.btlonappbanhangonline.model.TypeProduct;
 
 import java.util.List;
 
 public class LoaiSpAdapter extends BaseAdapter {
-    List<LoaiSp> array;
+    List<TypeProduct> array;
 
-    public LoaiSpAdapter(Context context, List<LoaiSp> array) {
+    public LoaiSpAdapter(Context context, List<TypeProduct> array) {
         this.array = array;
         this.context = context;
     }

@@ -2,10 +2,10 @@ package com.manager.btlonappbanhangonline.model;
 
 import java.util.List;
 
-public class DonHangModel {
+public class TypeProductModel {
     boolean success;
     String message;
-    List<DonHang> result;
+    List<TypeProduct> result;
 
     public boolean isSuccess() {
         return success;
@@ -23,11 +23,11 @@ public class DonHangModel {
         this.message = message;
     }
 
-    public List<DonHang> getResult() {
+    public List<TypeProduct> getResult() {
         return result;
     }
 
-    public void setResult(List<DonHang> result) {
+    public void setResult(List<TypeProduct> result) {
         this.result = result;
     }
 }

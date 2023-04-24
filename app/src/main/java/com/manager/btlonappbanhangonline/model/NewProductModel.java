@@ -2,7 +2,7 @@ package com.manager.btlonappbanhangonline.model;
 
 import java.util.List;
 
-public class SanPhamMoiModel {
+public class NewProductModel {
     boolean success;
     String message;
     List<NewProduct> result;

@@ -12,45 +12,46 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.model.GioHang;
 import com.manager.btlonappbanhangonline.model.NewProduct;
-import com.manager.btlonappbanhangonline.utils.Utils;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.text.DecimalFormat;
 
 public class DetailActivity extends AppCompatActivity {
-    TextView tensp, giasp, mota;
-    Button btnthem;
-    ImageView imghinhanh;
-    Spinner spinner;
-    Toolbar toolbar;
-    NewProduct sanPhamMoi;
-    NotificationBadge badge;
+    NewProduct newProduct;
+    ImageView imageProduct;
+    TextView nameProduct, detailProduct;
+    CardView cardBack;
+    AppCompatButton addCartButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiet);
+        setContentView(R.layout.activity_detail);
         Log.i("activity: ", "Detail");
+
         initView();
-        ActionToolBar();
         initData();
         initControl();
     }
 
     private void initControl() {
-        btnthem.setOnClickListener(new View.OnClickListener(){
+        /*btnthem.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 themGioHang();
             }
-        });
+        });*/
     }
-    private void themGioHang() {
+    /*private void themGioHang() {
         if(Utils.manggiohang.size()>0){
             boolean flag=false;
             int soluong= Integer.parseInt(spinner.getSelectedItem().toString());
@@ -88,46 +89,37 @@ public class DetailActivity extends AppCompatActivity {
             totalItem= totalItem+Utils.manggiohang.get(i).getSoluong();
         }
         badge.setText(String.valueOf(totalItem));
-    }
+    }*/
 
     private void initData() {
-        sanPhamMoi= sanPhamMoi=(NewProduct) getIntent().getSerializableExtra("chitiet");
-        tensp.setText(sanPhamMoi.getName());
-        mota.setText(sanPhamMoi.getDetail());
-        Glide.with(getApplicationContext()).load(sanPhamMoi.getImg()).into(imghinhanh);
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        giasp.setText("Giá:"+sanPhamMoi.getPrice()+"Đ");
-        Integer[] so =new Integer[]{1,2,3,4,5,6,7,8,9,10};
-        ArrayAdapter<Integer> adapterspin= new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,so);
-        spinner.setAdapter(adapterspin);
+        newProduct = (NewProduct) getIntent().getSerializableExtra("chitiet");
+        detailProduct.setText(newProduct.getDetail());
+        nameProduct.setText(newProduct.getName());
+        Glide.with(getApplicationContext()).load(newProduct.getImg()).into(imageProduct);
+        addCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Add To Cart New Product:", newProduct.toString());
+            }
+        });
+
+        cardBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initView() {
-        tensp=findViewById(R.id.txttensp);
-        giasp=findViewById(R.id.txtgiasp);
-        mota= findViewById(R.id.txtmotachitiet);
-        btnthem=findViewById(R.id.btnthemvaogiohang);
-        spinner=findViewById(R.id.spinner);
-        imghinhanh=findViewById(R.id.imgchitiet);
-        toolbar=findViewById(R.id.toobar);
-        badge= findViewById(R.id.menu_sl);
-        FrameLayout frameLayoutgiohang= findViewById(R.id.framegiohang);
-        frameLayoutgiohang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent giohang= new Intent(getApplicationContext(), CartActivity.class);
-                startActivity(giohang);
-            }
-        });
-        if(Utils.manggiohang != null){
-            int totalItem=0;
-            for(int i=0;i<Utils.manggiohang.size();i++){
-                totalItem= totalItem+Utils.manggiohang.get(i).getSoluong();
-            }
-            badge.setText(String.valueOf(totalItem));
-        }
+        imageProduct = findViewById(R.id.productImage);
+        detailProduct = findViewById(R.id.detailText);
+        nameProduct = findViewById(R.id.nameProductText);
+        cardBack = findViewById(R.id.backCard);
+        addCartButton = findViewById(R.id.addCartButton);
     }
-    private void ActionToolBar() {
+
+    /*private void ActionToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -136,17 +128,17 @@ public class DetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
+    }*/
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(Utils.manggiohang != null){
+        /*if(Utils.manggiohang != null){
             int totalItem=0;
             for(int i=0;i<Utils.manggiohang.size();i++){
                 totalItem= totalItem+Utils.manggiohang.get(i).getSoluong();
             }
             badge.setText(String.valueOf(totalItem));
-        }
+        }*/
     }
 }

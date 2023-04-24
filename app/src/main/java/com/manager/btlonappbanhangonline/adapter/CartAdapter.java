@@ -20,7 +20,6 @@ import com.manager.btlonappbanhangonline.Interface.IImageClickListener;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.model.EventBus.TinhTongEvent;
 import com.manager.btlonappbanhangonline.model.GioHang;
-import com.manager.btlonappbanhangonline.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -39,7 +38,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_giohang,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart,parent,false);
         return new MyViewHolder(view);
     }
 
@@ -56,7 +55,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+               /* if(b){
                     Utils.mangmuahang.add(gioHang);
                     EventBus.getDefault().postSticky(new TinhTongEvent());
                 }else{
@@ -66,7 +65,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                             EventBus.getDefault().postSticky(new TinhTongEvent());
                         }
                     }
-                }
+                }*/
             }
         });
         holder.setListener(new IImageClickListener() {
@@ -89,9 +88,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                         builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Utils.manggiohang.remove(pos);
+                                /*Utils.manggiohang.remove(pos);
                                 notifyDataSetChanged();
-                                EventBus.getDefault().postSticky(new TinhTongEvent());
+                                EventBus.getDefault().postSticky(new TinhTongEvent());*/
                             }
                         });
                         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {

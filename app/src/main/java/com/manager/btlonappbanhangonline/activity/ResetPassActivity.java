@@ -13,29 +13,25 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.manager.btlonappbanhangonline.R;
 
-import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
-import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
-import com.manager.btlonappbanhangonline.utils.Utils;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ResetPassActivity extends AppCompatActivity {
-    EditText email;
+    /*EditText email;
     AppCompatButton btnreset;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable= new CompositeDisposable();
-    ProgressBar progressBar;
+    ProgressBar progressBar;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pass);
-        initView();
-        initControll();
+/*        initView();
+        initControll();*/
     }
 
-    private void initControll() {
+    /*private void initControll() {
         btnreset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,5 +76,5 @@ public class ResetPassActivity extends AppCompatActivity {
     protected void onDestroy() {
         compositeDisposable.clear();
         super.onDestroy();
-    }
+    }*/
 }

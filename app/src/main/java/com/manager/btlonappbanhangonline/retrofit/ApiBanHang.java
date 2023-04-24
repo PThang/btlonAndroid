@@ -1,9 +1,10 @@
+/*
 package com.manager.btlonappbanhangonline.retrofit;
 
-import com.manager.btlonappbanhangonline.model.DonHangModel;
-import com.manager.btlonappbanhangonline.model.LoaiSpModel;
+import com.manager.btlonappbanhangonline.model.OrderModel;
+import com.manager.btlonappbanhangonline.model.TypeProductModel;
 import com.manager.btlonappbanhangonline.model.MessageModel;
-import com.manager.btlonappbanhangonline.model.SanPhamMoiModel;
+import com.manager.btlonappbanhangonline.model.NewProductModel;
 import com.manager.btlonappbanhangonline.model.UserModel;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -19,13 +20,13 @@ import retrofit2.http.Part;
 public interface ApiBanHang {
     //get data
     @GET("getloaisp.php")
-    Observable<LoaiSpModel> getLoaiSp();
+    Observable<TypeProductModel> getLoaiSp();
     @GET("getspmoi.php")
-    Observable<SanPhamMoiModel> getSpMoi();
+    Observable<NewProductModel> getSpMoi();
     //post data
     @POST("chitiet.php")
     @FormUrlEncoded
-    Observable<SanPhamMoiModel> getSanPham(
+    Observable<NewProductModel> getSanPham(
             @Field("page") int page,
             @Field("loai") int loai
     );
@@ -62,12 +63,12 @@ public interface ApiBanHang {
     );
     @POST("xemdonhang.php")
     @FormUrlEncoded
-    Observable<DonHangModel> xemDonHang(
+    Observable<OrderModel> xemDonHang(
             @Field("iduser") int id
     );
     @POST("timkiem.php")
     @FormUrlEncoded
-    Observable<SanPhamMoiModel> search(
+    Observable<NewProductModel> search(
             @Field("search") String search
     );
     @POST("xoa.php")
@@ -101,3 +102,4 @@ public interface ApiBanHang {
             @Part MultipartBody.Part file
     );
 }
+*/

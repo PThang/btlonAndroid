@@ -2,7 +2,7 @@ package com.manager.btlonappbanhangonline.model;
 
 import java.util.List;
 
-public class DonHang {
+public class Order {
     String id;
     int iduser;
     String diachi;

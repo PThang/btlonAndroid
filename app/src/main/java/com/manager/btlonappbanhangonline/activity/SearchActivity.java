@@ -16,10 +16,6 @@ import com.manager.btlonappbanhangonline.R;
 
 import com.manager.btlonappbanhangonline.adapter.PhoneAdapter;
 import com.manager.btlonappbanhangonline.model.NewProduct;
-import com.manager.btlonappbanhangonline.retrofit.ApiBanHang;
-import com.manager.btlonappbanhangonline.retrofit.RetrofitClient;
-import com.manager.btlonappbanhangonline.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,22 +24,22 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity {
-    Toolbar toolbar;
+    /*Toolbar toolbar;
     RecyclerView recyclerView;
     EditText edtsearch;
     PhoneAdapter adapterDt;
     List<NewProduct> sanPhamMoiList;
     ApiBanHang apiBanHang;
-    CompositeDisposable compositeDisposable= new CompositeDisposable();
+    CompositeDisposable compositeDisposable= new CompositeDisposable();*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        initView();
-        ActionToolBar();
+/*        initView();
+        ActionToolBar();*/
     }
 
-    private void initView() {
+    /*private void initView() {
         sanPhamMoiList = new ArrayList<>();
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         edtsearch=findViewById(R.id.edtsearch);
@@ -110,5 +106,5 @@ public class SearchActivity extends AppCompatActivity {
     protected void onDestroy() {
         compositeDisposable.clear();
         super.onDestroy();
-    }
+    }*/
 }

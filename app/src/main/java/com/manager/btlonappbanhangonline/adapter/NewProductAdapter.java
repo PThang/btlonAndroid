@@ -18,8 +18,6 @@ import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.activity.DetailActivity;
 import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;
 import com.manager.btlonappbanhangonline.model.NewProduct;
-import com.manager.btlonappbanhangonline.utils.Utils;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
@@ -35,7 +33,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sp_moi,parent,false);
+        View item= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_new_product,parent,false);
         return new MyViewHolder(item);
     }
 
@@ -48,8 +46,8 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         if(sanPhamMoi.getImg().contains("http")){
             Glide.with(context).load(sanPhamMoi.getImg()).into(holder.imghinhanh);
         }else{
-            String hinh = Utils.BASE_URL+"images/"+sanPhamMoi.getImg();
-            Glide.with(context).load(hinh).into(holder.imghinhanh);
+            /*String hinh = Utils.BASE_URL+"images/"+sanPhamMoi.getImg();*/
+            /*Glide.with(context).load(hinh).into(holder.imghinhanh);*/
         }
 
         holder.setItemClickListener(new ItemClickListener() {

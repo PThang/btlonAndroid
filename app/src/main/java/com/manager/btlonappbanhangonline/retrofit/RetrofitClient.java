@@ -1,3 +1,4 @@
+/*
 package com.manager.btlonappbanhangonline.retrofit;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
@@ -17,3 +18,4 @@ public class RetrofitClient {
         return instance;
     }
 }
+*/
