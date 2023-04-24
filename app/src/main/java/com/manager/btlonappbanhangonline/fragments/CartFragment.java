@@ -60,8 +60,8 @@ public class CartFragment extends Fragment {
     void fakeData(){
         try{
             data.add(new Cart("1", "Samsung Galaxy S22 Ultra", "17490000", "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/m/sm-s908_galaxys22ultra_front_burgundy_211119.jpg", 5));
-            data.add(new Cart("2", "Samsung Galaxy S22 Ultra", "17490000", "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/m/sm-s908_galaxys22ultra_front_burgundy_211119.jpg", 5));
-            data.add(new Cart("3", "Samsung Galaxy S22 Ultra", "17490000", "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/m/sm-s908_galaxys22ultra_front_burgundy_211119.jpg", 5));
+            data.add(new Cart("2", "Samsung Galaxy S22 Ultra", "17490000", "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/m/sm-s908_galaxys22ultra_front_burgundy_211119.jpg", 6));
+            data.add(new Cart("3", "Samsung Galaxy S22 Ultra", "17490000", "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/m/sm-s908_galaxys22ultra_front_burgundy_211119.jpg", 7));
 
             adapter = new CartAdapter(requireActivity(), data);
             cartRecycler.setAdapter(adapter);
