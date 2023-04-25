@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "cart_tb")
 public class Cart {
     @NonNull
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    int id;
     String idProduct;
     String nameProduct;
     String costProduct;
@@ -20,6 +21,14 @@ public class Cart {
         this.costProduct = costProduct;
         this.imageProduct = imageProduct;
         this.quantity = quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getIdProduct() {

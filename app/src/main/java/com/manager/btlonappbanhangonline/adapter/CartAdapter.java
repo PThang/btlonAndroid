@@ -12,22 +12,27 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.model.Cart;
+import com.manager.btlonappbanhangonline.viewmodels.CartViewModel;
 
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     Context context;
     List<Cart> data;
+    CartViewModel viewModel;
 
     public CartAdapter(Context context, List<Cart> data) {
         this.context = context;
         this.data = data;
+        viewModel = ViewModelProviders.of((FragmentActivity) context).get(CartViewModel.class);
     }
 
     @NonNull
@@ -52,7 +57,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 int count = Integer.parseInt(holder.quantityText.getText().toString());
                 count++;
                 holder.quantityText.setText(String.valueOf(count));
-                Log.i("Error when setting adapter: ", String.valueOf(count));
+                Cart cart = data.get(holder.getAdapterPosition());
+                cart.setQuantity(count);
+                //Log.i("Error when setting adapter: ", String.valueOf(count));
+                viewModel.updateCart(cart);
             }
         });
         holder.subImage.setOnClickListener(v -> {
@@ -60,9 +68,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             if(count > 1){
                 count--;
                 holder.quantityText.setText(String.valueOf(count));
-                Log.i("Error when setting adapter: ", String.valueOf(count));
+                Cart cart = data.get(holder.getAdapterPosition());
+                cart.setQuantity(count);
+                //Log.i("Error when setting adapter: ", String.valueOf(count));
+                viewModel.updateCart(cart);
+                //Log.i("Error when setting adapter: ", String.valueOf(count));
             } else if (count <= 1){
-                data.remove(position);
+                viewModel.deleteCart(data.get(position));
                 notifyDataSetChanged();
             }
         });

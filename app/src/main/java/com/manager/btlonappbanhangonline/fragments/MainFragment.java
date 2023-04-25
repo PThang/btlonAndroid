@@ -84,17 +84,17 @@ public class MainFragment extends Fragment {
     }
 
     private void ActionViewFlipper() {
-        List<String> mangquangcao=new ArrayList<>();
-        mangquangcao.add("https://intphcm.com/data/upload/banner-la-gi.jpg");
-        mangquangcao.add("https://insieutoc.vn/wp-content/uploads/2021/02/mau-banner-quang-cao-khuyen-mai.jpg");
-        mangquangcao.add("http://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-big-ky-nguyen-800-300.jpg");
-        for(int i=0;i<mangquangcao.size();i++){
+        List<String> advertisements=new ArrayList<>();
+        advertisements.add("https://intphcm.com/data/upload/banner-la-gi.jpg");
+        advertisements.add("https://insieutoc.vn/wp-content/uploads/2021/02/mau-banner-quang-cao-khuyen-mai.jpg");
+        advertisements.add("http://mauweb.monamedia.net/thegioididong/wp-content/uploads/2017/12/banner-big-ky-nguyen-800-300.jpg");
+        for(int i=0;i<advertisements.size();i++){
             ImageView imageView=new ImageView(requireActivity().getApplicationContext());
-            Glide.with(requireActivity().getApplicationContext()).load(mangquangcao.get(i)).into(imageView);
+            Glide.with(requireActivity().getApplicationContext()).load(advertisements.get(i)).into(imageView);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             viewFlipper.addView(imageView);
         }
-        viewFlipper.setFlipInterval(3000);
+        viewFlipper.setFlipInterval(2000);
         viewFlipper.setAutoStart(true);
         Animation slide_in= AnimationUtils.loadAnimation(requireActivity().getApplicationContext(), R.anim.slide_in_right);
         Animation slide_out= AnimationUtils.loadAnimation(requireActivity().getApplicationContext(), R.anim.slide_out_right);

@@ -2,7 +2,6 @@ package com.manager.btlonappbanhangonline.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -15,9 +14,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.manager.btlonappbanhangonline.R;
 import io.paperdb.Paper;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class LoginActivity extends AppCompatActivity {
     TextView txtdangki,txtresetpass;

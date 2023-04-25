@@ -53,15 +53,37 @@
                 android:id="@+id/subTotalText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="15dp"
                 android:text="Sub-total: 100.000.000 vnd"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+<!--            <TextView
+                android:id="@+id/totalText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Total: 100.000.000 vnd"
+                android:textColor="@color/white"
+                android:textSize="15dp" />-->
+
+            <!--<TextView
+                android:id="@+id/deliveryText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Sub-total: 100.000.000 vnd"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subTotalText" />-->
+
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_margin="10dp"

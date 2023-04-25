@@ -1,5 +1,6 @@
 package com.manager.btlonappbanhangonline.database.cartdatabase.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -13,11 +14,11 @@ import java.util.List;
 @Dao
 public interface CartDao {
     @Insert
-    void insertCart(Cart cart);
+    void insert(Cart cart);
     @Update
-    void updateCart(Cart cart);
+    void update(Cart cart);
     @Delete
-    void deleteCart(Cart cart);
+    void delete(Cart cart);
     @Query("SELECT * FROM cart_tb")
-    List<Cart> selectAllCart();
+    LiveData<List<Cart>> selectAllCart();
 }
