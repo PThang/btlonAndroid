@@ -63,12 +63,10 @@ public class CartFragment extends Fragment {
         cartViewModel.getAllCarts().observe(requireActivity(), carts -> {
             adapter = new CartAdapter(requireActivity(),carts);
             cartRecycler.setAdapter(adapter);
-            Log.i("Error when setting adapter:",String.valueOf(carts.size()));
-            //subTotalText.setText(String.valueOf(cartViewModel.cost()));
+            //Log.i("Error when setting adapter:",String.valueOf(carts.size()));
+            subTotalText.setText("Sub-total: " + String.valueOf(cartViewModel.cost().getValue()) + " VND");
         });
 
         return view;
     }
-
-
 }

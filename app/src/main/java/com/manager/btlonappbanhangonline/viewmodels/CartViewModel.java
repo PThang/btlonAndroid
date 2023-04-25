@@ -41,11 +41,12 @@ public class CartViewModel extends AndroidViewModel {
         return allCarts;
     }
 
-    /*public long cost(){
-        long cost = 0;
+    public LiveData<Long> cost(){
+        MutableLiveData<Long> cost = new MutableLiveData<Long>();
+        cost.setValue(0L);
         for(Cart i:allCarts.getValue()){
-            cost+= i.getQuantity() * Long.valueOf(cost);
+            cost.setValue(cost.getValue() + i.getQuantity() * Long.valueOf(i.getCostProduct()));
         }
         return cost;
-    }*/
+    }
 }

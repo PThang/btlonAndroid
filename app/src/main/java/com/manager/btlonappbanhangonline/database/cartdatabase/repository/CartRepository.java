@@ -3,7 +3,10 @@ package com.manager.btlonappbanhangonline.database.cartdatabase.repository;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.room.Room;
 
 
@@ -40,14 +43,14 @@ public class CartRepository {
         return allCarts;
     }
 
-    /*public LiveData<Long> cost(){
-        LiveData<Long> cost = new LiveData<Long>(){};
+    public LiveData<Long> cost(){
+        LiveData<Long> cost = new LiveData<Long>() {};
         for(Cart i:allCarts.getValue()){
-            cost.getValue()+= i.getQuantity() * Long.valueOf(cost);
+            //cost.getValue()+= i.getQuantity() * Long.valueOf(cost);
         }
         return cost;
     }
-*/
+
     private static class InsertCartAsyncTask extends AsyncTask<Cart, Void, Void> {
 
         private CartDao cartDao;
