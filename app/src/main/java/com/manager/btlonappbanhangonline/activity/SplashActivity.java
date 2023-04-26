@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.manager.btlonappbanhangonline.R;
 
-
 import io.paperdb.Paper;
 
 public class SplashActivity extends AppCompatActivity {
@@ -33,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(home);
                         finish();
                     }else{
-                        Intent home = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent home = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(home);
                         finish();
                     }

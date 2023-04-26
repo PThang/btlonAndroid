@@ -1,49 +1,55 @@
+
 package com.manager.btlonappbanhangonline.activity;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
+import android.util.Log;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.Toolbar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.manager.btlonappbanhangonline.R;
-
 import com.manager.btlonappbanhangonline.adapter.PhoneAdapter;
 import com.manager.btlonappbanhangonline.model.NewProduct;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity {
-    /*Toolbar toolbar;
+    Toolbar toolbar;
     RecyclerView recyclerView;
     EditText edtsearch;
     PhoneAdapter adapterDt;
     List<NewProduct> sanPhamMoiList;
-    ApiBanHang apiBanHang;
-    CompositeDisposable compositeDisposable= new CompositeDisposable();*/
+    CompositeDisposable compositeDisposable= new CompositeDisposable();
+    FirebaseFirestore db=FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-/*        initView();
-        ActionToolBar();*/
+        Log.i("activity: ", "Main");
+        db = FirebaseFirestore.getInstance();
+
+        initView();
     }
 
-    /*private void initView() {
+    private void initView() {
         sanPhamMoiList = new ArrayList<>();
-        apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         edtsearch=findViewById(R.id.edtsearch);
-        toolbar=findViewById(R.id.toobar);
         recyclerView=findViewById(R.id.recycleview_search);
         LinearLayoutManager layoutManager= new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(true);
@@ -74,24 +80,30 @@ public class SearchActivity extends AppCompatActivity {
     }
     private void getDataSearch(String s) {
         sanPhamMoiList.clear();
-        compositeDisposable.add(apiBanHang.search(s)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        sanPhamMoiModel -> {
-                            if(sanPhamMoiModel.isSuccess()) {
-                                sanPhamMoiList= sanPhamMoiModel.getResult();
-                                adapterDt = new PhoneAdapter(getApplicationContext(), sanPhamMoiList);
-                                recyclerView.setAdapter(adapterDt);
-                            }
-                        },
-                        throwable -> {
-                            Toast.makeText(getApplicationContext(),throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        db.collection("items").orderBy("name", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.d("onEvent: ", error.getMessage());
+                    return;
+                }
+                try {
+                    for (DocumentChange dc : value.getDocumentChanges()) {
+                        if (dc.getType() == DocumentChange.Type.ADDED) {
+                            sanPhamMoiList.add(dc.getDocument().toObject(NewProduct.class));
                         }
-                ));
+                    }
+                } catch (Exception e) {
+                    Log.i("error when getting data:", e.toString());
+                }
+                adapterDt = new PhoneAdapter(getApplicationContext(), sanPhamMoiList);
+                recyclerView.setAdapter(adapterDt);
+                adapterDt.notifyDataSetChanged();
+            }
+        });
     }
 
-    private void ActionToolBar() {
+    /*private void ActionToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -100,11 +112,11 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
+    }*/
 
     @Override
     protected void onDestroy() {
         compositeDisposable.clear();
         super.onDestroy();
-    }*/
+    }
 }

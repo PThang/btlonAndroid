@@ -1,16 +1,7 @@
 package com.manager.btlonappbanhangonline.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +11,17 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.manager.btlonappbanhangonline.R;
+import com.manager.btlonappbanhangonline.activity.SearchActivity;
 import com.manager.btlonappbanhangonline.adapter.NewProductAdapter;
-import com.manager.btlonappbanhangonline.model.NewProduct;
 import com.manager.btlonappbanhangonline.viewmodels.MainFragmentViewModel;
 
 import java.util.ArrayList;
@@ -47,6 +43,13 @@ public class MainFragment extends Fragment {
         searchView = view.findViewById(R.id.searchView);
 
         mainFragmentViewModel = new ViewModelProvider(requireActivity()).get(MainFragmentViewModel.class);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(requireActivity().getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ActionViewFlipper();
         RecyclerView.LayoutManager layoutManager= new GridLayoutManager(requireActivity().getApplicationContext(),2);
