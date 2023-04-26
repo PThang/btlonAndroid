@@ -1,36 +1,40 @@
 package com.manager.btlonappbanhangonline.model;
 
 public class TypeProduct {
-    String id;
-    String tensanpham;
-    String hinhanh;
+    String idType;
+    String name;
+    String image;
 
-    public TypeProduct(String tensanpham, String hinhanh) {
-        this.tensanpham = tensanpham;
-        this.hinhanh = hinhanh;
+    public TypeProduct() {
     }
 
-    public String getId() {
-        return id;
+    public TypeProduct(String idType, String name, String image) {
+        this.idType = idType;
+        this.name = name;
+        this.image = image;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getIdType() {
+        return idType;
     }
 
-    public String getTensanpham() {
-        return tensanpham;
+    public void setIdType(String idType) {
+        this.idType = idType;
     }
 
-    public void setTensanpham(String tensanpham) {
-        this.tensanpham = tensanpham;
+    public String getName() {
+        return name;
     }
 
-    public String getHinhanh() {
-        return hinhanh;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setHinhanh(String hinhanh) {
-        this.hinhanh = hinhanh;
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

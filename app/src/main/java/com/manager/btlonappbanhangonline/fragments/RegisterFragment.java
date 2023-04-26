@@ -50,7 +50,18 @@ public class RegisterFragment extends Fragment {
             }
         });
 
+        binding.signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUpWithGG();
+            }
+        });
+
         return binding.getRoot();
+    }
+
+    private void signUpWithGG() {
+
     }
 
     private void register() {

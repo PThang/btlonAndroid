@@ -37,7 +37,6 @@ public class MainFragment extends Fragment {
     SearchView searchView;
     MainFragmentViewModel mainFragmentViewModel;
     public MainFragment() {
-
     }
 
     @Override
@@ -67,7 +66,6 @@ public class MainFragment extends Fragment {
         mainFragmentViewModel.getAllProducts().observe(requireActivity(),newProducts ->{
             NewProductAdapter adapter = new NewProductAdapter(requireActivity().getApplicationContext(), newProducts);
             productRecycler.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
         });
     }
 

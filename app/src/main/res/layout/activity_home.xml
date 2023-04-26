@@ -55,35 +55,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/profileContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/menu_not_select"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="8dp">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/user" />
-
-            <TextView
-                android:id="@+id/profileText"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:text="Profile"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/cartContainer"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -106,6 +77,35 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:text="Cart"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/profileContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/menu_not_select"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:id="@+id/profileText"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:text="Profile"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"

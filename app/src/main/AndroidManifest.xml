@@ -54,9 +54,6 @@
             android:name="com.manager.btlonappbanhangonline.activity.LoginActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.RegisterActivity"
-            android:exported="true" />
-        <activity
             android:name="com.manager.btlonappbanhangonline.activity.DetailActivity"
             android:exported="true" />
         <activity
