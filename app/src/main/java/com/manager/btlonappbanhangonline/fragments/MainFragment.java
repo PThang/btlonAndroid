@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,19 +26,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.adapter.NewProductAdapter;
 import com.manager.btlonappbanhangonline.model.NewProduct;
+import com.manager.btlonappbanhangonline.viewmodels.MainFragmentViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainFragment extends Fragment {
-    FirebaseFirestore db=FirebaseFirestore.getInstance();
     ViewFlipper viewFlipper;
     RecyclerView productRecycler;
     SearchView searchView;
-    //NewProductAdapter adapter;
-    //List<NewProduct> data;
+    MainFragmentViewModel mainFragmentViewModel;
     public MainFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -45,15 +46,14 @@ public class MainFragment extends Fragment {
         viewFlipper = view.findViewById(R.id.viewFlipper);
         productRecycler = view.findViewById(R.id.productRecycler);
         searchView = view.findViewById(R.id.searchView);
-        db = FirebaseFirestore.getInstance();
+
+        mainFragmentViewModel = new ViewModelProvider(requireActivity()).get(MainFragmentViewModel.class);
 
         ActionViewFlipper();
-        //adapter = new NewProductAdapter(requireActivity().getApplicationContext(), data);
         RecyclerView.LayoutManager layoutManager= new GridLayoutManager(requireActivity().getApplicationContext(),2);
         productRecycler.setLayoutManager(layoutManager);
         productRecycler.setHasFixedSize(true);
         getProductData();
-        //productRecycler.setAdapter(adapter);
     }
 
     @Override
@@ -64,23 +64,11 @@ public class MainFragment extends Fragment {
     }
 
     void getProductData(){
-        List<NewProduct> data = new ArrayList<>();
-        db.collection("items")
-                .addSnapshotListener((value, error) -> {
-                    if(error != null){
-                        Log.i("error when getting data:", error.toString());
-                        return;
-                    }
-                    for(DocumentChange dc : value.getDocumentChanges()){
-                        if(dc.getType() == DocumentChange.Type.ADDED){
-                            data.add(dc.getDocument().toObject(NewProduct.class));
-                            Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
-                        }
-                    }
-                    NewProductAdapter adapter = new NewProductAdapter(requireActivity().getApplicationContext(), data);
-                    productRecycler.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                });
+        mainFragmentViewModel.getAllProducts().observe(requireActivity(),newProducts ->{
+            NewProductAdapter adapter = new NewProductAdapter(requireActivity().getApplicationContext(), newProducts);
+            productRecycler.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        });
     }
 
     private void ActionViewFlipper() {

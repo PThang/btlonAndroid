@@ -10,11 +10,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.manager.btlonappbanhangonline.database.cartdatabase.dao.CartDao;
 import com.manager.btlonappbanhangonline.model.Cart;
 
+import javax.inject.Singleton;
+
 @Database(entities = {Cart.class}, version = 2)
 public abstract class CartDatabase extends RoomDatabase {
     public static CartDatabase INSTANCE;
     public abstract CartDao cartDao();
 
+    @Singleton
     public static synchronized CartDatabase getInstance(Context context){
         if(INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), CartDatabase.class, "cart_db")

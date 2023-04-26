@@ -17,6 +17,9 @@ import com.manager.btlonappbanhangonline.model.Cart;
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
+@Singleton
 public class CartRepository {
     private CartDao cartDao;
     private LiveData<List<Cart>> allCarts;
