@@ -16,7 +16,7 @@ import java.util.List;
 public class CartViewModel extends AndroidViewModel {
     private CartRepository cartRepository;
     private LiveData<List<Cart>> allCarts;
-    //private MutableLiveData<List<Cart>> allCarts;
+
     private LiveData<Long> cost;
 
     public CartViewModel(@NonNull Application application) {

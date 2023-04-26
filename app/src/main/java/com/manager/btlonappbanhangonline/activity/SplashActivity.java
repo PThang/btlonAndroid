@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         Thread thread = new Thread(){
             public void run(){
                 try{
-                    sleep(1500);
+                    sleep(1000);
                 }catch(Exception ex){
 
                 }finally {
@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();*/
                         //Intent home = new Intent(getApplicationContext(), MainActivity.class);
-                        Intent home = new Intent(getApplicationContext(), HomeActivity.class);
+                        Intent home = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(home);
                         finish();
                     }else{

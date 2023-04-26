@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.manager.btlonappbanhangonline.R;
+import com.manager.btlonappbanhangonline.activity.HomeActivity;
 import com.manager.btlonappbanhangonline.adapter.CartAdapter;
 import com.manager.btlonappbanhangonline.model.Cart;
 import com.manager.btlonappbanhangonline.viewmodels.CartViewModel;
@@ -60,10 +61,9 @@ public class CartFragment extends Fragment {
 
         data = new ArrayList<>();
 
-        cartViewModel.getAllCarts().observe(requireActivity(), carts -> {
-            adapter = new CartAdapter(requireActivity(),carts);
+        cartViewModel.getAllCarts().observe((HomeActivity) requireActivity(), carts -> {
+            adapter = new CartAdapter((HomeActivity) requireActivity(),carts);
             cartRecycler.setAdapter(adapter);
-            //Log.i("Error when setting adapter:",String.valueOf(carts.size()));
             subTotalText.setText("Sub-total: " + String.valueOf(cartViewModel.cost().getValue()) + " VND");
         });
 

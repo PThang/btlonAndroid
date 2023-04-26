@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-auth:21.0.3'
     def lifecycle_version = "2.2.0"
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -68,12 +69,11 @@ dependencies {
     //image pick
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
-    // Import the BoM for the Firebase platform
+    //Firebase
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
-
-    // Declare the dependency for the Cloud Firestore library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-firestore'
+    implementation platform('com.google.firebase:firebase-bom:31.5.0')
+    implementation 'com.google.firebase:firebase-auth'
 
     def room_version = "2.5.1"
 
