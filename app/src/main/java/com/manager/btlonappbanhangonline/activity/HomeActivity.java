@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.ActivityHomeBinding;
 import com.manager.btlonappbanhangonline.fragments.CartFragment;
@@ -13,12 +15,17 @@ import com.manager.btlonappbanhangonline.fragments.ProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
+    private GoogleSignInClient client;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        auth = FirebaseAuth.getInstance();
+
         replaceFragment(new MainFragment());
         initEvent();
     }

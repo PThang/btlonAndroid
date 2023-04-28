@@ -1,46 +1,40 @@
 package com.manager.btlonappbanhangonline.model;
 
-public class User {
-    int id;
-    String email, pass, user, mobile;
+import java.io.Serializable;
 
-    public int getId() {
-        return id;
+public class User implements Serializable {
+    String userId, userName,userPic;
+
+    public User(String userId, String userName, String userPic) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userPic = userPic;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public User() {
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getPass() {
-        return pass;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserPic() {
+        return userPic;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setUserPic(String userPic) {
+        this.userPic = userPic;
     }
 }

@@ -1,4 +1,4 @@
-package com.manager.btlonappbanhangonline.Interface;
+package com.manager.btlonappbanhangonline.eventbus;
 
 import android.view.View;
 

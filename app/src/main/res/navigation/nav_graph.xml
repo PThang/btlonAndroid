@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginContainerFragment">
+
+    <fragment
+        android:id="@+id/loginContainerFragment"
+        android:name="com.manager.btlonappbanhangonline.fragments.LoginContainerFragment"
+        android:label="fragment_login_container"
+        tools:layout="@layout/fragment_login_container" >
+        <action
+            android:id="@+id/action_loginContainerFragment_to_forgetPassWordFragment"
+            app:destination="@id/forgetPassWordFragment" />
+        <action
+            android:id="@+id/action_loginContainerFragment_to_setProfileFragment"
+            app:destination="@id/setProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgetPassWordFragment"
+        android:name="com.manager.btlonappbanhangonline.fragments.ForgetPassWordFragment"
+        android:label="fragment_forget_pass_word"
+        tools:layout="@layout/fragment_forget_pass_word" >
+        <action
+            android:id="@+id/action_forgetPassWordFragment_to_loginContainerFragment"
+            app:destination="@id/loginContainerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setProfileFragment"
+        android:name="com.manager.btlonappbanhangonline.fragments.SetProfileFragment"
+        android:label="fragment_set_profile"
+        tools:layout="@layout/fragment_set_profile" >
+        <action
+            android:id="@+id/action_setProfileFragment_to_loginContainerFragment"
+            app:destination="@id/loginContainerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.manager.btlonappbanhangonline.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPassWordFragment"
+            app:destination="@id/forgetPassWordFragment" />
+    </fragment>
+</navigation>

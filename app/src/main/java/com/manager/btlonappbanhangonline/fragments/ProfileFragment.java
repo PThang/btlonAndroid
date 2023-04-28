@@ -1,15 +1,18 @@
 package com.manager.btlonappbanhangonline.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.activity.LoginActivity;
 import com.manager.btlonappbanhangonline.databinding.FragmentProfileBinding;
@@ -18,14 +21,10 @@ import com.manager.btlonappbanhangonline.databinding.FragmentProfileBinding;
 public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
     FirebaseAuth auth;
+    FirebaseUser user;
 
     public ProfileFragment() {
         // Required empty public constructor
-    }
-
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
-        return fragment;
     }
 
     @Override
@@ -38,6 +37,26 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
         auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+        if (user != null) {
+//            // Name, email address, and profile photo Url
+//            String name = user.getDisplayName();
+//            String email = user.getEmail();
+//            Uri photoUrl = user.getPhotoUrl();
+//
+//            // Check if user's email is verified
+//            boolean emailVerified = user.isEmailVerified();
+//
+//            // The user's ID, unique to the Firebase project. Do NOT use this value to
+//            // authenticate with your backend server, if you have one. Use
+//            // FirebaseUser.getIdToken() instead.
+//            String uid = user.getUid();
+//            Log.i("Firebase's user :", user.getDisplayName());
+            Log.i("Firebase's user :", user.getEmail());
+        }
+
+
         binding.logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

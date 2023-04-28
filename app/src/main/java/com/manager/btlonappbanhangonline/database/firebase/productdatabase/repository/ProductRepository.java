@@ -23,7 +23,7 @@ public class ProductRepository {
         db = FirebaseFirestore.getInstance();
     }
 
-    public LiveData<List<NewProduct>> getFirebaseProducts(){
+    public MutableLiveData<List<NewProduct>> getFirebaseProducts(){
         MutableLiveData<List<NewProduct>> products = new MutableLiveData<>();
         List<NewProduct> data = new ArrayList<>();
 
@@ -39,11 +39,30 @@ public class ProductRepository {
                             Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
                         }
                     }
-                    /*NewProductAdapter adapter = new NewProductAdapter(requireActivity().getApplicationContext(), data);
-                    productRecycler.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();*/
                 });
-        products.setValue(data);
+        products.postValue(data);
+        return products;
+    }
+
+    public LiveData<List<NewProduct>> getProductByType(String id){
+        MutableLiveData<List<NewProduct>> products = new MutableLiveData<>();
+        List<NewProduct> data = new ArrayList<>();
+
+        db.collection("items")
+                .whereEqualTo("type",id)
+                .addSnapshotListener((value, error) -> {
+                    if(error != null){
+                        Log.i("error when getting data:", error.toString());
+                        return;
+                    }
+                    for(DocumentChange dc : value.getDocumentChanges()){
+                        if(dc.getType() == DocumentChange.Type.ADDED){
+                            data.add(dc.getDocument().toObject(NewProduct.class));
+                            Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
+                        }
+                    }
+                });
+        products.postValue(data);
         return products;
     }
 }

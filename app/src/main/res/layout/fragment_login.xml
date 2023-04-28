@@ -49,6 +49,7 @@
         />
 
     <TextView
+        android:id="@+id/forgetPassWordText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Forgot password ?"
@@ -56,6 +57,25 @@
         android:gravity="right"
         android:textColor="#D82E2F"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <CheckBox
+            android:id="@+id/isShowPassword"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show password"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginButton"

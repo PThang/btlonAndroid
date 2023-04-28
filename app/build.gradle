@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -35,6 +36,8 @@ android {
 
 dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.3'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
     def lifecycle_version = "2.2.0"
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -88,5 +91,13 @@ dependencies {
     //ViewModel and livedata
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+
+    //navigation
+    def nav_version = "2.5.3"
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+    implementation "androidx.navigation:navigation-compose:$nav_version"
 
 }

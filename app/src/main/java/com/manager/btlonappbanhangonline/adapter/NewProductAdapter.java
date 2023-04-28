@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.manager.btlonappbanhangonline.Interface.ItemClickListener;
+import com.manager.btlonappbanhangonline.eventbus.ItemClickListener;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.activity.DetailActivity;
 import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;

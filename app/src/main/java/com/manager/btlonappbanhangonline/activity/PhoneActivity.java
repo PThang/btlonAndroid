@@ -1,26 +1,10 @@
 package com.manager.btlonappbanhangonline.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.adapter.PhoneAdapter;
-import com.manager.btlonappbanhangonline.model.NewProduct;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class PhoneActivity extends AppCompatActivity {
     /*Toolbar toolbar;

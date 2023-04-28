@@ -8,7 +8,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.manager.btlonappbanhangonline.database.cartdatabase.repository.CartRepository;
+import com.manager.btlonappbanhangonline.database.firebase.typeproductdatabase.TypeProRepository;
 import com.manager.btlonappbanhangonline.model.Cart;
+import com.manager.btlonappbanhangonline.model.TypeProduct;
 
 import java.io.Closeable;
 import java.util.List;
@@ -21,7 +23,6 @@ public class CartViewModel extends AndroidViewModel {
 
     public CartViewModel(@NonNull Application application) {
         super(application);
-        //super();
         cartRepository = new CartRepository(application);
         allCarts = cartRepository.getAllCarts();
     }

@@ -1,15 +1,24 @@
 package com.manager.btlonappbanhangonline.fragments;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,6 +30,7 @@ import com.manager.btlonappbanhangonline.databinding.FragmentRegisterBinding;
 public class RegisterFragment extends Fragment {
     FragmentRegisterBinding binding;
     FirebaseAuth auth;
+    ProgressDialog dialog;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -43,6 +53,9 @@ public class RegisterFragment extends Fragment {
         binding = FragmentRegisterBinding.inflate(getLayoutInflater());
         auth = FirebaseAuth.getInstance();
 
+        dialog = new ProgressDialog(requireActivity());
+        dialog.setTitle("Waiting...");
+
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,31 +66,49 @@ public class RegisterFragment extends Fragment {
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUpWithGG();
+                register();
             }
         });
 
+
         return binding.getRoot();
-    }
-
-    private void signUpWithGG() {
-
     }
 
     private void register() {
         String email = binding.emailRegisterText.getText().toString();
         String password = binding.passwordRegisterText.getText().toString();
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = auth.getCurrentUser();
-                            Log.i("Register State:", "Success");
-                        } else {
-                            Log.i("Register State:", "Failed");
+        String rePassword = binding.rePasswordText.getText().toString();
+
+        if(email.equalsIgnoreCase("")){
+            binding.emailRegisterText.setError("");
+        }
+        if(password.equalsIgnoreCase("")){
+            binding.passwordRegisterText.setError("");
+        }
+        if(rePassword.equalsIgnoreCase("")){
+            binding.rePasswordText.setError("");
+        }
+        if(!email.equalsIgnoreCase("")
+            && !password.equalsIgnoreCase("")
+            && !rePassword.equalsIgnoreCase("")
+            && password.equalsIgnoreCase(rePassword))   {
+            auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = auth.getCurrentUser();
+                                Log.i("Register State:", "Success");
+                                Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
+                                //dialog.dismiss();
+                            } else {
+                                Log.i("Register State:", "Failed");
+                                Toast.makeText(requireActivity(), "Fail", Toast.LENGTH_SHORT).show();
+                                //dialog.dismiss();
+                            }
                         }
-                    }
-                });
+                    });
+        }
+        //dialog.show();
     }
 }

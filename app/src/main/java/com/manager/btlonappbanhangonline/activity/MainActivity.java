@@ -44,7 +44,7 @@ import io.paperdb.Paper;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class MainActivity extends AppCompatActivity {
-    Toolbar toolbar;
+    /*Toolbar toolbar;
     ViewFlipper viewFlipper;
     RecyclerView recyclerViewManHinhChinh;
     NavigationView navigationView;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     ImageView imgsearch;
 
-    FirebaseFirestore db=FirebaseFirestore.getInstance();
+    FirebaseFirestore db=FirebaseFirestore.getInstance();*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i("activity: ", "Main");
 
-        db = FirebaseFirestore.getInstance();
+        /*db = FirebaseFirestore.getInstance();
 
         Anhxa();
         ActionBar();
@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
             getEnventClick();
         }else{
             Toast.makeText(getApplicationContext(),"Không có internet, vui lòng kết nối!", Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
-    private void getEnventClick() {
+    /*private void getEnventClick() {
         listViewManHinhChinh.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getSpMoi() {
-        /*compositeDisposable.add(apiBanHang.getSpMoi()
+        *//*compositeDisposable.add(apiBanHang.getSpMoi()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         throwable -> {
                             Toast.makeText(getApplicationContext(), "Không kết nối được với sever"+throwable.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                ));*/
+                ));*//*
         List<NewProduct> data = new ArrayList<>();
         db.collection("items")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getLoaiSanPham() {
-        /*compositeDisposable.add(apiBanHang.getLoaiSp()
+        *//*compositeDisposable.add(apiBanHang.getLoaiSp()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                 )
-        );*/
+        );*//*
     }
 
     private void ActionViewFlipper() {
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void ActionBar(){
-        /*setSupportActionBar(toolbar);
+        *//*setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
 
             }
-        });*/
+        });*//*
     }
     private void Anhxa(){
         imgsearch= findViewById(R.id.imgsearch);
@@ -247,11 +247,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        /*int totalItem=0;
+        *//*int totalItem=0;
         for(int i=0;i<Utils.manggiohang.size();i++){
             totalItem= totalItem+Utils.manggiohang.get(i).getSoluong();
         }
-        badge.setText(String.valueOf(totalItem));*/
+        badge.setText(String.valueOf(totalItem));*//*
     }
 
     private boolean isConnected(Context context){
@@ -268,5 +268,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy(){
         compositeDisposable.clear();
         super.onDestroy();
-    }
+    }*/
 }
