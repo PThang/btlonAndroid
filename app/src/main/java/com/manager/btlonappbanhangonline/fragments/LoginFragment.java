@@ -32,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.activity.HomeActivity;
 import com.manager.btlonappbanhangonline.databinding.FragmentLoginBinding;
@@ -45,7 +46,8 @@ public class LoginFragment extends Fragment {
 
     private GoogleSignInClient gsc;
     private GoogleSignInOptions gso;
-
+    private FirebaseDatabase database;
+    private static final int RC_SIGN_IN = 134;
 //    public LoginFragment() {
 //        // Required empty public constructor
 //    }
@@ -58,12 +60,12 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
-        gsc = GoogleSignIn.getClient(requireActivity(), gso);
+        gsc = GoogleSignIn.getClient(requireActivity().getApplicationContext(), gso);*/
     }
 
     @Override
@@ -77,6 +79,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         binding.loginButton.setOnClickListener(v -> login());
 
@@ -145,45 +148,46 @@ public class LoginFragment extends Fragment {
     }
 
     private void signInWithGoogle() {
-        Intent intent = gsc.getSignInIntent();
-        startActivityForResult(intent, 100);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 100){
+        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try{
+            try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-
-                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-
-                auth.signInWithCredential(credential)
-                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                                    @Override
-                                    public void onSuccess(AuthResult authResult) {
-                                        if(task.isSuccessful()){
-                                            FirebaseUser user = auth.getCurrentUser();
-                                            User user1 = new User();
-                                            assert user != null;
-                                            user1.setUserId(user.getUid());
-                                            user1.setUserName(user.getDisplayName());
-                                            user1.setUserPic(user.getPhotoUrl().toString());
-
-                                            Intent intent = new Intent(requireActivity().getApplicationContext(), HomeActivity.class);
-                                            intent.putExtra("user", user1);
-                                            startActivity(intent);
-                                        } else {
-                                            Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-            }catch (ApiException e){
-                Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show();
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                Toast.makeText(requireActivity(), "Google sign in failed", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        FirebaseAuth.getInstance().signInWithCredential(credential)
+                .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Đăng nhập thành công
+                        } else {
+                            // Đăng nhập thất bại
+                        }
+                    }
+                });
     }
 
     private void moveToHome() {
