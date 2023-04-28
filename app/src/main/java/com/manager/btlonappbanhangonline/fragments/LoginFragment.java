@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
+import androidx.room.Update;
 
 import android.text.InputType;
 import android.util.Log;
@@ -48,9 +49,6 @@ public class LoginFragment extends Fragment {
     private GoogleSignInOptions gso;
     private FirebaseDatabase database;
     private static final int RC_SIGN_IN = 134;
-//    public LoginFragment() {
-//        // Required empty public constructor
-//    }
 
     public LoginFragment(IMoveClickListener moveClickListener) {
         this.moveClickListener = moveClickListener;
@@ -59,13 +57,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /*gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        gsc = GoogleSignIn.getClient(requireActivity().getApplicationContext(), gso);*/
     }
 
     @Override
@@ -118,7 +109,7 @@ public class LoginFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = auth.getCurrentUser();
-                                updateUI(user);
+                                updateUI();
                                 Log.d("Register State:", "Success");
                             } else {
                                 Log.d("Register State:", "Failed");
@@ -142,7 +133,7 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    private void updateUI(FirebaseUser user) {
+    private void updateUI() {
         Intent i = new Intent(requireActivity(), HomeActivity.class);
         startActivity(i);
     }
@@ -182,9 +173,9 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Đăng nhập thành công
+                            updateUI();
                         } else {
-                            // Đăng nhập thất bại
+
                         }
                     }
                 });
