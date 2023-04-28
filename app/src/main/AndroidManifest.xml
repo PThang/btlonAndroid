@@ -15,7 +15,7 @@
         android:theme="@style/Theme.BTLonAppBanHangOnline"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.HomeActivity"
+            android:name="com.manager.btlonappbanhangonline.home.HomeActivity"
             android:exported="false" />
         <activity
             android:name="com.manager.btlonappbanhangonline.activity.InformationActivity"
@@ -30,7 +30,7 @@
             android:name="com.manager.btlonappbanhangonline.activity.ManagerActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.SplashActivity"
+            android:name="com.manager.btlonappbanhangonline.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +51,7 @@
             android:name="com.manager.btlonappbanhangonline.activity.ResetPassActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.LoginActivity"
+            android:name="com.manager.btlonappbanhangonline.login.LoginActivity"
             android:exported="true" />
         <activity
             android:name="com.manager.btlonappbanhangonline.activity.DetailActivity"

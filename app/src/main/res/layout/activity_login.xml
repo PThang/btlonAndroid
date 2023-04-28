@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pink"
-    tools:context="com.manager.btlonappbanhangonline.activity.LoginActivity">
+    tools:context="com.manager.btlonappbanhangonline.login.LoginActivity">
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
