@@ -2,7 +2,6 @@ package com.manager.btlonappbanhangonline.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
-=======
->>>>>>> 07e0548564dba5aad98ecfe818a9121ce6a3eb2c
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,13 +35,12 @@ import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.activity.SearchActivity;
 import com.manager.btlonappbanhangonline.adapter.NewProductAdapter;
-<<<<<<< HEAD
+
 import com.manager.btlonappbanhangonline.adapter.TypeProductAdapter;
 import com.manager.btlonappbanhangonline.databinding.FragmentMainBinding;
 import com.manager.btlonappbanhangonline.eventbus.TypeProClickListener;
 import com.manager.btlonappbanhangonline.model.NewProduct;
-=======
->>>>>>> 07e0548564dba5aad98ecfe818a9121ce6a3eb2c
+
 import com.manager.btlonappbanhangonline.viewmodels.MainFragmentViewModel;
 
 import java.util.ArrayList;
@@ -63,7 +59,7 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainFragmentViewModel = new ViewModelProvider(requireActivity()).get(MainFragmentViewModel.class);
-        searchView.setOnClickListener(new View.OnClickListener() {
+        binding.searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(requireActivity().getApplicationContext(), SearchActivity.class);
