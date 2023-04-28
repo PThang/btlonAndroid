@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.manager.btlonappbanhangonline.R;
 
-
 import io.paperdb.Paper;
 
 public class SplashActivity extends AppCompatActivity {
