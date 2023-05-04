@@ -1,5 +1,6 @@
 package com.manager.btlonappbanhangonline.login.login.login;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.text.InputType;
 import android.util.Log;
@@ -79,6 +82,24 @@ public class LoginFragment extends Fragment {
                 binding.passwordText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
         });
+    }
+
+    @Override
+    public void onAttachFragment(@NonNull Fragment childFragment) {
+        super.onAttachFragment(childFragment);
+        binding.forgetPassWordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forgetPassword();
+            }
+        });
+    }
+
+    private void forgetPassword() {
+        /*NavDirections action =
+                LoginFragmentDirections
+                        .actionLoginFragmentToForgetPassWordFragment();
+        Navigation.findNavController(view).navigate(action);*/
     }
 
     @Override

@@ -59,7 +59,7 @@ public class MainFragment extends Fragment {
         binding.typeProductRecycler.setLayoutManager(layoutManagerType);
         binding.typeProductRecycler.setHasFixedSize(true);
         //getTypeProData();
-        RecyclerView.LayoutManager layoutManager= new GridLayoutManager(requireActivity().getApplicationContext(),2);
+        RecyclerView.LayoutManager layoutManager= new GridLayoutManager(requireActivity(),2);
         binding.productRecycler.setLayoutManager(layoutManager);
         binding.productRecycler.setHasFixedSize(true);
         //getProductData();

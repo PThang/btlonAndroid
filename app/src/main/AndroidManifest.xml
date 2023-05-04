@@ -17,7 +17,7 @@
         <activity
             android:name="com.manager.btlonappbanhangonline.home.HomeActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name="com.manager.btlonappbanhangonline.activity.InformationActivity"
             android:exported="false" />
         <activity
@@ -28,7 +28,7 @@
             android:exported="true" />
         <activity
             android:name="com.manager.btlonappbanhangonline.activity.ManagerActivity"
-            android:exported="true" />
+            android:exported="true" />-->
         <activity
             android:name="com.manager.btlonappbanhangonline.splash.SplashActivity"
             android:exported="true">
@@ -38,7 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+        <!--<activity
             android:name="com.manager.btlonappbanhangonline.activity.SearchActivity"
             android:exported="true" />
         <activity
@@ -49,14 +49,14 @@
             android:exported="true" />
         <activity
             android:name="com.manager.btlonappbanhangonline.activity.ResetPassActivity"
-            android:exported="true" />
+            android:exported="true" />-->
         <activity
             android:name="com.manager.btlonappbanhangonline.login.LoginActivity"
             android:exported="true" />
         <activity
-            android:name="com.manager.btlonappbanhangonline.activity.DetailActivity"
+            android:name="com.manager.btlonappbanhangonline.detailproduct.DetailActivity"
             android:exported="true" />
-        <activity
+        <!--<activity
             android:name="com.manager.btlonappbanhangonline.activity.LaptopActivity"
             android:exported="true" />
         <activity
@@ -64,15 +64,15 @@
             android:exported="true" />
         <activity
             android:name="com.manager.btlonappbanhangonline.activity.MainActivity"
-            android:exported="true" />
+            android:exported="true" />-->
 
-        <service
+        <!--<service
             android:name="com.manager.btlonappbanhangonline.Service.FirebaseMessagerReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
+        </service>-->
     </application>
 
 </manifest>

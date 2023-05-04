@@ -6,18 +6,6 @@
     app:startDestination="@id/loginContainerFragment">
 
     <fragment
-        android:id="@+id/loginContainerFragment"
-        android:name="com.manager.btlonappbanhangonline.login.login.LoginContainerFragment"
-        android:label="fragment_login_container"
-        tools:layout="@layout/fragment_login_container" >
-        <action
-            android:id="@+id/action_loginContainerFragment_to_forgetPassWordFragment"
-            app:destination="@id/forgetPassWordFragment" />
-        <action
-            android:id="@+id/action_loginContainerFragment_to_setProfileFragment"
-            app:destination="@id/setProfileFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/forgetPassWordFragment"
         android:name="com.manager.btlonappbanhangonline.login.forgetpassword.ForgetPassWordFragment"
         android:label="fragment_forget_pass_word"
@@ -43,5 +31,19 @@
         <action
             android:id="@+id/action_loginFragment_to_forgetPassWordFragment"
             app:destination="@id/forgetPassWordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginContainerFragment"
+        android:name="com.manager.btlonappbanhangonline.login.login.LoginContainerFragment"
+        android:label="fragment_login_container"
+        tools:layout="@layout/fragment_login_container" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.manager.btlonappbanhangonline.login.login.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_setProfileFragment"
+            app:destination="@id/setProfileFragment" />
     </fragment>
 </navigation>

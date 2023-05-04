@@ -2,6 +2,7 @@ package com.manager.btlonappbanhangonline.home.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +61,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }else{
-                    EventBus.getDefault().postSticky(new SuaXoaEvent(newProduct));
+                    //EventBus.getDefault().postSticky(new SuaXoaEvent(newProduct));
                 }
             }
         });
