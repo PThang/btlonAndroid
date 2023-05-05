@@ -1,5 +1,8 @@
 package com.manager.btlonappbanhangonline.home.cart;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -52,7 +55,6 @@ public class CartFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     String userEmail;
-
 
     public CartFragment() {
         // Required empty public constructor
@@ -111,4 +113,5 @@ public class CartFragment extends Fragment {
         binding = FragmentCartBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
+
 }
