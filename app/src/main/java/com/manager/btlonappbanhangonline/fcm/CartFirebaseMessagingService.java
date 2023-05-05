@@ -16,14 +16,21 @@ import com.manager.btlonappbanhangonline.MainApplication;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.splash.SplashActivity;
 
+import java.util.Map;
+
 public class CartFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
-        RemoteMessage.Notification notification = message.getNotification();
-        if(notification == null) return;;
-        String strTitle = notification.getTitle();
-        String strMessage = notification.getBody();
+//        RemoteMessage.Notification notification = message.getNotification();
+//        if(notification == null) return;;
+//        String strTitle = notification.getTitle();
+//        String strMessage = notification.getBody();
+
+        Map<String, String> strMap = message.getData();
+        if(strMap == null) return;
+        String strTitle = strMap.get("user_name");
+        String strMessage = strMap.get("description");
 
         sendNotification(strTitle, strMessage);
     }
@@ -43,5 +50,10 @@ public class CartFirebaseMessagingService extends FirebaseMessagingService {
         if(manager != null){
             manager.notify(1, notification);
         }
+    }
+
+    @Override
+    public void onNewToken(@NonNull String token) {
+        super.onNewToken(token);
     }
 }

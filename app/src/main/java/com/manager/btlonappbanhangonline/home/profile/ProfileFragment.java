@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.FragmentProfileBinding;
 import com.manager.btlonappbanhangonline.login.LoginActivity;
 
@@ -20,6 +23,7 @@ public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
     FirebaseAuth auth;
     FirebaseUser user;
+    FirebaseFirestore db;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -36,25 +40,18 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
 
         if (user != null) {
-//            // Name, email address, and profile photo Url
-//            String name = user.getDisplayName();
-//            String email = user.getEmail();
-//            Uri photoUrl = user.getPhotoUrl();
-//
-//            // Check if user's email is verified
-//            boolean emailVerified = user.isEmailVerified();
-//
-//            // The user's ID, unique to the Firebase project. Do NOT use this value to
-//            // authenticate with your backend server, if you have one. Use
-//            // FirebaseUser.getIdToken() instead.
-//            String uid = user.getUid();
-//            Log.i("Firebase's user :", user.getDisplayName());
             Log.i("Firebase's user :", user.getEmail());
         }
 
-
+        Glide.with(this).load(user.getPhotoUrl()).into(binding.profileImageView).onLoadFailed(getResources().getDrawable(R.drawable.user));
+        binding.inputName.setText(user.getDisplayName());
+        //binding.inputName.setText(db.collection("infoUsers").);
+        binding.inputEmail.setText(user.getEmail());
         binding.logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,10 +1,12 @@
 package com.manager.btlonappbanhangonline.login.login.register;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,15 +26,12 @@ public class RegisterFragment extends Fragment {
     FragmentRegisterBinding binding;
     FirebaseAuth auth;
     ProgressDialog dialog;
+    Intent intent;
 
-    public RegisterFragment() {
-        // Required empty public constructor
+    public RegisterFragment(Intent intent) {
+        this.intent = intent;
     }
 
-    public static RegisterFragment newInstance(String param1, String param2) {
-        RegisterFragment fragment = new RegisterFragment();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,6 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-
         return binding.getRoot();
     }
 
@@ -92,7 +91,7 @@ public class RegisterFragment extends Fragment {
                                 FirebaseUser user = auth.getCurrentUser();
                                 Log.i("Register State:", "Success");
                                 Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
-                                //dialog.dismiss();
+                                startActivity(intent);
                             } else {
                                 Log.i("Register State:", "Failed");
                                 Toast.makeText(requireActivity(), "Fail", Toast.LENGTH_SHORT).show();

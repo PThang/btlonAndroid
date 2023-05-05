@@ -1,5 +1,6 @@
 package com.manager.btlonappbanhangonline.login.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,13 +19,17 @@ import com.manager.btlonappbanhangonline.eventbus.IMoveClickListener;
 import com.manager.btlonappbanhangonline.login.login.login.LoginFragment;
 import com.manager.btlonappbanhangonline.login.login.register.RegisterFragment;
 
-public class LoginContainerFragment extends Fragment {
+public class LoginContainerFragment extends Fragment{
     FragmentLoginContainerBinding binding;
     ViewPagerAdapter adapter;
     FirebaseAuth auth;
     NavController navController;
-    public LoginContainerFragment() {
-        // Required empty public constructor
+    Intent intent1, intent2, intent3;
+
+    public LoginContainerFragment(Intent intent1, Intent intent2, Intent intent3) {
+        this.intent1 = intent1;
+        this.intent2 = intent2;
+        this.intent3 = intent3;
     }
 
     @Override
@@ -50,7 +55,7 @@ public class LoginContainerFragment extends Fragment {
 
         //navController = Navigation.findNavController(view);
 
-        adapter.addFragment(new RegisterFragment(), "Create Account");
+        adapter.addFragment(new RegisterFragment(intent1), "Create Account");
 
         adapter.addFragment(new LoginFragment(new IMoveClickListener() {
             @Override
@@ -58,7 +63,7 @@ public class LoginContainerFragment extends Fragment {
                 //navController = Navigation.findNavController(view);
                 //navController.navigate(R.id.action_loginFragment_to_forgetPassWordFragment);
             }
-        }), "Login");
+        }, intent2,intent3), "Login");
 
         binding.viewPager.setAdapter(adapter);
         binding.tabs.setupWithViewPager(binding.viewPager);
@@ -69,4 +74,5 @@ public class LoginContainerFragment extends Fragment {
         super.onDestroy();
         binding = null;
     }
+
 }

@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.detailproduct.DetailActivity;
 import com.manager.btlonappbanhangonline.eventbus.ItemClickListener;
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.model.EventBus.SuaXoaEvent;
 import com.manager.btlonappbanhangonline.model.NewProduct;
 import org.greenrobot.eventbus.EventBus;
 

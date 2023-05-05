@@ -32,6 +32,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.core.FirestoreClient;
 import com.google.firebase.firestore.remote.FirestoreChannel;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.FragmentCartBinding;
 import com.manager.btlonappbanhangonline.home.HomeActivity;
@@ -42,6 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 public class CartFragment extends Fragment {
@@ -56,6 +59,8 @@ public class CartFragment extends Fragment {
     FirebaseUser currentUser;
     String userEmail;
 
+    String TAG = "error when pushing notification :";
+
     public CartFragment() {
         // Required empty public constructor
     }
@@ -63,6 +68,21 @@ public class CartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Lấy được token
+                        String token = task.getResult();
+                        Log.d(TAG, "Token: " + token);
+                    }
+                });
     }
 
     @Override
@@ -101,7 +121,15 @@ public class CartFragment extends Fragment {
         CollectionReference userCollection = db.collection("carts").document(userEmail).collection("cartList").document().collection("detail");
         Map<String, List<Cart>> products = new HashMap<>();
         products.put("products", data);
-        userCollection.document("products").set(products);
+        userCollection.document("products").set(products).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                FirebaseMessaging.getInstance().send(new RemoteMessage.Builder("931836430890@fcm.googleapis.com")
+                        .setMessageId(Integer.toString(new Random().nextInt(1000)))
+                        .addData("my_custom_key", "my_custom_value")
+                        .build());
+            }
+        });
         Map<String, String> cost = new HashMap<>();
         cost.put("cost", String.valueOf(cartViewModel.cost().getValue()));
         userCollection.document("cost").set(cost);

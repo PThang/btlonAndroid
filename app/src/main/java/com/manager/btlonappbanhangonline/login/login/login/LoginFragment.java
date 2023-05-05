@@ -1,6 +1,5 @@
 package com.manager.btlonappbanhangonline.login.login.login;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import android.text.InputType;
 import android.util.Log;
@@ -18,37 +15,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.FirebaseDatabase;
-import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.FragmentLoginBinding;
 import com.manager.btlonappbanhangonline.home.HomeActivity;
 import com.manager.btlonappbanhangonline.eventbus.IMoveClickListener;
+import com.manager.btlonappbanhangonline.login.LoginActivity;
+import com.manager.btlonappbanhangonline.login.login.LoginContainerFragment;
 
-public class LoginFragment extends Fragment {
+import java.util.Objects;
+
+public class LoginFragment extends Fragment{
     FragmentLoginBinding binding;
     private FirebaseAuth auth;
     private IMoveClickListener moveClickListener;
 
-    private GoogleSignInClient gsc;
-    private GoogleSignInOptions gso;
-    private FirebaseDatabase database;
-    private static final int RC_SIGN_IN = 134;
+    private Intent intent,intent2;
 
-    public LoginFragment(IMoveClickListener moveClickListener) {
+    public LoginFragment(IMoveClickListener moveClickListener, Intent intent, Intent intent2) {
         this.moveClickListener = moveClickListener;
+        this.intent = intent;
+        this.intent2 = intent2;
     }
 
     @Override
@@ -67,7 +58,6 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
 
         binding.loginButton.setOnClickListener(v -> login());
 
@@ -82,11 +72,7 @@ public class LoginFragment extends Fragment {
                 binding.passwordText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
         });
-    }
 
-    @Override
-    public void onAttachFragment(@NonNull Fragment childFragment) {
-        super.onAttachFragment(childFragment);
         binding.forgetPassWordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,10 +82,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void forgetPassword() {
-        /*NavDirections action =
-                LoginFragmentDirections
-                        .actionLoginFragmentToForgetPassWordFragment();
-        Navigation.findNavController(view).navigate(action);*/
+        startActivity(intent);
     }
 
     @Override
@@ -124,7 +107,14 @@ public class LoginFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = auth.getCurrentUser();
-                                updateUI();
+                                //String nameUser = user.getDisplayName().toString().trim();
+
+                                if(user != null && user.getDisplayName() != null){
+                                    updateUI();
+                                }
+                                else {
+                                    startActivity(intent2);
+                                }
                                 Log.d("Register State:", "Success");
                             } else {
                                 Log.d("Register State:", "Failed");
@@ -140,10 +130,10 @@ public class LoginFragment extends Fragment {
                     });
         }
 
-        binding.loginWithGG.setOnClickListener(new View.OnClickListener() {
+        binding.forgetPassWordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signInWithGoogle();
+
             }
         });
     }
@@ -151,52 +141,5 @@ public class LoginFragment extends Fragment {
     private void updateUI() {
         Intent i = new Intent(requireActivity(), HomeActivity.class);
         startActivity(i);
-    }
-
-    private void signInWithGoogle() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
-
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account.getIdToken());
-            } catch (ApiException e) {
-                Toast.makeText(requireActivity(), "Google sign in failed", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        FirebaseAuth.getInstance().signInWithCredential(credential)
-                .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            updateUI();
-                        } else {
-
-                        }
-                    }
-                });
-    }
-
-    private void moveToHome() {
-        requireActivity().finish();
     }
 }
