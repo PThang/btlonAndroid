@@ -39,8 +39,8 @@ public class ProductRepository {
                             Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
                         }
                     }
+                    products.postValue(data);
                 });
-        products.postValue(data);
         return products;
     }
 
@@ -61,8 +61,8 @@ public class ProductRepository {
                             Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
                         }
                     }
+                    products.postValue(data);
                 });
-        products.postValue(data);
         return products;
     }
 }

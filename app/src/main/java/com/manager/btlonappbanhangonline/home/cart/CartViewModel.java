@@ -37,6 +37,10 @@ public class CartViewModel extends AndroidViewModel {
         return allCarts;
     }
 
+    public void deleteAll(){
+        cartRepository.deleteAll();
+    }
+
     public LiveData<Long> cost(){
         MutableLiveData<Long> cost = new MutableLiveData<Long>();
         cost.setValue(0L);

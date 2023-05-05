@@ -88,6 +88,8 @@ public class MainFragment extends Fragment {
             binding.typeProductRecycler.setAdapter(typeProductAdapter);
             typeProductAdapter.notifyDataSetChanged();
         });
+
+
     }
 
     @Override

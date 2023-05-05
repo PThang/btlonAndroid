@@ -19,9 +19,10 @@ public class CartRepository {
     private CartDao cartDao;
     private LiveData<List<Cart>> allCarts;
     private LiveData<Long> cost;
+    private CartDatabase cartDatabase;
 
     public CartRepository(Application application) {
-        CartDatabase cartDatabase = CartDatabase.getInstance(application);
+        cartDatabase = CartDatabase.getInstance(application);
         cartDao = cartDatabase.cartDao();
         allCarts = cartDao.selectAllCart();
     }
@@ -37,10 +38,13 @@ public class CartRepository {
     public void deleteCart(Cart cart){
         new DeleteCartAsyncTask(cartDao).execute(cart);
     }
+
     public LiveData<List<Cart>> getAllCarts() {
         return allCarts;
     }
-
+    public void deleteAll(){
+        cartDatabase.clearAllTables();
+    }
     public LiveData<Long> cost(){
         LiveData<Long> cost = new LiveData<Long>() {};
         for(Cart i:allCarts.getValue()){

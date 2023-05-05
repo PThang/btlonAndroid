@@ -3,25 +3,25 @@ package com.manager.btlonappbanhangonline.model;
 import java.util.List;
 
 public class Order {
-    String id;
     List<Cart> carts;
     String orderDate;
+    Long cost;
 
-    public Order(String id, List<Cart> carts, String orderDate) {
-        this.id = id;
+    public Order(List<Cart> carts, String orderDate, Long cost) {
         this.carts = carts;
         this.orderDate = orderDate;
+        this.cost = cost;
     }
 
     public Order() {
     }
 
-    public String getId() {
-        return id;
+    public Long getCost() {
+        return cost;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCost(Long cost) {
+        this.cost = cost;
     }
 
     public List<Cart> getCarts() {

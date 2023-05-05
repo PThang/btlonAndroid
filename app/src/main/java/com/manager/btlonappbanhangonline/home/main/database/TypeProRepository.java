@@ -40,8 +40,8 @@ public class TypeProRepository {
                             Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
                         }
                     }
+                    allTypes.postValue(types);
                 });
-        allTypes.postValue(types);
         return allTypes;
     }
 }
