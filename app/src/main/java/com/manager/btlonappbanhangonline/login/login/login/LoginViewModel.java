@@ -24,6 +24,7 @@ import com.manager.btlonappbanhangonline.login.LoginActivity;
 
 public class LoginViewModel extends AndroidViewModel {
     private FirebaseAuth auth;
+    private LoginResultCallBack loginResultCallback;
     public LoginViewModel(@NonNull Application application) {
         super(application);
         auth = FirebaseAuth.getInstance();
@@ -40,10 +41,12 @@ public class LoginViewModel extends AndroidViewModel {
                                 Intent intent = new Intent(getApplication().getApplicationContext(), HomeActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 getApplication().startActivity(intent);
+                                loginResultCallback.onLoginSuccess();
                             } else {
                                 Intent intent = new Intent(getApplication().getApplicationContext(), LoginActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 getApplication().startActivity(intent);
+                                loginResultCallback.onLoginFailure("User display name is null.");
                             }
                             Log.d("Register State:", "Success");
                         }
@@ -62,5 +65,9 @@ public class LoginViewModel extends AndroidViewModel {
                         Toast.makeText(getApplication(), "Password or email is wrong.", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public void setLoginResultCallback(LoginResultCallBack callback) {
+        loginResultCallback = callback;
     }
 }

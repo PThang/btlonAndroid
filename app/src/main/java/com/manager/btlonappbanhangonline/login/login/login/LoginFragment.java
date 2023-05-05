@@ -58,6 +58,7 @@ public class LoginFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         loginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+
         binding.loginButton.setOnClickListener(v -> login());
 
         binding.forgetPassWordText.setOnClickListener(v -> {
@@ -89,6 +90,17 @@ public class LoginFragment extends Fragment{
     void login(){
         String email = binding.emailText.getText().toString();
         String password = binding.passwordText.getText().toString();
+
+        loginViewModel.setLoginResultCallback(new LoginResultCallBack() {
+            @Override
+            public void onLoginSuccess() {
+                requireActivity().finish();
+            }
+            @Override
+            public void onLoginFailure(String message) {
+                Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         if(email.equalsIgnoreCase("")){
             binding.emailText.setError("");
