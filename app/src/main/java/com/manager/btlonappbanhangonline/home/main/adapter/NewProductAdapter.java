@@ -2,7 +2,6 @@ package com.manager.btlonappbanhangonline.home.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.manager.btlonappbanhangonline.detailproduct.DetailActivity;
+import com.manager.btlonappbanhangonline.home.main.detailproduct.DetailActivity;
 import com.manager.btlonappbanhangonline.eventbus.ItemClickListener;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.model.NewProduct;
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 

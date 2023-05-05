@@ -1,4 +1,4 @@
-package com.manager.btlonappbanhangonline.detailproduct;
+package com.manager.btlonappbanhangonline.home.main.detailproduct;
 
 import android.os.Bundle;
 import android.util.Log;

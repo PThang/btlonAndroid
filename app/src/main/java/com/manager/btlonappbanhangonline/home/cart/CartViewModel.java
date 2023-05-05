@@ -1,18 +1,26 @@
 package com.manager.btlonappbanhangonline.home.cart;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.manager.btlonappbanhangonline.home.cart.cartdatabase.repository.CartRepository;
+import com.manager.btlonappbanhangonline.home.cart.cartdatabase.repository.DeliveryRepository;
 import com.manager.btlonappbanhangonline.model.Cart;
+import com.manager.btlonappbanhangonline.model.Delivery;
+import com.manager.btlonappbanhangonline.model.Order;
 
 import java.util.List;
 
 public class CartViewModel extends AndroidViewModel {
     private CartRepository cartRepository;
+    private DeliveryRepository deliveryRepository;
     private LiveData<List<Cart>> allCarts;
     private LiveData<Long> cost;
 
@@ -20,6 +28,7 @@ public class CartViewModel extends AndroidViewModel {
         super(application);
         cartRepository = new CartRepository(application);
         allCarts = cartRepository.getAllCarts();
+        deliveryRepository = new DeliveryRepository(CartViewModel.this);
     }
 
     public void insertCart(Cart cart){
@@ -39,6 +48,12 @@ public class CartViewModel extends AndroidViewModel {
 
     public void deleteAll(){
         cartRepository.deleteAll();
+    }
+
+    public void order(Delivery delivery){
+        if(delivery != null){
+            deliveryRepository.order(delivery);
+        }
     }
 
     public LiveData<Long> cost(){
