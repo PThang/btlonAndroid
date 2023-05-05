@@ -18,6 +18,9 @@
         android:theme="@style/Theme.BTLonAppBanHangOnline"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="com.manager.btlonappbanhangonline.home.delivering.detail.DetailOrderActivity"
+            android:exported="false" />
+        <activity
             android:name="com.manager.btlonappbanhangonline.home.cart.finshorder.FinishOrderActivity"
             android:exported="false" />
         <activity

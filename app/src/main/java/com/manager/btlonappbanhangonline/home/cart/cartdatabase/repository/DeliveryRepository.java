@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.manager.btlonappbanhangonline.home.cart.CartViewModel;
 import com.manager.btlonappbanhangonline.model.Delivery;
@@ -33,8 +34,10 @@ public class DeliveryRepository {
 
     public void order(Delivery delivery, Context context, Intent intent) {
         CollectionReference userCollection = db.collection("deliveries").document(currentUser.getEmail()).collection(currentUser.getEmail());
-
-        userCollection.document().set(delivery)
+        DocumentReference document = userCollection.document();
+        String documentId = document.getId();
+        delivery.setId(documentId);
+        userCollection.document(documentId).set(delivery)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

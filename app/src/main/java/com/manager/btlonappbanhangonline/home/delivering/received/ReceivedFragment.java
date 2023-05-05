@@ -1,4 +1,4 @@
-package com.manager.btlonappbanhangonline.home.delivering;
+package com.manager.btlonappbanhangonline.home.delivering.received;
 
 import android.os.Bundle;
 
@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.databinding.FragmentDeliveringBinding;
+public class ReceivedFragment extends Fragment {
 
-public class DeliveringFragment extends Fragment {
-    FragmentDeliveringBinding binding;
-
-    public DeliveringFragment() {
-
+    public ReceivedFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -26,7 +23,7 @@ public class DeliveringFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentDeliveringBinding.inflate(getLayoutInflater());
-        return binding.getRoot();
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_received, container, false);
     }
 }

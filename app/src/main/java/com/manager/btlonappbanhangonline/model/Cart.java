@@ -23,6 +23,9 @@ public class Cart {
         this.quantity = quantity;
     }
 
+    public Cart() {
+    }
+
     public int getId() {
         return id;
     }

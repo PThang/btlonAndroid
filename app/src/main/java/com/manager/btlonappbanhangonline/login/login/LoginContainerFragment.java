@@ -63,7 +63,7 @@ public class LoginContainerFragment extends Fragment{
                 //navController = Navigation.findNavController(view);
                 //navController.navigate(R.id.action_loginFragment_to_forgetPassWordFragment);
             }
-        }, intent2,intent3), "Login");
+        }), "Login");
 
         binding.viewPager.setAdapter(adapter);
         binding.tabs.setupWithViewPager(binding.viewPager);

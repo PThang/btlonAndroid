@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
 import android.util.Log;
@@ -24,7 +25,7 @@ import com.manager.btlonappbanhangonline.databinding.FragmentRegisterBinding;
 
 public class RegisterFragment extends Fragment {
     FragmentRegisterBinding binding;
-    FirebaseAuth auth;
+    RegisterViewModel registerViewModel;
     ProgressDialog dialog;
     Intent intent;
 
@@ -43,7 +44,8 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentRegisterBinding.inflate(getLayoutInflater());
-        auth = FirebaseAuth.getInstance();
+
+        registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
 
         dialog = new ProgressDialog(requireActivity());
         dialog.setTitle("Waiting...");
@@ -83,23 +85,7 @@ public class RegisterFragment extends Fragment {
             && !password.equalsIgnoreCase("")
             && !rePassword.equalsIgnoreCase("")
             && password.equalsIgnoreCase(rePassword))   {
-            auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = auth.getCurrentUser();
-                                Log.i("Register State:", "Success");
-                                Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
-                                startActivity(intent);
-                            } else {
-                                Log.i("Register State:", "Failed");
-                                Toast.makeText(requireActivity(), "Fail", Toast.LENGTH_SHORT).show();
-                                //dialog.dismiss();
-                            }
-                        }
-                    });
+            registerViewModel.register(email, password);
         }
-        //dialog.show();
     }
 }
