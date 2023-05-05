@@ -33,6 +33,7 @@ public class MainFragmentViewModel extends AndroidViewModel {
     public LiveData<List<TypeProduct>> getAllTypes(){
         return allTypes;
     }
+
     public LiveData<List<NewProduct>> getProductByType(String id){
         return productRepository.getProductByType(id);
     }

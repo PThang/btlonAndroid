@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.R;
@@ -89,8 +92,8 @@ public class MainFragment extends Fragment {
             typeProductAdapter.notifyDataSetChanged();
         });
 
-
     }
+
 
     @Override
     public void onResume() {
