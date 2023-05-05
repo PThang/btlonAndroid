@@ -3,7 +3,7 @@ package com.manager.btlonappbanhangonline.home.cart.di;
 import android.app.Application;
 
 import com.manager.btlonappbanhangonline.home.cart.cartdatabase.CartDatabase;
-import com.manager.btlonappbanhangonline.home.cart.cartdatabase.dao.CartDao;
+import com.manager.btlonappbanhangonline.home.cart.cartdatabase.repository.dao.CartDao;
 
 import dagger.Module;
 import dagger.Provides;

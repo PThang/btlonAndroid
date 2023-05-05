@@ -2,6 +2,7 @@ package com.manager.btlonappbanhangonline.home.cart;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -50,9 +51,9 @@ public class CartViewModel extends AndroidViewModel {
         cartRepository.deleteAll();
     }
 
-    public void order(Delivery delivery){
+    public void order(Delivery delivery, Context context,Intent intent){
         if(delivery != null){
-            deliveryRepository.order(delivery);
+            deliveryRepository.order(delivery,context, intent);
         }
     }
 

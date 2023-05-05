@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.ActivityHomeBinding;
 import com.manager.btlonappbanhangonline.home.cart.CartFragment;
+import com.manager.btlonappbanhangonline.home.delivering.DeliveringFragment;
 import com.manager.btlonappbanhangonline.home.main.MainFragment;
 import com.manager.btlonappbanhangonline.home.profile.ProfileFragment;
 
@@ -40,6 +41,9 @@ public class HomeActivity extends AppCompatActivity {
             binding.profileContainer.setBackgroundResource(R.drawable.menu_not_select);
             binding.profileText.setVisibility(View.GONE);
 
+            binding.deliveringContainer.setBackgroundResource(R.drawable.menu_not_select);
+            binding.deliveringText.setVisibility(View.GONE);
+
             binding.cartContainer.setBackgroundResource(R.drawable.menu_not_select);
             binding.cartText.setVisibility(View.GONE);
         });
@@ -48,6 +52,24 @@ public class HomeActivity extends AppCompatActivity {
             binding.profileContainer.setBackgroundResource(R.drawable.bg_menu);
             binding.profileText.setVisibility(View.VISIBLE);
             replaceFragment(new ProfileFragment());
+
+            binding.homeContainer.setBackgroundResource(R.drawable.menu_not_select);
+            binding.homeText.setVisibility(View.GONE);
+
+            binding.deliveringContainer.setBackgroundResource(R.drawable.menu_not_select);
+            binding.deliveringText.setVisibility(View.GONE);
+
+            binding.cartContainer.setBackgroundResource(R.drawable.menu_not_select);
+            binding.cartText.setVisibility(View.GONE);
+        });
+
+        binding.deliveringContainer.setOnClickListener(v -> {
+            binding.deliveringContainer.setBackgroundResource(R.drawable.bg_menu);
+            binding.deliveringText.setVisibility(View.VISIBLE);
+            replaceFragment(new DeliveringFragment());
+
+            binding.profileContainer.setBackgroundResource(R.drawable.menu_not_select);
+            binding.profileText.setVisibility(View.GONE);
 
             binding.homeContainer.setBackgroundResource(R.drawable.menu_not_select);
             binding.homeText.setVisibility(View.GONE);
@@ -63,6 +85,9 @@ public class HomeActivity extends AppCompatActivity {
 
             binding.profileContainer.setBackgroundResource(R.drawable.menu_not_select);
             binding.profileText.setVisibility(View.GONE);
+
+            binding.deliveringContainer.setBackgroundResource(R.drawable.menu_not_select);
+            binding.deliveringText.setVisibility(View.GONE);
 
             binding.homeContainer.setBackgroundResource(R.drawable.menu_not_select);
             binding.homeText.setVisibility(View.GONE);

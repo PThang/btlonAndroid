@@ -1,4 +1,4 @@
-package com.manager.btlonappbanhangonline.home.cart.cartdatabase.dao;
+package com.manager.btlonappbanhangonline.home.cart.cartdatabase.repository.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

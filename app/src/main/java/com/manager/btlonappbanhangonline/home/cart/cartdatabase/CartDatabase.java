@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.manager.btlonappbanhangonline.home.cart.cartdatabase.dao.CartDao;
+import com.manager.btlonappbanhangonline.home.cart.cartdatabase.repository.dao.CartDao;
 import com.manager.btlonappbanhangonline.model.Cart;
 
 import javax.inject.Singleton;

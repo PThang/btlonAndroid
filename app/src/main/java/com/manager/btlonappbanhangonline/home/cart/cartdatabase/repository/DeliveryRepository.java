@@ -1,11 +1,9 @@
 package com.manager.btlonappbanhangonline.home.cart.cartdatabase.repository;
 
-import android.app.Application;
 import android.content.Context;
-import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -15,8 +13,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.manager.btlonappbanhangonline.home.cart.CartViewModel;
 import com.manager.btlonappbanhangonline.model.Delivery;
-
-import java.text.SimpleDateFormat;
 
 
 public class DeliveryRepository {
@@ -35,7 +31,7 @@ public class DeliveryRepository {
         userEmail = currentUser.getEmail();
     }
 
-    public void order(Delivery delivery) {
+    public void order(Delivery delivery, Context context, Intent intent) {
         CollectionReference userCollection = db.collection("deliveries").document(currentUser.getEmail()).collection(currentUser.getEmail());
 
         userCollection.document().set(delivery)
@@ -44,6 +40,7 @@ public class DeliveryRepository {
                     public void onSuccess(Void unused) {
                         //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
                         cartViewModel.deleteAll();
+                        context.startActivity(intent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

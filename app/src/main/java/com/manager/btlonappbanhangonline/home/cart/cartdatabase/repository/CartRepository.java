@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 
 
 import com.manager.btlonappbanhangonline.home.cart.cartdatabase.CartDatabase;
-import com.manager.btlonappbanhangonline.home.cart.cartdatabase.dao.CartDao;
+import com.manager.btlonappbanhangonline.home.cart.cartdatabase.repository.dao.CartDao;
 import com.manager.btlonappbanhangonline.model.Cart;
 
 import java.util.List;
