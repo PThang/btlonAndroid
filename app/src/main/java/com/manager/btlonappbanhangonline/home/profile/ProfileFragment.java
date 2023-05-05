@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.FragmentProfileBinding;
 import com.manager.btlonappbanhangonline.login.LoginActivity;
+import com.manager.btlonappbanhangonline.login.setprofile.SetProfileActivity;
 
 
 public class ProfileFragment extends Fragment {
@@ -59,7 +60,22 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        binding.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editProfile();
+            }
+        });
+
         return binding.getRoot();
+    }
+
+    private void editProfile() {
+        String srtMove = "MoveFromProfile";
+        Intent i = new Intent(requireActivity(), SetProfileActivity.class);
+        i.putExtra("result", srtMove);
+        startActivity(i);
+
     }
 
     private void logOut() {

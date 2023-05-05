@@ -53,6 +53,17 @@ public class SetProfileActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
+
+        if(getIntent().getStringExtra("result") != null){
+            setData();
+        }
+    }
+
+    private void setData() {
+        Glide.with(SetProfileActivity.this).load(user.getPhotoUrl()).into(binding.profileImageView);
+        binding.inputName.setText(user.getDisplayName());
+        //binding.inputName.setText(db.collection("infoUsers").);
+        binding.inputEmail.setText(user.getEmail());
     }
 
     private void initEvents() {
