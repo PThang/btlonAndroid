@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -28,10 +30,12 @@ import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.ActivitySetProfileBinding;
 import com.manager.btlonappbanhangonline.home.HomeActivity;
 import com.manager.btlonappbanhangonline.model.Cart;
+import com.manager.btlonappbanhangonline.model.User;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SetProfileActivity extends AppCompatActivity {
     private ActivitySetProfileBinding binding;
@@ -41,6 +45,7 @@ public class SetProfileActivity extends AppCompatActivity {
     FirebaseUser user;
     FirebaseStorage storage;
     String strUrl;
+    User userAc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,7 @@ public class SetProfileActivity extends AppCompatActivity {
         
         initEvents();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        //userAc = new User();
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -62,8 +68,24 @@ public class SetProfileActivity extends AppCompatActivity {
     private void setData() {
         Glide.with(SetProfileActivity.this).load(user.getPhotoUrl()).into(binding.profileImageView);
         binding.inputName.setText(user.getDisplayName());
-        //binding.inputName.setText(db.collection("infoUsers").);
         binding.inputEmail.setText(user.getEmail());
+
+        db.collection("users")
+                .document(user.getEmail())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            // Chuyển đổi DocumentSnapshot thành object User
+                            User userAc = documentSnapshot.toObject(User.class);
+                            Log.i("Firebase's user :", userAc.getName());
+                            binding.inputAddress.setText(userAc.getAddress());
+                            binding.inputPhoneNumber.setText(userAc.getPhoneNumber());
+                        } else {
+                        }
+                    }
+                });
     }
 
     private void initEvents() {
@@ -85,37 +107,35 @@ public class SetProfileActivity extends AppCompatActivity {
     private void saveInfo() {
         String name = binding.inputName.getText().toString();
         String email = binding.inputEmail.getText().toString();
+        String address = binding.inputAddress.getText().toString();
         String phoneNumber = binding.inputPhoneNumber.getText().toString();
+        UserProfileChangeRequest profileUpdates;
 
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(name)
-                .setPhotoUri(uri)
-                .build();
+        if (uri != null){            profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(name)
+                    .setPhotoUri(uri)
+                    .build();
+        } else {
+            profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(name)
+                    .build();
+        }
 
         insertImageOnFS();
         String photoUrl = strUrl;
 
+        userAc = new User(name, email, phoneNumber, photoUrl, address);
         user.updateProfile(profileUpdates)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        CollectionReference userCollection = db.collection("infoUsers").document(email).collection("information");
-                        Map<String, String> info = new HashMap<>();
-                        info.put("photo", photoUrl);
-                        info.put("name", name);
-                        info.put("phone", phoneNumber);
-                        info.put("email", email);
-                        userCollection.document(email).set(info)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        CollectionReference usersRef = db.collection("users");
+                        usersRef.document(email)
+                                .set(userAc)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
+                                    public void onSuccess(Void unused) {
                                         startActivity(new Intent(SetProfileActivity.this, HomeActivity.class));
-                                    }
-                                })
-                                .addOnCanceledListener(new OnCanceledListener() {
-                                    @Override
-                                    public void onCanceled() {
-                                        Toast.makeText(SetProfileActivity.this,"Failed", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     }

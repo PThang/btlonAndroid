@@ -4,11 +4,17 @@ import java.util.List;
 
 public class Order {
     String id;
-    int iduser;
-    String diachi;
-    String sodienthoai;
-    String tongtien;
-    List<Item> item;
+    List<Cart> carts;
+    String orderDate;
+
+    public Order(String id, List<Cart> carts, String orderDate) {
+        this.id = id;
+        this.carts = carts;
+        this.orderDate = orderDate;
+    }
+
+    public Order() {
+    }
 
     public String getId() {
         return id;
@@ -18,43 +24,19 @@ public class Order {
         this.id = id;
     }
 
-    public int getIduser() {
-        return iduser;
+    public List<Cart> getCarts() {
+        return carts;
     }
 
-    public void setIduser(int iduser) {
-        this.iduser = iduser;
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
     }
 
-    public String getDiachi() {
-        return diachi;
+    public String getOrderDate() {
+        return orderDate;
     }
 
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
-    }
-
-    public String getSodienthoai() {
-        return sodienthoai;
-    }
-
-    public void setSodienthoai(String sodienthoai) {
-        this.sodienthoai = sodienthoai;
-    }
-
-    public String getTongtien() {
-        return tongtien;
-    }
-
-    public void setTongtien(String tongtien) {
-        this.tongtien = tongtien;
-    }
-
-    public List<Item> getItem() {
-        return item;
-    }
-
-    public void setItem(List<Item> item) {
-        this.item = item;
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 }

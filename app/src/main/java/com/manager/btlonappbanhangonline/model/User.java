@@ -2,39 +2,57 @@ package com.manager.btlonappbanhangonline.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
-    String userId, userName,userPic;
+public class User {
+    String name, email, phoneNumber, photoUrl, address;
 
-    public User(String userId, String userName, String userPic) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userPic = userPic;
+    public User(String name, String email, String phoneNumber, String photoUrl, String address) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.photoUrl = photoUrl;
+        this.address = address;
     }
 
     public User() {
     }
 
-    public String getUserId() {
-        return userId;
+    public String getName() {
+        return name;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getUserPic() {
-        return userPic;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setUserPic(String userPic) {
-        this.userPic = userPic;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
