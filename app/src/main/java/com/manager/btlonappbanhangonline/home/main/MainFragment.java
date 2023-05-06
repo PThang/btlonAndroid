@@ -1,7 +1,14 @@
 package com.manager.btlonappbanhangonline.home.main;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,24 +20,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.SearchView;
-
 import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.home.main.adapter.NewProductAdapter;
-
-import com.manager.btlonappbanhangonline.home.main.adapter.TypeProductAdapter;
 import com.manager.btlonappbanhangonline.databinding.FragmentMainBinding;
 import com.manager.btlonappbanhangonline.eventbus.TypeProClickListener;
+import com.manager.btlonappbanhangonline.home.main.adapter.NewProductAdapter;
+import com.manager.btlonappbanhangonline.home.main.adapter.TypeProductAdapter;
 import com.manager.btlonappbanhangonline.model.NewProduct;
 
 import java.util.ArrayList;
@@ -49,11 +44,23 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainFragmentViewModel = new ViewModelProvider(requireActivity()).get(MainFragmentViewModel.class);
+
         binding.searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /*Intent intent= new Intent(requireActivity().getApplicationContext(), SearchActivity.class);
                 startActivity(intent);*/
+            }
+        });
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchFirestore(query);
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
             }
         });
 
@@ -154,5 +161,15 @@ public class MainFragment extends Fragment {
         Animation slide_out= AnimationUtils.loadAnimation(requireActivity().getApplicationContext(), R.anim.slide_out_right);
         binding.viewFlipper.setInAnimation(slide_in);
         binding.viewFlipper.setInAnimation(slide_out);
+    }
+    private void searchFirestore(String query) {
+        mainFragmentViewModel.searchFirestore(query).observe(getViewLifecycleOwner(), new Observer<List<NewProduct>>() {
+            @Override
+            public void onChanged(List<NewProduct> newProducts) {
+                NewProductAdapter adapter = new NewProductAdapter(requireActivity().getApplicationContext(), newProducts);
+                binding.productRecycler.setAdapter(adapter);
+                Log.i("Size of data: ", String.valueOf(newProducts.size()));
+            }
+        });
     }
 }

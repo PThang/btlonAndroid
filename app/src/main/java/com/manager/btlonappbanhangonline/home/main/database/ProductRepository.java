@@ -17,7 +17,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.manager.btlonappbanhangonline.model.NewProduct;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Singleton;
@@ -70,6 +69,30 @@ public class ProductRepository {
                     }
                     products.postValue(data);
                 });
+        return products;
+    }
+    public LiveData<List<NewProduct>> searchFirestore(String query) {
+        MutableLiveData<List<NewProduct>> products = new MutableLiveData<>();
+        // Tạo truy vấn để tìm kiếm tài khoản người dùng có tên hoặc email chứa query
+        Query data =  db.collection("items").whereGreaterThanOrEqualTo("name", query)
+                .whereLessThanOrEqualTo("name", query + "\uf8ff");
+
+        data.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<NewProduct> productData = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        NewProduct product = document.toObject(NewProduct.class);
+                        productData.add(product);
+                    }
+
+                    products.postValue(productData);
+                } else {
+                    Log.i("Error getting documents: ", task.getException().toString());
+                }
+            }
+        });
         return products;
     }
 

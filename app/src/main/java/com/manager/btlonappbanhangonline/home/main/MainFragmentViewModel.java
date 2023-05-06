@@ -37,4 +37,7 @@ public class MainFragmentViewModel extends AndroidViewModel {
     public LiveData<List<NewProduct>> getProductByType(String id){
         return productRepository.getProductByType(id);
     }
+    public LiveData<List<NewProduct>> searchFirestore(String query){
+        return productRepository.searchFirestore(query);
+    }
 }
