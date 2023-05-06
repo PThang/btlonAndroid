@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.manager.btlonappbanhangonline.databinding.FragmentRegisterBinding;
 
+import java.util.regex.Pattern;
+
 public class RegisterFragment extends Fragment {
     FragmentRegisterBinding binding;
     RegisterViewModel registerViewModel;
@@ -72,20 +74,36 @@ public class RegisterFragment extends Fragment {
         String password = binding.passwordRegisterText.getText().toString();
         String rePassword = binding.rePasswordText.getText().toString();
 
+        if(!validateEmail(email)){
+            Toast.makeText(requireActivity(), "Email is not correct.", Toast.LENGTH_SHORT).show();
+        }
+
         if(email.equalsIgnoreCase("")){
             binding.emailRegisterText.setError("");
         }
         if(password.equalsIgnoreCase("")){
             binding.passwordRegisterText.setError("");
         }
-        if(rePassword.equalsIgnoreCase("")){
-            binding.rePasswordText.setError("");
+        if(!rePassword.equalsIgnoreCase(password)){
+            Toast.makeText(requireActivity(), "Repeat password is not correct.", Toast.LENGTH_SHORT).show();
         }
         if(!email.equalsIgnoreCase("")
             && !password.equalsIgnoreCase("")
             && !rePassword.equalsIgnoreCase("")
-            && password.equalsIgnoreCase(rePassword))   {
+            && password.equalsIgnoreCase(rePassword)
+            && validateEmail(email))   {
             registerViewModel.register(email, password);
         }
+    }
+
+    Boolean validateEmail(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pattern.matcher(email).matches();
     }
 }

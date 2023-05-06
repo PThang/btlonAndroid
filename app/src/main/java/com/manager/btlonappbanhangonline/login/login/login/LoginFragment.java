@@ -31,6 +31,7 @@ import com.manager.btlonappbanhangonline.login.forgetpassword.ForgetPasswordActi
 import com.manager.btlonappbanhangonline.login.login.LoginContainerFragment;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class LoginFragment extends Fragment{
     FragmentLoginBinding binding;
@@ -91,6 +92,9 @@ public class LoginFragment extends Fragment{
         String email = binding.emailText.getText().toString();
         String password = binding.passwordText.getText().toString();
 
+        if(!validateEmail(email)){
+            Toast.makeText(requireActivity(), "Email is not correct.", Toast.LENGTH_SHORT).show();
+        }
         loginViewModel.setLoginResultCallback(new LoginResultCallBack() {
             @Override
             public void onLoginSuccess() {
@@ -112,7 +116,16 @@ public class LoginFragment extends Fragment{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             loginViewModel.login(email,password);
         }
-
     }
 
+    Boolean validateEmail(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pattern.matcher(email).matches();
+    }
 }
