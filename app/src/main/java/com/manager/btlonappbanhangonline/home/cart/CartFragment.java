@@ -1,5 +1,6 @@
 package com.manager.btlonappbanhangonline.home.cart;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,6 +18,10 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.manager.btlonappbanhangonline.databinding.FragmentCartBinding;
 import com.manager.btlonappbanhangonline.home.cart.finshorder.FinishOrderActivity;
@@ -37,7 +42,6 @@ public class CartFragment extends Fragment {
     CartAdapter adapter;
     CartViewModel cartViewModel;
     FragmentCartBinding binding;
-
 
 
     String TAG = "error when pushing notification :";
@@ -78,7 +82,7 @@ public class CartFragment extends Fragment {
         data = new ArrayList<>();
 
         cartViewModel.getAllCarts().observe(requireActivity(), carts -> {
-            adapter = new CartAdapter(requireActivity(),carts);
+            adapter = new CartAdapter(requireActivity(),carts, true);
             data = carts;
             binding.cartRecycler.setAdapter(adapter);
             binding.subTotalText.setText("Sub-total: " + String.valueOf(cartViewModel.cost().getValue()) + " VND");
@@ -91,6 +95,11 @@ public class CartFragment extends Fragment {
                 order();
             }
         });
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 
     private void order() {
@@ -109,7 +118,7 @@ public class CartFragment extends Fragment {
     }
 
     public String getCurrentDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm:hh - dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm - dd/MM/yyyy");
         Date date = new Date();
         return dateFormat.format(date);
     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
 import android.util.Log;
@@ -21,11 +22,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.manager.btlonappbanhangonline.databinding.FragmentRegisterBinding;
+import com.manager.btlonappbanhangonline.login.login.ResultCallBack;
+
+import java.util.regex.Pattern;
 
 public class RegisterFragment extends Fragment {
     FragmentRegisterBinding binding;
-    FirebaseAuth auth;
-    ProgressDialog dialog;
+    RegisterViewModel registerViewModel;
+    private ProgressDialog progressDialog;
     Intent intent;
 
     public RegisterFragment(Intent intent) {
@@ -43,10 +47,12 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentRegisterBinding.inflate(getLayoutInflater());
-        auth = FirebaseAuth.getInstance();
 
-        dialog = new ProgressDialog(requireActivity());
-        dialog.setTitle("Waiting...");
+        registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
+
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Waiting...");
+        progressDialog.setCancelable(false);
 
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,40 +72,59 @@ public class RegisterFragment extends Fragment {
     }
 
     private void register() {
-        String email = binding.emailRegisterText.getText().toString();
+        progressDialog.show();
+        String email = binding.emailRegisterText.getText().toString().trim();
         String password = binding.passwordRegisterText.getText().toString();
         String rePassword = binding.rePasswordText.getText().toString();
 
+        registerViewModel.setRegisterResultCallback(new ResultCallBack() {
+            @Override
+            public void onLoginSuccess() {
+                requireActivity().finish();
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onLoginFailure(String message) {
+                Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
+
+        if(!validateEmail(email)){
+            Toast.makeText(requireActivity(), "Email is not correct.", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        }
+
         if(email.equalsIgnoreCase("")){
             binding.emailRegisterText.setError("");
+            progressDialog.dismiss();
         }
         if(password.equalsIgnoreCase("")){
             binding.passwordRegisterText.setError("");
+            progressDialog.dismiss();
         }
-        if(rePassword.equalsIgnoreCase("")){
-            binding.rePasswordText.setError("");
+        if(!rePassword.equalsIgnoreCase(password)){
+            Toast.makeText(requireActivity(), "Repeat password is not correct.", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
         if(!email.equalsIgnoreCase("")
             && !password.equalsIgnoreCase("")
             && !rePassword.equalsIgnoreCase("")
-            && password.equalsIgnoreCase(rePassword))   {
-            auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = auth.getCurrentUser();
-                                Log.i("Register State:", "Success");
-                                Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
-                                startActivity(intent);
-                            } else {
-                                Log.i("Register State:", "Failed");
-                                Toast.makeText(requireActivity(), "Fail", Toast.LENGTH_SHORT).show();
-                                //dialog.dismiss();
-                            }
-                        }
-                    });
+            && password.equalsIgnoreCase(rePassword)
+            && validateEmail(email))   {
+            registerViewModel.register(email, password);
         }
-        //dialog.show();
+    }
+
+    Boolean validateEmail(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pattern.matcher(email).matches();
     }
 }

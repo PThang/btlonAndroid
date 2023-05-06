@@ -1,8 +1,9 @@
 package com.manager.btlonappbanhangonline.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable  {
     List<Cart> carts;
     String orderDate;
     Long cost;

@@ -29,7 +29,7 @@ public class CartViewModel extends AndroidViewModel {
         super(application);
         cartRepository = new CartRepository(application);
         allCarts = cartRepository.getAllCarts();
-        deliveryRepository = new DeliveryRepository(CartViewModel.this);
+        deliveryRepository = new DeliveryRepository(CartViewModel.this, application);
     }
 
     public void insertCart(Cart cart){

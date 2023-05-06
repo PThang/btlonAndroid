@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,9 +38,12 @@ import java.util.Map;
 
 public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
+    ProfileViewModel profileViewModel;
+
     FirebaseAuth auth;
-    FirebaseUser user;
-    FirebaseFirestore db;
+//    FirebaseAuth auth;
+//    FirebaseUser user;
+//    FirebaseFirestore db;
     //User userAc;
 
     public ProfileFragment() {
@@ -55,15 +60,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
         auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        //userAc = new User();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
 
-
-        if (user != null) {
-            Log.i("Firebase's user :", user.getEmail());
-        }
+        profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
 
         setData();
         binding.logOutButton.setOnClickListener(new View.OnClickListener() {
@@ -84,32 +82,29 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setData() {
-        Glide.with(this).load(user.getPhotoUrl()).into(binding.profileImageView).onLoadFailed(getResources().getDrawable(R.drawable.user));
-        binding.inputName.setText(user.getDisplayName());
-        binding.inputEmail.setText(user.getEmail());
+        profileViewModel.user.observe(getViewLifecycleOwner(), new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser user) {
+                Glide.with(requireActivity()).load(user.getPhotoUrl()).into(binding.profileImageView)/*.onLoadFailed(getResources().getDrawable(R.drawable.user))*/;
+                binding.inputName.setText(user.getDisplayName());
+                binding.inputEmail.setText(user.getEmail());
+            }
+        });
 
-        db.collection("users")
-                .document(user.getEmail())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            // Chuyển đổi DocumentSnapshot thành object User
-                            User userAc = documentSnapshot.toObject(User.class);
-                            Log.i("Firebase's user :", userAc.getName());
-                            binding.inputAddress.setText(userAc.getAddress());
-                            binding.inputPhoneNumber.setText(userAc.getPhoneNumber());
-                        } else {
-                        }
-                    }
-                });
+        profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                binding.inputAddress.setText(user.getAddress());
+                binding.inputPhoneNumber.setText(user.getPhoneNumber());
+            }
+        });
     }
 
     private void editProfile() {
         String srtMove = "MoveFromProfile";
         Intent i = new Intent(requireActivity(), SetProfileActivity.class);
         i.putExtra("result", srtMove);
+        i.putExtra("start","home");
         startActivity(i);
 
     }

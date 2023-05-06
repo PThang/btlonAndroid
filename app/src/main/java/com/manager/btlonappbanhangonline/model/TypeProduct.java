@@ -1,6 +1,8 @@
 package com.manager.btlonappbanhangonline.model;
 
-public class TypeProduct {
+import java.io.Serializable;
+
+public class TypeProduct implements Serializable {
     String idType;
     String name;
     String image;

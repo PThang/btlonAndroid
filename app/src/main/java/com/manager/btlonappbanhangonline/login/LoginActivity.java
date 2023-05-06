@@ -33,17 +33,6 @@ public class LoginActivity extends AppCompatActivity {
                 new Intent(LoginActivity.this, SetProfileActivity.class)));
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = auth.getCurrentUser();
-        if(currentUser != null && !currentUser.getDisplayName().equalsIgnoreCase("")){
-            //reload();
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-        }
-    }
-
     public void replaceFragment(Fragment fragment){
         getSupportFragmentManager()
                 .beginTransaction()

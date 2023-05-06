@@ -2,7 +2,7 @@ package com.manager.btlonappbanhangonline.model;
 
 import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
     String name, email, phoneNumber, photoUrl, address;
 
     public User(String name, String email, String phoneNumber, String photoUrl, String address) {

@@ -1,9 +1,19 @@
 package com.manager.btlonappbanhangonline.model;
 
-public class Delivery {
+import java.io.Serializable;
+
+public class Delivery implements Serializable  {
+    String id;
     Order order;
     Boolean isReceived;
     String receivedDate;
+
+    public Delivery(String id, Order order, Boolean isReceived, String receivedDate) {
+        this.id = id;
+        this.order = order;
+        this.isReceived = isReceived;
+        this.receivedDate = receivedDate;
+    }
 
     public Delivery(Order order, Boolean isReceived, String receivedDate) {
         this.order = order;
@@ -14,10 +24,21 @@ public class Delivery {
     public Delivery() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Order getOrder() {
         return order;
     }
 
+    public Boolean getIsReceived(){
+        return isReceived;
+    }
     public void setOrder(Order order) {
         this.order = order;
     }

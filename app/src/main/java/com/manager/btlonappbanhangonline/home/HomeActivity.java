@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.ActivityHomeBinding;
 import com.manager.btlonappbanhangonline.home.cart.CartFragment;
-import com.manager.btlonappbanhangonline.home.delivering.DeliveringFragment;
+import com.manager.btlonappbanhangonline.home.delivering.DeliveringContainerFragment;
 import com.manager.btlonappbanhangonline.home.main.MainFragment;
 import com.manager.btlonappbanhangonline.home.profile.ProfileFragment;
 
@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.deliveringContainer.setOnClickListener(v -> {
             binding.deliveringContainer.setBackgroundResource(R.drawable.bg_menu);
             binding.deliveringText.setVisibility(View.VISIBLE);
-            replaceFragment(new DeliveringFragment());
+            replaceFragment(new DeliveringContainerFragment());
 
             binding.profileContainer.setBackgroundResource(R.drawable.menu_not_select);
             binding.profileText.setVisibility(View.GONE);

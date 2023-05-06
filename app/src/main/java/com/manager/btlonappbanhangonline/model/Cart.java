@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "cart_tb")
-public class Cart {
+public class Cart implements Serializable {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     int id;
@@ -21,6 +23,9 @@ public class Cart {
         this.costProduct = costProduct;
         this.imageProduct = imageProduct;
         this.quantity = quantity;
+    }
+
+    public Cart() {
     }
 
     public int getId() {
