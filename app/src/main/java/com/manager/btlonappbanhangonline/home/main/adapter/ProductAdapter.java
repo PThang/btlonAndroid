@@ -16,14 +16,14 @@ import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.home.main.detailproduct.DetailActivity;
 import com.manager.btlonappbanhangonline.eventbus.ItemClickListener;
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.model.NewProduct;
+import com.manager.btlonappbanhangonline.model.Product;
 
 import java.util.List;
 
-public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.MyViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
     Context context;
-    List<NewProduct> array;
-    public NewProductAdapter(Context context, List<NewProduct> array) {
+    List<Product> array;
+    public ProductAdapter(Context context, List<Product> array) {
         this.context = context;
         this.array = array;
     }
@@ -37,9 +37,9 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        NewProduct newProduct = array.get(position);
+        Product newProduct = array.get(position);
         holder.nameText.setText(newProduct.getName());
-        //DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
         holder.costText.setText(newProduct.getPrice()+"Đ");
         if(newProduct.getImg().contains("http")){
             Glide.with(context).load(newProduct.getImg()).into(holder.productImage);
@@ -52,13 +52,10 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
             @Override
             public void onClick(View view, int pos, boolean isLongClick) {
                 if(!isLongClick){
-                    //click
                     Intent intent=new Intent(context, DetailActivity.class);
-                    intent.putExtra("chitiet",newProduct);
+                    intent.putExtra("detail",newProduct);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
-                }else{
-                    //EventBus.getDefault().postSticky(new SuaXoaEvent(newProduct));
                 }
             }
         });

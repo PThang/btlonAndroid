@@ -54,7 +54,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Holder
         }
 
         void onBind(Delivery delivery, DeliveryOnclickListener listener){
-            dateText.setText(delivery.getOrder().getOrderDate());
+            dateText.setText(context.getResources().getString(R.string.order_at) + delivery.getOrder().getOrderDate());
 
             receivedButton.setOnClickListener(new View.OnClickListener() {
                 @Override

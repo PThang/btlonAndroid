@@ -2,15 +2,15 @@ package com.manager.btlonappbanhangonline.model;
 
 import java.io.Serializable;
 
-public class NewProduct implements Serializable {
+public class Product implements Serializable {
     String id;
     String name;
     String img;
     String price;
     String detail;
     String type;
-    public NewProduct(){}
-    public NewProduct(String id, String name, String img, String price, String detail, String type) {
+    public Product(){}
+    public Product(String id, String name, String img, String price, String detail, String type) {
         this.id = id;
         this.name = name;
         this.img = img;

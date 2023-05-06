@@ -48,10 +48,14 @@ public class CartFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(String token) {
-        super.onNewToken(token);
+        Log.d(TAG, "Refreshed token: " + token);
 
-//        saveTokenToSharedPreferences(token);
-        Log.i("token's device:", token);
+        // Send the new token to your app server.
+        sendRegistrationToServer(token);
+    }
+
+    private void sendRegistrationToServer(String token) {
+        // Implement this method to send token to your app server.
     }
 
 

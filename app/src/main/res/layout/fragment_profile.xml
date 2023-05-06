@@ -63,7 +63,7 @@
             android:layout_height="50dp"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="20dp"
-            android:text="Personal info"
+            android:text="@string/personal_info"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -83,7 +83,7 @@
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="Your name"
+                    android:text="@string/your_name"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -99,7 +99,7 @@
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="Address"
+                    android:text="@string/address"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -127,7 +127,7 @@
             android:layout_height="50dp"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="20dp"
-            android:text="Contact info"
+            android:text="@string/contact_info"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -147,7 +147,7 @@
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="Phone number"
+                    android:text="@string/phone_number"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -164,7 +164,7 @@
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="Email"
+                    android:text="@string/email"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -199,7 +199,7 @@
         android:layout_height="55dp"
         android:layout_margin="15dp"
         android:background="@drawable/bg_button"
-        android:text="Log out"
+        android:text="@string/logout"
         android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"

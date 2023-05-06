@@ -2,6 +2,7 @@ package com.manager.btlonappbanhangonline.home.cart;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.FragmentCartBinding;
 import com.manager.btlonappbanhangonline.home.cart.finshorder.FinishOrderActivity;
 import com.manager.btlonappbanhangonline.home.cart.adapter.CartAdapter;
@@ -85,7 +87,7 @@ public class CartFragment extends Fragment {
             adapter = new CartAdapter(requireActivity(),carts, true);
             data = carts;
             binding.cartRecycler.setAdapter(adapter);
-            binding.subTotalText.setText("Sub-total: " + String.valueOf(cartViewModel.cost().getValue()) + " VND");
+            binding.subTotalText.setText(getResources().getString(R.string.sub_total) + String.valueOf(cartViewModel.cost().getValue()) + " VND");
             cost = cartViewModel.cost().getValue();
         });
 

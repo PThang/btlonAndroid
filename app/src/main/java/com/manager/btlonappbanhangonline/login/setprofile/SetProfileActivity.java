@@ -29,10 +29,9 @@ public class SetProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySetProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        
-        initEvents();
 
         profileViewModel = new ViewModelProvider(SetProfileActivity.this).get(ProfileViewModel.class);
+        initEvents();
 
         start = getIntent().getStringExtra("start");
         if(getIntent().getStringExtra("result") != null){
@@ -74,6 +73,12 @@ public class SetProfileActivity extends AppCompatActivity {
             }
         });
 
+        profileViewModel.user.observe(SetProfileActivity.this, new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser firebaseUser) {
+                binding.inputEmail.setText(firebaseUser.getEmail().toString());
+            }
+        });
         binding.backCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +97,6 @@ public class SetProfileActivity extends AppCompatActivity {
         String email = binding.inputEmail.getText().toString();
         String address = binding.inputAddress.getText().toString();
         String phoneNumber = binding.inputPhoneNumber.getText().toString();
-        UserProfileChangeRequest profileUpdates;
 
         profileViewModel.saveInfo(uri, name, email, address, phoneNumber);
     }

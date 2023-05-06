@@ -3,37 +3,21 @@ package com.manager.btlonappbanhangonline.home.profile;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.FragmentProfileBinding;
 import com.manager.btlonappbanhangonline.login.LoginActivity;
 import com.manager.btlonappbanhangonline.login.setprofile.SetProfileActivity;
-import com.manager.btlonappbanhangonline.model.NewProduct;
 import com.manager.btlonappbanhangonline.model.User;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class ProfileFragment extends Fragment {

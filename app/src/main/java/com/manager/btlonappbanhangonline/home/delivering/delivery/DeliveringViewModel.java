@@ -10,14 +10,18 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.manager.btlonappbanhangonline.model.Delivery;
 
@@ -42,29 +46,27 @@ public class DeliveringViewModel extends AndroidViewModel {
         deliveryLiveData = getData();
     }
 
-    LiveData<List<Delivery>> getData(){
+    public LiveData<List<Delivery>> getData(){
         MutableLiveData<List<Delivery>> deliveries = new MutableLiveData<>();
-        List<Delivery> data = new ArrayList<>();
+
         db.collection("deliveries")
                 .document(userEmail)
                 .collection(userEmail)
                 .whereEqualTo("isReceived", false)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if(error != null){
-                            Log.i("error when getting data:", error.toString());
-                            return;
-                        }
-                        for(DocumentChange dc : value.getDocumentChanges()){
-                            if(dc.getType() == DocumentChange.Type.ADDED){
-                                data.add(dc.getDocument().toObject(Delivery.class));
-                                Log.i("when getting data:",dc.getDocument().toObject(Delivery.class).getIsReceived().toString());
-                            }
-                        }
-                        deliveries.postValue(data);
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        Log.i("error when getting data:", error.toString());
+                        return;
                     }
+
+                    List<Delivery> data = new ArrayList<>();
+                    for (DocumentSnapshot documentSnapshot : value.getDocuments()) {
+                        data.add(documentSnapshot.toObject(Delivery.class));
+                    }
+
+                    deliveries.setValue(data);
                 });
+
         return deliveries;
     }
 

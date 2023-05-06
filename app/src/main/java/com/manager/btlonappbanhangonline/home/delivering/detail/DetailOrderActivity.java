@@ -37,5 +37,6 @@ public class DetailOrderActivity extends AppCompatActivity {
         binding.cartRecycler.setHasFixedSize(true);
         CartAdapter adapter = new CartAdapter(DetailOrderActivity.this, order.getCarts(), false);
         binding.cartRecycler.setAdapter(adapter);
+        binding.subTotalText.setText(getResources().getString(R.string.sub_total) +" "+ String.valueOf(order.getCost()) + " VND");
     }
 }

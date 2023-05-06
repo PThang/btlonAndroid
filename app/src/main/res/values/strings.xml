@@ -5,4 +5,29 @@
     <string name="ng_nh_p">Đăng nhập</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_to_cart">Thêm vào giỏ hàng</string>
+    <string name="order_detail">Chi tiết đơn hàng</string>
+    <string name="skip">Tiếp tục</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="delivering">Đang giao</string>
+    <string name="personal_info">Thông tin cá nhân</string>
+    <string name="contact_info">Thông tin liên hệ</string>
+    <string name="your_name">Họ và tên</string>
+    <string name="address">Địa chỉ</string>
+    <string name="phone_number">Số ĐT</string>
+    <string name="finish">Lưu</string>
+    <string name="received">Đã nhận</string>
+    <string name="order_at">Thời gian đặt : </string>
+    <string name="cart_detail">Chi tiết giỏ hàng</string>
+    <string name="order">Đơn hàng</string>
+    <string name="sub_total">Tổng giá : </string>
+    <string name="delivery">Đang giao</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="forget_password">Quên mật khẩu ?</string>
+    <string name="show_password">Hiển thị mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng ký</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="repass">Nhập lại mật khẩu</string>
 </resources>

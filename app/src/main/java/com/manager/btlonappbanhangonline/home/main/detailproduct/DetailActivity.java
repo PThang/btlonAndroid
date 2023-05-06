@@ -1,5 +1,6 @@
 package com.manager.btlonappbanhangonline.home.main.detailproduct;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +15,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.R;
+import com.manager.btlonappbanhangonline.home.HomeActivity;
 import com.manager.btlonappbanhangonline.model.Cart;
-import com.manager.btlonappbanhangonline.model.NewProduct;
+import com.manager.btlonappbanhangonline.model.Product;
 import com.manager.btlonappbanhangonline.home.cart.CartViewModel;
 
 public class DetailActivity extends AppCompatActivity {
-    NewProduct newProduct;
+    Product newProduct;
     ImageView imageProduct;
     TextView nameProduct, detailProduct;
     CardView cardBack;
@@ -44,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        newProduct = (NewProduct) getIntent().getSerializableExtra("chitiet");
+        newProduct = (Product) getIntent().getSerializableExtra("detail");
         detailProduct.setText(newProduct.getDetail());
         nameProduct.setText(newProduct.getName());
         Glide.with(getApplicationContext()).load(newProduct.getImg()).into(imageProduct);
@@ -60,7 +62,7 @@ public class DetailActivity extends AppCompatActivity {
         cardBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(DetailActivity.this, HomeActivity.class));
             }
         });
     }
@@ -76,6 +78,10 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DetailActivity.this, HomeActivity.class));
     }
 }

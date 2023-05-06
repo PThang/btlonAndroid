@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.manager.btlonappbanhangonline.model.NewProduct;
+import com.manager.btlonappbanhangonline.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ public class ProductRepository {
         db = FirebaseFirestore.getInstance();
     }
 
-    public MutableLiveData<List<NewProduct>> getFirebaseProducts(){
-        MutableLiveData<List<NewProduct>> products = new MutableLiveData<>();
-        List<NewProduct> data = new ArrayList<>();
+    public MutableLiveData<List<Product>> getFirebaseProducts(){
+        MutableLiveData<List<Product>> products = new MutableLiveData<>();
+        List<Product> data = new ArrayList<>();
 
         db.collection("items")
                 .addSnapshotListener((value, error) -> {
@@ -41,8 +41,8 @@ public class ProductRepository {
                     }
                     for(DocumentChange dc : value.getDocumentChanges()){
                         if(dc.getType() == DocumentChange.Type.ADDED){
-                            data.add(dc.getDocument().toObject(NewProduct.class));
-                            Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
+                            data.add(dc.getDocument().toObject(Product.class));
+                            Log.i("error when getting data:",dc.getDocument().toObject(Product.class).getName());
                         }
                     }
                     products.postValue(data);
@@ -50,9 +50,9 @@ public class ProductRepository {
         return products;
     }
 
-    public LiveData<List<NewProduct>> getProductByType(String id){
-        MutableLiveData<List<NewProduct>> products = new MutableLiveData<>();
-        List<NewProduct> data = new ArrayList<>();
+    public LiveData<List<Product>> getProductByType(String id){
+        MutableLiveData<List<Product>> products = new MutableLiveData<>();
+        List<Product> data = new ArrayList<>();
 
         db.collection("items")
                 .whereEqualTo("type",id)
@@ -63,16 +63,16 @@ public class ProductRepository {
                     }
                     for(DocumentChange dc : value.getDocumentChanges()){
                         if(dc.getType() == DocumentChange.Type.ADDED){
-                            data.add(dc.getDocument().toObject(NewProduct.class));
-                            Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
+                            data.add(dc.getDocument().toObject(Product.class));
+                            Log.i("error when getting data:",dc.getDocument().toObject(Product.class).getName());
                         }
                     }
                     products.postValue(data);
                 });
         return products;
     }
-    public LiveData<List<NewProduct>> searchFirestore(String query) {
-        MutableLiveData<List<NewProduct>> products = new MutableLiveData<>();
+    public LiveData<List<Product>> searchFirestore(String query) {
+        MutableLiveData<List<Product>> products = new MutableLiveData<>();
         // Tạo truy vấn để tìm kiếm tài khoản người dùng có tên hoặc email chứa query
         Query data =  db.collection("items").whereGreaterThanOrEqualTo("name", query)
                 .whereLessThanOrEqualTo("name", query + "\uf8ff");
@@ -81,9 +81,9 @@ public class ProductRepository {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    List<NewProduct> productData = new ArrayList<>();
+                    List<Product> productData = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        NewProduct product = document.toObject(NewProduct.class);
+                        Product product = document.toObject(Product.class);
                         productData.add(product);
                     }
 

@@ -1,9 +1,11 @@
 package com.manager.btlonappbanhangonline.home.cart.cartdatabase.repository;
 
 import android.app.Application;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -58,7 +60,7 @@ public class DeliveryRepository {
                             //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
                             cartViewModel.deleteAll();
                             context.startActivity(intent);
-                            sendNotification();
+                            //sendNotification();
 
                         }
                     })
@@ -74,18 +76,4 @@ public class DeliveryRepository {
 
     }
 
-    void sendNotification(){
-        FirebaseMessaging.getInstance().subscribeToTopic("weather")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Subscribed";
-                        if (!task.isSuccessful()) {
-                            msg = "Subscribe failed";
-                        }
-                        Log.d("token's device:", msg);
-                        Toast.makeText(application, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 }

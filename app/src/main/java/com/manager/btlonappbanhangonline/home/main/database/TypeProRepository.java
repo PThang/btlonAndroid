@@ -2,12 +2,11 @@ package com.manager.btlonappbanhangonline.home.main.database;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.manager.btlonappbanhangonline.model.NewProduct;
+import com.manager.btlonappbanhangonline.model.Product;
 import com.manager.btlonappbanhangonline.model.TypeProduct;
 
 import java.util.ArrayList;
@@ -25,8 +24,6 @@ public class TypeProRepository {
 
     public MutableLiveData<List<TypeProduct>> getFbTypePro(){
         MutableLiveData<List<TypeProduct>> allTypes = new MutableLiveData<>();
-        List<TypeProduct> types = new ArrayList<>();
-        allTypes.setValue(types);
 
         db.collection("producttype")
                 .addSnapshotListener((value, error) -> {
@@ -34,10 +31,11 @@ public class TypeProRepository {
                         Log.i("error when getting data:", error.toString());
                         return;
                     }
+                    List<TypeProduct> types = new ArrayList<>();
                     for(DocumentChange dc : value.getDocumentChanges()){
                         if(dc.getType() == DocumentChange.Type.ADDED){
                             types.add(dc.getDocument().toObject(TypeProduct.class));
-                            Log.i("error when getting data:",dc.getDocument().toObject(NewProduct.class).getName());
+                            Log.i("error when getting data:",dc.getDocument().toObject(Product.class).getName());
                         }
                     }
                     allTypes.postValue(types);

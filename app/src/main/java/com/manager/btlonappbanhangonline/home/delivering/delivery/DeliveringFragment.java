@@ -39,14 +39,10 @@ import java.util.List;
 import java.util.Map;
 
 public class DeliveringFragment extends Fragment {
-//    FirebaseFirestore db;
-//    FirebaseAuth mAuth;
-//    FirebaseUser currentUser;
-//    String userEmail;
     FragmentDeliveringBinding binding;
     DeliveringViewModel deliveringViewModel;
     public DeliveringFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -64,10 +60,6 @@ public class DeliveringFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        db = FirebaseFirestore.getInstance();
-//        mAuth = FirebaseAuth.getInstance();
-//        currentUser = mAuth.getCurrentUser();
-//        userEmail = currentUser.getEmail();
         deliveringViewModel = new ViewModelProvider(requireActivity()).get(DeliveringViewModel.class);
 
         binding.listDelivery.setHasFixedSize(true);
@@ -76,7 +68,7 @@ public class DeliveringFragment extends Fragment {
     }
 
     void getData(){
-        deliveringViewModel.deliveryLiveData.observe(getViewLifecycleOwner(), new Observer<List<Delivery>>() {
+        deliveringViewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<Delivery>>() {
             @Override
             public void onChanged(List<Delivery> deliveries) {
                 binding.listDelivery.setAdapter(new DeliveryAdapter(deliveries, requireActivity().getApplicationContext(), new DeliveryOnclickListener() {

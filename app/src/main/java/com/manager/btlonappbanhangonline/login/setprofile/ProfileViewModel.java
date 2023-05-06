@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -62,8 +63,6 @@ public class ProfileViewModel extends AndroidViewModel {
                             // Chuyển đổi DocumentSnapshot thành object User
                             User userAc = documentSnapshot.toObject(User.class);
                             Log.i("Firebase's user :", userAc.getName());
-//                            binding.inputAddress.setText(userAc.getAddress());
-//                            binding.inputPhoneNumber.setText(userAc.getPhoneNumber());
                             userMutableLiveData.postValue(userAc);
                         } else {
                         }
@@ -89,25 +88,51 @@ public class ProfileViewModel extends AndroidViewModel {
         insertImageOnFS(uri);
 
         String photoUrl = srtUrl;
+        if(!name.equalsIgnoreCase("")
+            && !email.equalsIgnoreCase("")
+            && !address.equalsIgnoreCase("")
+            && !phoneNumber.equalsIgnoreCase("")){
+            if(validatePhoneNumber(phoneNumber)){
+                User u = new User(name, email, phoneNumber, photoUrl, address);
+                user.getValue().updateProfile(profileUpdates)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                CollectionReference usersRef = db.collection("users");
+                                usersRef.document(email)
+                                        .set(u)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Intent intent = new Intent(getApplication(), HomeActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                getApplication().startActivity(intent);
+                                            }
+                                        });
+                            }
+                        });
+            } else {
+                Toast.makeText(getApplication(), "Phone number is not correct.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplication(), "Please enter all data.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
-        User u = new User(name, email, phoneNumber, photoUrl, address);
-        user.getValue().updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        CollectionReference usersRef = db.collection("users");
-                        usersRef.document(email)
-                                .set(u)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Intent intent = new Intent(getApplication(), HomeActivity.class);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        getApplication().startActivity(intent);
-                                    }
-                                });
-                    }
-                });
+    private Boolean validatePhoneNumber(String phoneNumber){
+        if (phoneNumber == null || phoneNumber.isEmpty()) {
+            return false;
+        }
+        if (phoneNumber.length() < 10 || phoneNumber.length() > 13) {
+            return false;
+        }
+        if (!phoneNumber.matches("[0-9]+")) {
+            return false;
+        }
+        if (phoneNumber.charAt(0) != '0') {
+            return false;
+        }
+        return true;
     }
 
     private void insertImageOnFS(Uri uri) {

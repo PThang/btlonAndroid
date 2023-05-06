@@ -25,7 +25,7 @@
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:background="@color/red"
-        android:text="Received"
+        android:text="@string/received"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

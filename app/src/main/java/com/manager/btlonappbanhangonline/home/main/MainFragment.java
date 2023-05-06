@@ -24,9 +24,9 @@ import com.bumptech.glide.Glide;
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.FragmentMainBinding;
 import com.manager.btlonappbanhangonline.eventbus.TypeProClickListener;
-import com.manager.btlonappbanhangonline.home.main.adapter.NewProductAdapter;
+import com.manager.btlonappbanhangonline.home.main.adapter.ProductAdapter;
 import com.manager.btlonappbanhangonline.home.main.adapter.TypeProductAdapter;
-import com.manager.btlonappbanhangonline.model.NewProduct;
+import com.manager.btlonappbanhangonline.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ import java.util.List;
 public class MainFragment extends Fragment {
     MainFragmentViewModel mainFragmentViewModel;
     FragmentMainBinding binding;
-    NewProductAdapter newProductAdapter;
+    ProductAdapter newProductAdapter;
     TypeProductAdapter typeProductAdapter;
     public MainFragment() {
     }
@@ -45,13 +45,6 @@ public class MainFragment extends Fragment {
 
         mainFragmentViewModel = new ViewModelProvider(requireActivity()).get(MainFragmentViewModel.class);
 
-        binding.searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Intent intent= new Intent(requireActivity().getApplicationContext(), SearchActivity.class);
-                startActivity(intent);*/
-            }
-        });
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -68,15 +61,14 @@ public class MainFragment extends Fragment {
         RecyclerView.LayoutManager layoutManagerType = new StaggeredGridLayoutManager(1, LinearLayoutManager.HORIZONTAL);
         binding.typeProductRecycler.setLayoutManager(layoutManagerType);
         binding.typeProductRecycler.setHasFixedSize(true);
-        //getTypeProData();
+
         RecyclerView.LayoutManager layoutManager= new GridLayoutManager(requireActivity(),2);
         binding.productRecycler.setLayoutManager(layoutManager);
         binding.productRecycler.setHasFixedSize(true);
-        //getProductData();
-        mainFragmentViewModel.getAllProducts().observe(getViewLifecycleOwner(), new Observer<List<NewProduct>>() {
+        mainFragmentViewModel.getAllProducts().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
-            public void onChanged(List<NewProduct> newProducts) {
-                newProductAdapter = new NewProductAdapter(requireActivity().getApplicationContext(), newProducts);
+            public void onChanged(List<Product> newProducts) {
+                newProductAdapter = new ProductAdapter(requireActivity().getApplicationContext(), newProducts);
                 binding.productRecycler.setAdapter(newProductAdapter);
                 Log.i("Size of data: ", String.valueOf(newProducts.size()));
                 newProductAdapter.notifyDataSetChanged();
@@ -88,7 +80,7 @@ public class MainFragment extends Fragment {
                 @Override
                 public void OnClick(String id) {
                     mainFragmentViewModel.getProductByType(id).observe(getViewLifecycleOwner(), data ->{
-                        newProductAdapter = new NewProductAdapter(requireActivity().getApplicationContext(), data);
+                        newProductAdapter = new ProductAdapter(requireActivity().getApplicationContext(), data);
                         binding.productRecycler.setAdapter(newProductAdapter);
                         Log.i("Size of data: ", String.valueOf(data.size()));
                         newProductAdapter.notifyDataSetChanged();
@@ -118,10 +110,10 @@ public class MainFragment extends Fragment {
     }
 
     void getProductData(){
-        mainFragmentViewModel.getAllProducts().observe(getViewLifecycleOwner(), new Observer<List<NewProduct>>() {
+        mainFragmentViewModel.getAllProducts().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
-            public void onChanged(List<NewProduct> newProducts) {
-                NewProductAdapter adapter = new NewProductAdapter(requireActivity().getApplicationContext(), newProducts);
+            public void onChanged(List<Product> newProducts) {
+                ProductAdapter adapter = new ProductAdapter(requireActivity().getApplicationContext(), newProducts);
                 binding.productRecycler.setAdapter(adapter);
                 Log.i("Size of data: ", String.valueOf(newProducts.size()));
             }
@@ -134,7 +126,7 @@ public class MainFragment extends Fragment {
                 @Override
                 public void OnClick(String id) {
                     mainFragmentViewModel.getProductByType(id).observe(getViewLifecycleOwner(), data ->{
-                        NewProductAdapter adapter = new NewProductAdapter(requireActivity().getApplicationContext(), data);
+                        ProductAdapter adapter = new ProductAdapter(requireActivity().getApplicationContext(), data);
                         binding.productRecycler.setAdapter(adapter);
                         Log.i("Size of data: ", String.valueOf(data.size()));
                     });
@@ -163,10 +155,10 @@ public class MainFragment extends Fragment {
         binding.viewFlipper.setInAnimation(slide_out);
     }
     private void searchFirestore(String query) {
-        mainFragmentViewModel.searchFirestore(query).observe(getViewLifecycleOwner(), new Observer<List<NewProduct>>() {
+        mainFragmentViewModel.searchFirestore(query).observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
-            public void onChanged(List<NewProduct> newProducts) {
-                NewProductAdapter adapter = new NewProductAdapter(requireActivity().getApplicationContext(), newProducts);
+            public void onChanged(List<Product> newProducts) {
+                ProductAdapter adapter = new ProductAdapter(requireActivity().getApplicationContext(), newProducts);
                 binding.productRecycler.setAdapter(adapter);
                 Log.i("Size of data: ", String.valueOf(newProducts.size()));
             }
