@@ -6,12 +6,14 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.home.HomeActivity;
 import com.manager.btlonappbanhangonline.home.cart.CartViewModel;
 import com.manager.btlonappbanhangonline.login.LoginActivity;
+import com.manager.btlonappbanhangonline.login.setprofile.SetProfileActivity;
 
 import io.paperdb.Paper;
 
@@ -36,9 +38,21 @@ public class SplashActivity extends AppCompatActivity {
                         public void run() {
                             splashViewModel.currentUser.observe(SplashActivity.this, user -> {
                                 if (user != null) {
-                                    Intent home = new Intent(getApplicationContext(), HomeActivity.class);
-                                    startActivity(home);
-                                    finish();
+                                    splashViewModel.checkData().observe(SplashActivity.this, new Observer<Boolean>() {
+                                        @Override
+                                        public void onChanged(Boolean aBoolean) {
+                                            if(aBoolean){
+                                                Intent home = new Intent(getApplicationContext(), HomeActivity.class);
+                                                startActivity(home);
+                                                finish();
+                                            } else {
+                                                Intent home = new Intent(getApplicationContext(), SetProfileActivity.class);
+                                                home.putExtra("start", "login");
+                                                startActivity(home);
+                                                finish();
+                                            }
+                                        }
+                                    });
                                 } else {
                                     Intent login = new Intent(getApplicationContext(), LoginActivity.class);
                                     startActivity(login);

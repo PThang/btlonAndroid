@@ -22,13 +22,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.manager.btlonappbanhangonline.databinding.FragmentRegisterBinding;
+import com.manager.btlonappbanhangonline.login.login.ResultCallBack;
 
 import java.util.regex.Pattern;
 
 public class RegisterFragment extends Fragment {
     FragmentRegisterBinding binding;
     RegisterViewModel registerViewModel;
-    ProgressDialog dialog;
+    private ProgressDialog progressDialog;
     Intent intent;
 
     public RegisterFragment(Intent intent) {
@@ -49,8 +50,9 @@ public class RegisterFragment extends Fragment {
 
         registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
 
-        dialog = new ProgressDialog(requireActivity());
-        dialog.setTitle("Waiting...");
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Waiting...");
+        progressDialog.setCancelable(false);
 
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,22 +72,41 @@ public class RegisterFragment extends Fragment {
     }
 
     private void register() {
-        String email = binding.emailRegisterText.getText().toString();
+        progressDialog.show();
+        String email = binding.emailRegisterText.getText().toString().trim();
         String password = binding.passwordRegisterText.getText().toString();
         String rePassword = binding.rePasswordText.getText().toString();
 
+        registerViewModel.setRegisterResultCallback(new ResultCallBack() {
+            @Override
+            public void onLoginSuccess() {
+                requireActivity().finish();
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onLoginFailure(String message) {
+                Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
+
         if(!validateEmail(email)){
             Toast.makeText(requireActivity(), "Email is not correct.", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
 
         if(email.equalsIgnoreCase("")){
             binding.emailRegisterText.setError("");
+            progressDialog.dismiss();
         }
         if(password.equalsIgnoreCase("")){
             binding.passwordRegisterText.setError("");
+            progressDialog.dismiss();
         }
         if(!rePassword.equalsIgnoreCase(password)){
             Toast.makeText(requireActivity(), "Repeat password is not correct.", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
         if(!email.equalsIgnoreCase("")
             && !password.equalsIgnoreCase("")

@@ -20,6 +20,7 @@ public class SetProfileActivity extends AppCompatActivity {
     private ActivitySetProfileBinding binding;
     private ProfileViewModel profileViewModel;
     Uri uri = null;
+    String start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class SetProfileActivity extends AppCompatActivity {
 
         profileViewModel = new ViewModelProvider(SetProfileActivity.this).get(ProfileViewModel.class);
 
+        start = getIntent().getStringExtra("start");
         if(getIntent().getStringExtra("result") != null){
             setData();
         }
@@ -69,6 +71,18 @@ public class SetProfileActivity extends AppCompatActivity {
                 saveInfo();
             }
         });
+
+        binding.backCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(start.equalsIgnoreCase("login")){
+                    startActivity(new Intent());
+                }
+                if(start.equalsIgnoreCase("home")){
+
+                }
+            }
+        });
     }
 
     private void saveInfo() {
@@ -97,28 +111,4 @@ public class SetProfileActivity extends AppCompatActivity {
             Glide.with(this).load(uri).into(binding.profileImageView);
         }
     }
-
-//    private void insertImageOnFS() {
-//        if (uri == null) return;
-//        StorageReference storageReference = storage.getReference("Images").child(String.valueOf(System.currentTimeMillis()));
-//        UploadTask uploadTask = storageReference.putFile(uri);
-//        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Task<Uri> downloadUrlTask = taskSnapshot.getStorage().getDownloadUrl();
-//                downloadUrlTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//                        strUrl = uri.toString();
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        strUrl = null;
-//                    }
-//                });
-//            }
-//        });
-//    }
-
 }

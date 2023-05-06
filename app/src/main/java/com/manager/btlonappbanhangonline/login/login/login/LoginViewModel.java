@@ -2,14 +2,10 @@ package com.manager.btlonappbanhangonline.login.login.login;
 
 import android.app.Application;
 import android.content.Intent;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.google.android.gms.tasks.OnCanceledListener;
@@ -21,10 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.manager.btlonappbanhangonline.home.HomeActivity;
 import com.manager.btlonappbanhangonline.login.LoginActivity;
+import com.manager.btlonappbanhangonline.login.login.ResultCallBack;
+import com.manager.btlonappbanhangonline.login.setprofile.SetProfileActivity;
 
 public class LoginViewModel extends AndroidViewModel {
     private FirebaseAuth auth;
-    private LoginResultCallBack loginResultCallback;
+    private ResultCallBack loginResultCallback;
     public LoginViewModel(@NonNull Application application) {
         super(application);
         auth = FirebaseAuth.getInstance();
@@ -40,10 +38,11 @@ public class LoginViewModel extends AndroidViewModel {
                             if (user != null && user.getDisplayName() != null) {
                                 Intent intent = new Intent(getApplication().getApplicationContext(), HomeActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("start", "login");
                                 getApplication().startActivity(intent);
                                 loginResultCallback.onLoginSuccess();
                             } else {
-                                Intent intent = new Intent(getApplication().getApplicationContext(), LoginActivity.class);
+                                Intent intent = new Intent(getApplication().getApplicationContext(), SetProfileActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 getApplication().startActivity(intent);
                                 loginResultCallback.onLoginFailure("User display name is null.");
@@ -67,7 +66,7 @@ public class LoginViewModel extends AndroidViewModel {
                 });
     }
 
-    public void setLoginResultCallback(LoginResultCallBack callback) {
+    public void setLoginResultCallback(ResultCallBack callback) {
         loginResultCallback = callback;
     }
 }
