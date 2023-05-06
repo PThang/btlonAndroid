@@ -40,40 +40,44 @@ public class SplashViewModel extends AndroidViewModel {
 
     public LiveData<User> getUserLiveData(){
         MutableLiveData<User> userMutableLiveData = new MutableLiveData<>();
-        db.collection("users")
-                .document(currentUser.getValue().getEmail())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            // Chuyển đổi DocumentSnapshot thành object User
-                            User userAc = documentSnapshot.toObject(User.class);
-                            Log.i("Firebase's user :", userAc.getName());
-                            userMutableLiveData.setValue(userAc);
-                        } else {
+        if(currentUser.getValue() != null){
+            db.collection("users")
+                    .document(currentUser.getValue().getEmail())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                // Chuyển đổi DocumentSnapshot thành object User
+                                User userAc = documentSnapshot.toObject(User.class);
+                                Log.i("Firebase's user :", userAc.getName());
+                                userMutableLiveData.setValue(userAc);
+                            } else {
+                            }
                         }
-                    }
-                });
+                    });
+        }
         return userMutableLiveData;
     }
     LiveData<Boolean> checkData(){
         MutableLiveData<Boolean> checked = new MutableLiveData<>();
-        if (!currentUser.getValue().getDisplayName().equalsIgnoreCase("")
-                && !currentUser.getValue().getEmail().equalsIgnoreCase("")) {
-            if(user.getValue() != null) {
-                if(!user.getValue().getName().equalsIgnoreCase("")
-                        && !user.getValue().getAddress().equalsIgnoreCase("")
-                        && !user.getValue().getPhoneNumber().equalsIgnoreCase("")) {
-                    checked.setValue(true);
+        if(currentUser.getValue() != null){
+            if (!currentUser.getValue().getDisplayName().equalsIgnoreCase("")
+                    && !currentUser.getValue().getEmail().equalsIgnoreCase("")) {
+                if(user.getValue() != null) {
+                    if(!user.getValue().getName().equalsIgnoreCase("")
+                            && !user.getValue().getAddress().equalsIgnoreCase("")
+                            && !user.getValue().getPhoneNumber().equalsIgnoreCase("")) {
+                        checked.setValue(true);
+                    } else {
+                        checked.setValue(false);
+                    }
                 } else {
                     checked.setValue(false);
                 }
             } else {
                 checked.setValue(false);
             }
-        } else {
-            checked.setValue(false);
         }
         return checked;
     }

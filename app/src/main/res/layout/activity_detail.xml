@@ -74,6 +74,7 @@
             android:gravity="left"
             android:maxWidth="100dp"
             android:text="Số lượng: 100"
+            android:visibility="invisible"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
