@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.manager.btlonappbanhangonline.databinding.ActivitySetProfileBinding;
+import com.manager.btlonappbanhangonline.home.HomeActivity;
+import com.manager.btlonappbanhangonline.login.LoginActivity;
 import com.manager.btlonappbanhangonline.model.User;
 
 public class SetProfileActivity extends AppCompatActivity {
@@ -76,10 +78,10 @@ public class SetProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(start.equalsIgnoreCase("login")){
-                    startActivity(new Intent());
+                    startActivity(new Intent(SetProfileActivity.this, LoginActivity.class));
                 }
-                if(start.equalsIgnoreCase("home")){
-
+                else if(start.equalsIgnoreCase("home")){
+                    startActivity(new Intent(SetProfileActivity.this, HomeActivity.class));
                 }
             }
         });

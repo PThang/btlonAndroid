@@ -104,6 +104,7 @@ public class ProfileFragment extends Fragment {
         String srtMove = "MoveFromProfile";
         Intent i = new Intent(requireActivity(), SetProfileActivity.class);
         i.putExtra("result", srtMove);
+        i.putExtra("start","home");
         startActivity(i);
 
     }
