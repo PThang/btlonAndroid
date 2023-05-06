@@ -1,6 +1,8 @@
 package com.manager.btlonappbanhangonline.model;
 
-public class Delivery {
+import java.io.Serializable;
+
+public class Delivery implements Serializable  {
     String id;
     Order order;
     Boolean isReceived;

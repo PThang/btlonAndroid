@@ -1,5 +1,6 @@
 package com.manager.btlonappbanhangonline.home.cart;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -81,7 +82,7 @@ public class CartFragment extends Fragment {
         data = new ArrayList<>();
 
         cartViewModel.getAllCarts().observe(requireActivity(), carts -> {
-            adapter = new CartAdapter(requireActivity(),carts);
+            adapter = new CartAdapter(requireActivity(),carts, true);
             data = carts;
             binding.cartRecycler.setAdapter(adapter);
             binding.subTotalText.setText("Sub-total: " + String.valueOf(cartViewModel.cost().getValue()) + " VND");
@@ -94,6 +95,11 @@ public class CartFragment extends Fragment {
                 order();
             }
         });
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 
     private void order() {
@@ -112,7 +118,7 @@ public class CartFragment extends Fragment {
     }
 
     public String getCurrentDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm:hh - dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm - dd/MM/yyyy");
         Date date = new Date();
         return dateFormat.format(date);
     }

@@ -80,7 +80,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                app:cardCornerRadius="3dp">
+                app:cardCornerRadius="3dp"
+                android:id="@+id/subImage">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -88,7 +89,6 @@
                     android:background="@color/white">
 
                     <ImageView
-                        android:id="@+id/subImage"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:padding="7dp"
@@ -113,6 +113,7 @@
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/addImage"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 app:cardCornerRadius="3dp">
@@ -124,9 +125,8 @@
                     >
 
                     <ImageView
-                        android:id="@+id/addImage"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
                         android:padding="7dp"
                         android:src="@drawable/add"
                         app:layout_constraintBottom_toBottomOf="parent"

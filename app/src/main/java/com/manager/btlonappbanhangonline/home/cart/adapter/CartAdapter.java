@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,11 +28,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     Context context;
     List<Cart> data;
     CartViewModel viewModel;
+    Boolean isCart;
 
-    public CartAdapter(Context context, List<Cart> data) {
+    public CartAdapter(Context context, List<Cart> data, Boolean isCart) {
         this.context = context;
         this.data = data;
         viewModel = ViewModelProviders.of((FragmentActivity) context).get(CartViewModel.class);
+        this.isCart = isCart;
     }
 
     @NonNull
@@ -78,6 +81,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             }
         });
 
+        if(!isCart){
+            holder.addImage.setVisibility(View.GONE);
+            holder.subImage.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -86,7 +94,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView productImage, subImage, addImage;
+        ImageView productImage;
+        CardView addImage, subImage;
         TextView nameProductText, costProductText, quantityText,noName;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

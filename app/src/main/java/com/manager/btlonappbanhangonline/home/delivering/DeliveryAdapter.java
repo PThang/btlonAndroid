@@ -1,4 +1,4 @@
-package com.manager.btlonappbanhangonline.home.delivering.delivery;
+package com.manager.btlonappbanhangonline.home.delivering;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.manager.btlonappbanhangonline.R;
-import com.manager.btlonappbanhangonline.home.delivering.DeliveryOnclickListener;
 import com.manager.btlonappbanhangonline.model.Delivery;
 
 import java.util.List;
@@ -20,11 +19,13 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Holder
     List<Delivery> data;
     Context context;
     DeliveryOnclickListener listener;
+    Boolean isReceived;
 
-    public DeliveryAdapter(List<Delivery> data, Context context, DeliveryOnclickListener listener) {
+    public DeliveryAdapter(List<Delivery> data, Context context, DeliveryOnclickListener listener, Boolean isReceived) {
         this.data = data;
         this.context = context;
         this.listener = listener;
+        this.isReceived = isReceived;
     }
 
     @NonNull
@@ -54,12 +55,18 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Holder
 
         void onBind(Delivery delivery, DeliveryOnclickListener listener){
             dateText.setText(delivery.getOrder().getOrderDate());
+
             receivedButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.changeStateDeliveryListener(getAdapterPosition());
+                    notifyDataSetChanged();
                 }
             });
+
+            if (isReceived){
+                receivedButton.setVisibility(View.GONE);
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
