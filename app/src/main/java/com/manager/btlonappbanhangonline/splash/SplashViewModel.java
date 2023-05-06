@@ -54,6 +54,7 @@ public class SplashViewModel extends AndroidViewModel {
                                 userMutableLiveData.setValue(userAc);
                             } else {
                             }
+                            //return null;
                         }
                     });
         }

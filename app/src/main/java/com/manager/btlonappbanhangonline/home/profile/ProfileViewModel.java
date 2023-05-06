@@ -52,6 +52,7 @@ public class ProfileViewModel extends AndroidViewModel {
                             userMutableLiveData.setValue(userAc);
                         } else {
                         }
+                        //return null;
                     }
                 });
         return userMutableLiveData;

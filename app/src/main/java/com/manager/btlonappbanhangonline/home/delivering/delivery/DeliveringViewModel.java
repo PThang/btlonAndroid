@@ -89,6 +89,7 @@ public class DeliveringViewModel extends AndroidViewModel {
                     public void onSuccess(Void aVoid) {
                         //Log.i("Shange state : ", "Thanks");
                         Toast.makeText(getApplication(), "Thanks", Toast.LENGTH_SHORT).show();
+                        //return null;
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

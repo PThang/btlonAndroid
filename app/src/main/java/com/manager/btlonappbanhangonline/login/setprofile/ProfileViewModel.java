@@ -32,7 +32,7 @@ public class ProfileViewModel extends AndroidViewModel {
     FirebaseAuth mAuth;
     LiveData<FirebaseUser> user;
     FirebaseStorage storage;
-    String srtUrl;
+    String strUrl;
     LiveData<User> userAc;
     public ProfileViewModel(@NonNull Application application) {
         super(application);
@@ -66,6 +66,7 @@ public class ProfileViewModel extends AndroidViewModel {
                             userMutableLiveData.postValue(userAc);
                         } else {
                         }
+                        //return null;
                     }
                 });
         return userMutableLiveData;
@@ -85,9 +86,9 @@ public class ProfileViewModel extends AndroidViewModel {
                     .build();
         }
 
-        insertImageOnFS(uri);
+        strUrl = insertImageOnFS(uri);
 
-        String photoUrl = srtUrl;
+        String photoUrl = strUrl;
         if(!name.equalsIgnoreCase("")
             && !email.equalsIgnoreCase("")
             && !address.equalsIgnoreCase("")
@@ -107,6 +108,7 @@ public class ProfileViewModel extends AndroidViewModel {
                                                 Intent intent = new Intent(getApplication(), HomeActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 getApplication().startActivity(intent);
+                                                //return null;
                                             }
                                         });
                             }
@@ -135,9 +137,10 @@ public class ProfileViewModel extends AndroidViewModel {
         return true;
     }
 
-    private void insertImageOnFS(Uri uri) {
-        if (uri == null) return;
+    private String insertImageOnFS(Uri uri) {
+        if (uri == null) return "";
 
+        final String[] url = new String[1];
         StorageReference storageReference = storage.getReference("Images").child(String.valueOf(System.currentTimeMillis()));
         UploadTask uploadTask = storageReference.putFile(uri);
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -147,15 +150,17 @@ public class ProfileViewModel extends AndroidViewModel {
                 downloadUrlTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        srtUrl = uri.toString();
+                        String u = uri.toString();
+                        url[0] = u;
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        srtUrl = null;
+                        strUrl = null;
                     }
                 });
             }
         });
+        return url[0];
     }
 }

@@ -62,6 +62,7 @@ public class DeliveryRepository {
                             context.startActivity(intent);
                             //sendNotification();
 
+                            //return null;
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.FragmentProfileBinding;
 import com.manager.btlonappbanhangonline.login.LoginActivity;
 import com.manager.btlonappbanhangonline.login.setprofile.SetProfileActivity;
@@ -69,7 +70,7 @@ public class ProfileFragment extends Fragment {
         profileViewModel.user.observe(getViewLifecycleOwner(), new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser user) {
-                Glide.with(requireActivity()).load(user.getPhotoUrl()).into(binding.profileImageView)/*.onLoadFailed(getResources().getDrawable(R.drawable.user))*/;
+                Glide.with(requireActivity()).load(user.getPhotoUrl()).into(binding.profileImageView).onLoadFailed(getResources().getDrawable(R.drawable.user));
                 binding.inputName.setText(user.getDisplayName());
                 binding.inputEmail.setText(user.getEmail());
             }

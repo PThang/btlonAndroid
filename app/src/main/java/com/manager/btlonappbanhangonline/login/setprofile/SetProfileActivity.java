@@ -13,6 +13,7 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.manager.btlonappbanhangonline.R;
 import com.manager.btlonappbanhangonline.databinding.ActivitySetProfileBinding;
 import com.manager.btlonappbanhangonline.home.HomeActivity;
 import com.manager.btlonappbanhangonline.login.LoginActivity;
@@ -43,7 +44,8 @@ public class SetProfileActivity extends AppCompatActivity {
         profileViewModel.user.observe(SetProfileActivity.this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser user) {
-                Glide.with(SetProfileActivity.this).load(user.getPhotoUrl()).into(binding.profileImageView);
+                Glide.with(SetProfileActivity.this).load(user.getPhotoUrl()).into(binding.profileImageView)
+                        .onLoadFailed(getResources().getDrawable(R.drawable.user));
                 binding.inputName.setText(user.getDisplayName());
                 binding.inputEmail.setText(user.getEmail());
             }
